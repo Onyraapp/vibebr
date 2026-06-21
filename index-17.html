@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#ffffff"/>
+<title>VIBE.BR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-serif;background:#F2F5F3;color:#0D1A12;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+
+/* ─── TOKENS ─── */
+:root{
+  --g:#0E8C5A;--gd:#0A6E45;--gl:#E8F5EF;--g2:#F0FAF5;
+  --y:#D4A017;--yl:#FBF6E8;
+  --b:#1A4FA8;--bl:#E8F0FA;
+  --am:#8A5C2A;--aml:#FBF3E8;
+  --re:#D94040;--rel:#FCEAEA;
+  --pu:#533AB7;--pul:#F0EEFA;
+  --tx:#0D1A12;--mid:#4A5550;--soft:#8A9990;
+  --br:#E4EBE8;--br2:#D0DDD8;
+  --wh:#FFFFFF;--cr:#F7FAF8;--bg:#F2F5F3;
+  --nav:52px;--bot:58px;--r:14px;--rs:10px;
+}
+
+/* ─── SCREENS ─── */
+.screen{display:none;position:fixed;inset:0;height:100dvh;flex-direction:column;overflow:hidden}
+.screen.on{display:flex}
+
+/* ─── TOP NAV ─── */
+.tnav{height:var(--nav);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;background:var(--wh);border-bottom:1px solid var(--br);z-index:50}
+.logo{display:flex;align-items:center;gap:7px;text-decoration:none}
+.lm{width:26px;height:26px;border-radius:8px;background:var(--g);display:flex;align-items:center;justify-content:center}
+.lm i{font-size:13px;color:#fff}
+.lt{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--tx);letter-spacing:-0.02em}
+.lt span{color:var(--g)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.lsw{display:flex;gap:2px;background:var(--cr);border:1px solid var(--br);border-radius:20px;padding:2px}
+.lb{font-size:10px;font-weight:600;padding:3px 7px;border-radius:12px;border:none;background:transparent;color:var(--soft);cursor:pointer;font-family:inherit;transition:all .15s}
+.lb.on{background:var(--wh);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.bsm{padding:7px 14px;border-radius:18px;font-size:11px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .15s}
+.bg{background:var(--g);color:#fff}.bg:active{background:var(--gd)}
+.bo{background:transparent;border:1px solid var(--br);color:var(--mid)}
+
+/* ─── BOTTOM NAV ─── */
+.bnav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--bot) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:grid;grid-template-columns:repeat(4,1fr);background:var(--wh);border-top:1px solid var(--br);z-index:200}
+.bni{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:500;color:var(--soft);cursor:pointer;border:none;background:transparent;font-family:inherit;transition:color .15s}
+.bni i{font-size:22px}
+.bni.on{color:var(--g)}
+
+/* ════════════════════════════ */
+/* SCREEN 1 — LANDING          */
+/* ════════════════════════════ */
+.s1-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom))}
+
+.hero{background:var(--wh);padding:1.8rem 1.1rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 0%,rgba(14,140,90,.12) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 5% 100%,rgba(212,160,23,.08) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 95% 90%,rgba(26,79,168,.06) 0%,transparent 55%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g) 0%,var(--y) 50%,var(--b) 100%);opacity:.65}
+
+.eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--g);background:var(--gl);border:1px solid rgba(14,140,90,.2);border-radius:20px;padding:3px 11px;margin-bottom:.9rem;position:relative}
+.htitle{font-family:'Fraunces',serif;font-size:clamp(26px,7.5vw,36px);font-weight:700;line-height:1.08;letter-spacing:-.03em;color:var(--tx);margin-bottom:.65rem;position:relative}
+.htitle .gi{color:var(--g);font-style:italic}
+.hsub{font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:1.3rem;position:relative}
+.hsub strong{color:var(--tx)}
+
+.sb-label{font-size:11px;font-weight:600;color:var(--mid);margin-bottom:7px;position:relative}
+.sb-or{font-size:10px;color:var(--soft);margin:.7rem 0 .6rem;position:relative}
+.sb-custom-budget{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:.6rem;flex-wrap:wrap}
+.sb-custom-lbl{font-size:11px;color:var(--soft)}
+.sb-custom-row{display:flex;align-items:center;gap:0;background:var(--cr);border:1.5px solid var(--br);border-radius:20px;padding:4px 6px 4px 12px;transition:border-color .2s}
+.sb-custom-row:focus-within{border-color:var(--g)}
+.sb-custom-prefix{font-size:12px;font-weight:600;color:var(--mid)}
+#custom-budget-input{width:80px;border:none;background:transparent;outline:none;font-size:13px;font-weight:600;color:var(--tx);padding:4px 6px;font-family:inherit}
+#custom-budget-input::placeholder{color:var(--soft);font-weight:400}
+#custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.sbar{display:flex;align-items:center;gap:8px;background:var(--wh);border:1.5px solid var(--br);border-radius:40px;padding:7px 7px 7px 14px;box-shadow:0 3px 14px rgba(0,0,0,.06);margin-bottom:.4rem;position:relative;transition:border-color .2s}
+.sbar:focus-within{border-color:var(--g);box-shadow:0 0 0 3px rgba(14,140,90,.08)}
+.sbar input{flex:1;min-width:0;border:none;outline:none;font-size:13px;color:var(--tx);font-family:inherit;background:transparent}
+.sbar input::placeholder{color:var(--soft)}
+.sbtn{flex-shrink:0;padding:9px 16px;border-radius:30px;background:var(--g);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
+
+.vpills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:1.2rem;position:relative}
+.vp{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--br);background:var(--cr);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s}
+.vp.on{border-color:var(--g);color:var(--g);background:var(--gl)}
+.vp-vibe{background:var(--yl);border-color:rgba(212,160,23,.35);color:#7A5600}
+.vp-vibe:hover{background:#F5E6B8;border-color:var(--y)}
+.vp-vibe.on{background:var(--y);border-color:var(--y);color:#fff;font-weight:700}
+
+.hstats{display:flex;justify-content:center;position:relative}
+.hst{text-align:center;padding:0 .9rem;border-right:1px solid var(--br)}
+.hst:last-child{border-right:none}
+.hst-n{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--tx)}
+.hst-l{font-size:9px;color:var(--soft);margin-top:1px}
+
+/* DESTINOS */
+.dsec{padding:1.1rem 1rem;background:var(--cr);border-top:1px solid var(--br)}
+.sechdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem}
+.sect{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--tx)}
+.secl{font-size:12px;color:var(--g);font-weight:600;cursor:pointer}
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.dcard{border-radius:var(--r);overflow:hidden;border:1px solid var(--br);background:var(--wh);cursor:pointer;transition:all .2s}
+.dcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px)}
+.dthumb{height:68px;position:relative}
+.dthumb.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
+.dthumb.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
+.dthumb.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
+.dthumb.noronha{background:linear-gradient(145deg,#0a2060,#1a5fa8,#e8c870)}
+.dthumb.floripa{background:linear-gradient(145deg,#3a2a9a,#6a5ad4,#a088e8)}
+.dthumb.foz      {background:linear-gradient(145deg,#0a5040,#1a8a6a,#5dc8a0)}
+.dthumb.saopaulo {background:linear-gradient(145deg,#2a2a38,#4a4a60,#7878a0)}
+.dthumb.salvador {background:linear-gradient(145deg,#8a3010,#c85020,#e8a040)}
+.dthumb.paraty   {background:linear-gradient(145deg,#3a5a78,#6a8aa8,#c8d8e0)}
+.dthumb.angra    {background:linear-gradient(145deg,#0a3050,#1a6090,#4ab8c8)}
+.dmatch{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:9px;background:rgba(255,255,255,.92);color:var(--g)}
+.dbody{padding:8px 10px 10px}
+.dname{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:1px}
+.dvibe{font-size:10px;color:var(--soft);margin-bottom:3px}
+.dprice{font-size:10px;font-weight:600;color:var(--mid)}
+
+/* HOW */
+.hwsec{padding:1.1rem 1rem;background:var(--wh);border-top:1px solid var(--br)}
+.hwcards{display:flex;flex-direction:column;gap:8px;margin-top:.8rem}
+.hwcard{display:flex;align-items:flex-start;gap:11px;background:var(--cr);border-radius:var(--r);padding:.85rem;border:1px solid var(--br)}
+.hwico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.hwico.g{background:var(--gl);color:var(--g)}
+.hwico.y{background:var(--yl);color:#8A6300}
+.hwico.b{background:var(--bl);color:var(--b)}
+.hwt{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:3px}
+.hwd{font-size:11px;color:var(--soft);line-height:1.5}
+
+.ctastrip{background:var(--g);padding:1.2rem 1rem}
+.ctat{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:3px}
+.ctas{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:.9rem}
+.btwh{padding:11px 22px;border-radius:22px;background:#fff;color:var(--g);font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:inherit}
+
+/* ════════════════════════════ */
+/* SCREEN 2 — QUIZ             */
+/* ════════════════════════════ */
+.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.2rem 1rem;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom)+1rem)}
+
+.qprog{display:flex;gap:4px;margin-bottom:1.4rem}
+.qpb{flex:1;height:4px;border-radius:4px;background:var(--br);transition:background .3s}
+.qpb.done{background:var(--g)}
+.qpb.act{background:rgba(14,140,90,.4)}
+
+.qcard{display:none;animation:fadeIn .25s ease}
+.qcard.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.qlabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.5rem}
+.qtitle{font-family:'Fraunces',serif;font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--tx);margin-bottom:.4rem;line-height:1.2}
+.qsub{font-size:13px;color:var(--mid);margin-bottom:1.3rem;line-height:1.55}
+
+.qopts{display:flex;flex-direction:column;gap:8px}
+.qopt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r);border:1.5px solid var(--br);background:var(--wh);cursor:pointer;transition:all .15s;font-family:inherit;text-align:left;width:100%}
+.qopt:hover{border-color:var(--g);background:var(--gl)}
+.qopt.sel{border-color:var(--g);background:var(--gl)}
+.qopt-icon{font-size:20px;flex-shrink:0}
+.qopt-text{display:flex;flex-direction:column}
+.qopt-main{font-size:13px;font-weight:600;color:var(--tx)}
+.qopt-sub{font-size:11px;color:var(--soft);margin-top:1px}
+
+/* multi-select opts */
+.qopts.multi .qopt.sel{border-color:var(--g);background:var(--gl)}
+.qopts.multi .qopt.sel .qopt-main{color:var(--g)}
+
+/* slider */
+.qslider-wrap{margin-bottom:1.5rem}
+.qslider-val{font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:var(--g);margin-bottom:.5rem}
+.qslider-sub{font-size:11px;color:var(--soft);margin-bottom:1rem}
+.qslider{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:5px;background:var(--br);outline:none;cursor:pointer}
+.qslider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--g);cursor:pointer;border:3px solid var(--wh);box-shadow:0 2px 8px rgba(14,140,90,.3)}
+.qslider-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--soft);margin-top:6px}
+
+/* origen chips */
+.origen-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.orig-chip{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;border-radius:var(--r);border:1.5px solid var(--br);background:var(--wh);cursor:pointer;transition:all .15s;font-family:inherit}
+.orig-chip:hover{border-color:var(--g)}
+.orig-chip.sel{border-color:var(--g);background:var(--gl)}
+.orig-icon{font-size:20px}
+.orig-city{font-size:13px;font-weight:600;color:var(--tx)}
+.orig-code{font-size:10px;color:var(--soft)}
+
+.qnav{display:flex;gap:8px;margin-top:1.5rem}
+.q1-headcount{margin-top:.9rem;padding:13px 14px;background:var(--cr);border-radius:var(--r);border:1px solid var(--br);animation:fadeIn .25s ease}
+.q1hc-label{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:9px}
+.q1hc-row{display:flex;gap:6px}
+.q1hc-btn{flex:1;padding:9px 0;border-radius:10px;border:1.5px solid var(--br);background:var(--wh);font-size:13px;font-weight:700;color:var(--mid);cursor:pointer;font-family:inherit;transition:all .15s}
+.q1hc-btn:hover,.q1hc-btn.sel{border-color:var(--g);background:var(--gl);color:var(--g)}
+.q1hc-result{font-size:11px;color:var(--g);font-weight:600;margin-top:9px;display:flex;align-items:center;gap:5px;min-height:14px}
+.qbtn{flex:1;padding:13px;border-radius:var(--rs);font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .15s}
+.qbtn.primary{background:var(--g);color:#fff}
+.qbtn.primary:hover{background:var(--gd)}
+.qbtn.secondary{background:var(--cr);border:1px solid var(--br);color:var(--mid)}
+
+/* ════════════════════════════ */
+/* SCREEN 3 — RESULTS          */
+/* ════════════════════════════ */
+.res-header{padding:.9rem 1rem .7rem;background:var(--wh);border-bottom:1px solid var(--br);flex-shrink:0}
+.res-ey{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);margin-bottom:3px}
+.res-tt{font-family:'Fraunces',serif;font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--tx);margin-bottom:2px}
+.res-sub{font-size:11px;color:var(--soft);margin-bottom:.7rem}
+.ctx-row{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-bottom:.6rem}
+.ctx-row::-webkit-scrollbar{display:none}
+.ctx-chip{flex-shrink:0;font-size:10px;padding:3px 9px;border-radius:12px;background:var(--cr);border:1px solid var(--br);color:var(--mid);font-weight:500}
+.adj-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.adj-row::-webkit-scrollbar{display:none}
+.adj-btn{flex-shrink:0;font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid var(--br);background:var(--wh);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:500;white-space:nowrap;transition:all .15s}
+.adj-btn:hover{border-color:var(--g);color:var(--g);background:var(--gl)}
+
+.res-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+
+.rcard{background:var(--wh);border-bottom:8px solid var(--bg);cursor:pointer}
+.rcard.feat{border-left:3px solid var(--g)}
+.rphoto{height:120px;position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:10px 12px}
+.rphoto.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
+.rphoto.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
+.rphoto.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
+.rphoto.noronha{background:linear-gradient(145deg,#0a2060,#1a5fa8,#e8c870)}
+.rphoto.floripa{background:linear-gradient(145deg,#3a2a9a,#6a5ad4,#a088e8)}
+.rphoto.foz      {background:linear-gradient(145deg,#0a5040,#1a8a6a,#5dc8a0)}
+.rphoto.saopaulo {background:linear-gradient(145deg,#2a2a38,#4a4a60,#7878a0)}
+.rphoto.salvador {background:linear-gradient(145deg,#8a3010,#c85020,#e8a040)}
+.rphoto.paraty   {background:linear-gradient(145deg,#3a5a78,#6a8aa8,#c8d8e0)}
+.rphoto.angra    {background:linear-gradient(145deg,#0a3050,#1a6090,#4ab8c8)}
+.rbadges{display:flex;flex-direction:column;gap:4px}
+.rbadge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;backdrop-filter:blur(8px)}
+.rbadge.feat{background:var(--g);color:#fff}
+.rbadge.match{background:rgba(255,255,255,.92);color:var(--g)}
+.rbadge.dark{background:rgba(0,0,0,.38);color:rgba(255,255,255,.9)}
+.rheart{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--soft);cursor:pointer;font-family:inherit}
+
+.rbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:9px}
+.rhead{display:flex;align-items:flex-start;justify-content:space-between}
+.rname{font-family:'Fraunces',serif;font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--tx)}
+.rloc{font-size:10px;color:var(--soft);margin-top:2px}
+.rprice-n{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--tx);text-align:right}
+.rprice-l{font-size:9px;color:var(--soft);text-align:right}
+
+.rvt{display:flex;gap:5px;flex-wrap:wrap}
+.rv{font-size:10px;padding:3px 8px;border-radius:8px;background:var(--cr);border:1px solid var(--br);color:var(--mid)}
+.rv.g{background:var(--gl);border-color:rgba(14,140,90,.2);color:var(--g)}
+.rv.y{background:var(--yl);border-color:rgba(212,160,23,.2);color:#8A6300}
+
+.rdets{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.rdet{background:var(--cr);border-radius:var(--rs);padding:7px 8px}
+.rdet-i{font-size:13px;margin-bottom:2px}
+.rdet-l{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);font-weight:700}
+.rdet-v{font-size:11px;font-weight:600;color:var(--tx);margin-top:1px}
+
+.rbbar{height:5px;border-radius:5px;overflow:hidden;display:flex}
+.rbi{height:100%}
+
+.rwarn{display:flex;gap:7px;background:var(--yl);border:1px solid rgba(212,160,23,.3);border-radius:var(--rs);padding:8px 10px;font-size:11px;color:#7A5600;line-height:1.5}
+.rwarn i{font-size:12px;color:var(--y);flex-shrink:0;margin-top:1px}
+
+.rcta{display:flex;gap:7px}
+.rcta-main{flex:1;padding:11px;border-radius:var(--rs);font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;color:#fff;transition:opacity .15s}
+.rcta-sh{padding:11px 13px;border-radius:var(--rs);border:1px solid var(--br);background:var(--wh);color:var(--mid);font-size:13px;cursor:pointer;font-family:inherit}
+
+.res-footer{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;background:var(--wh);border-top:1px solid var(--br);flex-shrink:0}
+.res-footer-t{font-size:11px;color:var(--soft)}
+.wpp-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:18px;background:var(--cr);border:1px solid var(--br);font-size:12px;font-weight:500;color:var(--mid);cursor:pointer;font-family:inherit}
+
+/* ════════════════════════════ */
+/* SCREEN 4 — DETAIL           */
+/* ════════════════════════════ */
+.det-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+.dhero{height:170px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem 1.1rem;flex-shrink:0}
+.dhero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.52) 0%,transparent 55%)}
+.dhero.rio    {background:linear-gradient(155deg,#0a2060 0%,#1a5fa8 40%,#2a9ad4 70%)}
+.dhero.buzios {background:linear-gradient(155deg,#0e4a38 0%,#1a7a5e 40%,#2aab82 70%)}
+.dhero.pipa   {background:linear-gradient(155deg,#0a3060 0%,#1a5f8a 40%,#2a8ab5 70%)}
+.dhero.noronha{background:linear-gradient(155deg,#080e30 0%,#0a2060 30%,#1a5fa8 60%,#e8c870 100%)}
+.dhero.floripa{background:linear-gradient(155deg,#1a0a60 0%,#3a2a9a 40%,#6a5ad4 70%)}
+.dhero.foz      {background:linear-gradient(155deg,#063828 0%,#1a8a6a 40%,#5dc8a0 70%)}
+.dhero.saopaulo {background:linear-gradient(155deg,#1a1a24 0%,#3a3a50 40%,#6a6a90 70%)}
+.dhero.salvador {background:linear-gradient(155deg,#5a1c08 0%,#8a3010 30%,#c85020 60%,#e8a040 100%)}
+.dhero.paraty   {background:linear-gradient(155deg,#2a4258 0%,#3a5a78 40%,#6a8aa8 70%)}
+.dhero.angra    {background:linear-gradient(155deg,#061830 0%,#0a3050 30%,#1a6090 60%,#4ab8c8 100%)}
+.dback{position:absolute;top:10px;left:10px;z-index:10;display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:18px;background:rgba(255,255,255,.15);border:none;cursor:pointer;color:#fff;font-size:12px;font-weight:500;backdrop-filter:blur(8px);font-family:inherit}
+.dhact{position:absolute;top:10px;right:10px;z-index:10;display:flex;gap:7px}
+.dhb{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.15);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;backdrop-filter:blur(8px);font-family:inherit}
+.dhmatch{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(8px);margin-bottom:4px;position:relative;z-index:2;border:.5px solid rgba(255,255,255,.35)}
+.dhtitle{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:-.02em;position:relative;z-index:2}
+.dhsub{font-size:11px;color:rgba(255,255,255,.68);position:relative;z-index:2;margin-top:2px}
+
+.dqs{display:grid;grid-template-columns:repeat(4,1fr);background:var(--wh);border-bottom:1px solid var(--br);flex-shrink:0}
+.dqs-i{padding:9px 6px;text-align:center;border-right:1px solid var(--br)}
+.dqs-i:last-child{border-right:none}
+.dqs-ic{font-size:15px;margin-bottom:2px}
+.dqs-v{font-size:11px;font-weight:700;color:var(--tx)}
+.dqs-l{font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:var(--soft);font-weight:700;margin-top:1px}
+
+.dbody{padding:1.1rem 1rem;display:flex;flex-direction:column;gap:1.1rem}
+.dsl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.6rem}
+.dwarn{display:flex;gap:9px;background:var(--yl);border:1px solid rgba(212,160,23,.3);border-radius:var(--r);padding:11px 13px}
+.dwarn i{font-size:15px;color:var(--y);flex-shrink:0;margin-top:1px}
+.dwt{font-size:12px;font-weight:700;color:#7A5600;margin-bottom:2px}
+.dwd{font-size:11px;color:#7A5600;line-height:1.55}
+
+.dscores{display:flex;flex-direction:column;gap:7px}
+.dsr{display:flex;align-items:center;gap:9px}
+.dsr-l{font-size:11px;color:var(--mid);width:84px;flex-shrink:0;font-weight:500}
+.dsr-t{flex:1;height:4px;background:var(--br);border-radius:4px;overflow:hidden}
+.dsr-f{height:100%;border-radius:4px;transition:width .6s ease}
+.dsr-n{font-size:11px;font-weight:700;color:var(--tx);width:18px;text-align:right}
+
+/* Zonas Floripa */
+.zonas-list{display:flex;flex-direction:column;gap:6px}
+.zona-item{background:var(--cr);border:1px solid var(--br);border-radius:var(--rs);padding:9px 11px}
+.zona-name{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.zona-desc{font-size:11px;color:var(--soft);line-height:1.45}
+
+.ditinerary{display:flex;flex-direction:column}
+.dday{display:flex;gap:11px;padding-bottom:13px}
+.dday:last-child{padding-bottom:0}
+.dday-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.dday-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--g);background:var(--wh);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--g)}
+.dday-conn{width:1.5px;flex:1;background:var(--br);margin-top:4px}
+.dday-c{flex:1;padding-top:2px}
+.dday-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);margin-bottom:2px}
+.dday-t{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:3px}
+.dday-d{font-size:12px;color:var(--mid);line-height:1.55;margin-bottom:5px}
+.dday-tags{display:flex;gap:4px;flex-wrap:wrap}
+.dday-tag{font-size:9px;padding:2px 7px;border-radius:7px;background:var(--cr);border:1px solid var(--br);color:var(--soft)}
+
+/* Budget section */
+.dbudget{background:var(--cr);border-top:8px solid var(--bg);padding:1.1rem 1rem;display:flex;flex-direction:column;gap:1rem}
+.dbud-card{background:var(--wh);border-radius:var(--r);border:1px solid var(--br);overflow:hidden}
+.dbud-hdr{padding:.9rem 1rem;border-bottom:1px solid var(--br)}
+.dbud-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+.dbud-tot{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--tx)}
+.dbud-sub{font-size:11px;color:var(--soft);margin-top:2px}
+.dbbar{height:7px;display:flex;border-radius:6px;overflow:hidden;margin-top:9px}
+.dbbl{height:100%}
+.dblines{}
+.dbline{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--br);font-size:12px}
+.dbline:last-child{border-bottom:none}
+.dbline-l{display:flex;align-items:center;gap:8px;color:var(--mid)}
+.dbline-d{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dbline-r{font-weight:600;color:var(--tx)}
+
+.dlog-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.dlog{background:var(--wh);border:1px solid var(--br);border-radius:var(--rs);padding:9px 10px}
+.dlog-i{font-size:16px;margin-bottom:3px}
+.dlog-t{font-size:11px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.dlog-d{font-size:10px;color:var(--soft);line-height:1.45}
+
+.dsim-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.dsim-row::-webkit-scrollbar{display:none}
+.dsim{flex-shrink:0;width:110px;border-radius:var(--rs);border:1px solid var(--br);background:var(--wh);overflow:hidden;cursor:pointer;transition:all .15s}
+.dsim:hover{border-color:var(--g)}
+.dsim-t{height:52px}
+.dsim-t.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8)}
+.dsim-t.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82)}
+.dsim-t.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5)}
+.dsim-t.noronha{background:linear-gradient(145deg,#0a2060,#1a5fa8)}
+.dsim-t.floripa{background:linear-gradient(145deg,#3a2a9a,#6a5ad4)}
+.dsim-t.foz      {background:linear-gradient(145deg,#0a5040,#1a8a6a)}
+.dsim-t.saopaulo {background:linear-gradient(145deg,#2a2a38,#4a4a60)}
+.dsim-t.salvador {background:linear-gradient(145deg,#8a3010,#c85020)}
+.dsim-t.paraty   {background:linear-gradient(145deg,#3a5a78,#6a8aa8)}
+.dsim-t.angra    {background:linear-gradient(145deg,#0a3050,#1a6090)}
+.dsim-b{padding:6px 8px}
+.dsim-n{font-size:10px;font-weight:600;color:var(--tx)}
+.dsim-m{font-size:9px;color:var(--soft);margin-top:1px}
+
+.dcta{position:sticky;bottom:0;padding:.85rem 1rem;padding-bottom:calc(.85rem + var(--bot) + env(safe-area-inset-bottom));background:var(--wh);border-top:1px solid var(--br);display:flex;flex-direction:column;gap:8px}
+.dcta-main{width:100%;padding:13px;border-radius:var(--rs);font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit}
+.dcta-wpp{width:100%;padding:12px;border-radius:var(--rs);background:#25D366;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px}
+
+/* ════════════════════════════ */
+/* SCREEN 5 — BOOKING FLOW     */
+/* ════════════════════════════ */
+.bk-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+.bk-helper{display:flex;gap:9px;background:var(--gl);border:1px solid rgba(14,140,90,.2);border-radius:var(--r);padding:11px 13px;margin:1rem;align-items:flex-start}
+.bk-helper i{font-size:16px;color:var(--g);flex-shrink:0;margin-top:1px}
+.bk-helper-t{font-size:12px;font-weight:700;color:var(--gd);margin-bottom:2px}
+.bk-helper-d{font-size:11px;color:var(--gd);line-height:1.5}
+
+.bk-steps{display:flex;gap:6px;padding:0 1rem;margin-bottom:1rem}
+.bk-step-pill{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:var(--rs);background:var(--cr);border:1.5px solid var(--br);transition:all .2s}
+.bk-step-pill.active{background:var(--gl);border-color:var(--g)}
+.bk-step-pill.done{background:var(--gl);border-color:var(--g);opacity:.7}
+.bk-step-ic{font-size:16px}
+.bk-step-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--soft)}
+.bk-step-pill.active .bk-step-lbl,.bk-step-pill.done .bk-step-lbl{color:var(--g)}
+
+.bk-section{padding:0 1rem;margin-bottom:1.3rem}
+.bk-sec-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--tx);margin-bottom:3px}
+.bk-sec-sub{font-size:12px;color:var(--soft);margin-bottom:.9rem}
+
+.bk-card{background:var(--wh);border:1.5px solid var(--br);border-radius:var(--r);padding:13px;margin-bottom:9px;transition:all .15s}
+.bk-card.curada{border-color:var(--g);background:var(--gl)}
+.bk-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px}
+.bk-card-name{font-size:14px;font-weight:700;color:var(--tx)}
+.bk-card-meta{font-size:11px;color:var(--soft);margin-top:2px}
+.bk-card-price{text-align:right;flex-shrink:0}
+.bk-price-n{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--tx)}
+.bk-price-l{font-size:9px;color:var(--soft)}
+.bk-badges-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.bk-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:10px}
+.bk-badge.g{background:var(--gl);color:var(--g);border:1px solid rgba(14,140,90,.25)}
+.bk-badge.b{background:var(--bl);color:var(--b);border:1px solid rgba(26,79,168,.2)}
+.bk-badge.y{background:var(--yl);color:#8A6300;border:1px solid rgba(212,160,23,.25)}
+.bk-badge.curada-tag{background:var(--g);color:#fff}
+.bk-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bk-provider{font-size:10px;color:var(--soft);display:flex;align-items:center;gap:4px}
+.bk-go-btn{padding:8px 16px;border-radius:18px;background:var(--g);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.bk-go-btn:hover{background:var(--gd)}
+.bk-go-btn.redirect{background:var(--wh);border:1.5px solid var(--br);color:var(--mid)}
+.bk-redirect-note{font-size:9px;color:var(--soft);margin-top:6px;display:flex;align-items:center;gap:4px}
+
+.bk-nav{display:flex;gap:8px;padding:1rem;position:sticky;bottom:0;background:var(--wh);border-top:1px solid var(--br)}
+.bk-nav-btn{flex:1;padding:13px;border-radius:var(--rs);font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:inherit}
+.bk-nav-btn.primary{background:var(--g);color:#fff}
+.bk-nav-btn.secondary{background:var(--cr);border:1px solid var(--br);color:var(--mid)}
+
+/* Summary screen */
+.bk-summary-hero{background:linear-gradient(155deg,var(--g) 0%,var(--gd) 100%);padding:1.6rem 1.2rem;text-align:center;margin:1rem;border-radius:var(--r)}
+.bk-summary-check{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:24px;color:#fff}
+.bk-summary-title{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:4px}
+.bk-summary-sub{font-size:12px;color:rgba(255,255,255,.75)}
+.bk-summary-total{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:#fff;margin:.8rem 0 2px}
+.bk-summary-total-l{font-size:11px;color:rgba(255,255,255,.7)}
+
+.bk-recap{margin:0 1rem 1rem;background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
+.bk-recap-item{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--br)}
+.bk-recap-item:last-child{border-bottom:none}
+.bk-recap-ic{width:34px;height:34px;border-radius:9px;background:var(--cr);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.bk-recap-txt{flex:1}
+.bk-recap-t{font-size:12px;font-weight:600;color:var(--tx)}
+.bk-recap-d{font-size:10px;color:var(--soft);margin-top:1px}
+.bk-recap-p{font-size:13px;font-weight:700;color:var(--tx);flex-shrink:0}
+
+.bk-cta-final{margin:0 1rem;display:flex;flex-direction:column;gap:8px}
+</style>
+
+</head>
+<body>
+
+<!-- ══════════════════════ -->
+<!-- SCREEN 1 — LANDING   -->
+<!-- ══════════════════════ -->
+<div class="screen on" id="s1">
+  <nav class="tnav">
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="nav-r">
+      <div class="lsw">
+        <button class="lb on" onclick="setLang(this,'ES')">ES</button>
+        <button class="lb" onclick="setLang(this,'EN')">EN</button>
+        <button class="lb" onclick="setLang(this,'PT')">PT</button>
+      </div>
+      <button class="bsm bg" onclick="go(2)">Empezar</button>
+    </div>
+  </nav>
+
+  <div class="s1-body">
+    <section class="hero">
+      <div class="eyebrow"><i class="ti ti-sparkles" style="font-size:12px"></i> Copiloto turístico para Brasil</div>
+      <h1 class="htitle">Vibrá <span class="gi">tu Brasil</span></h1>
+      <p class="hsub">La gente no quiere buscar más.<br><strong>Quiere decidir mejor.</strong></p>
+      <div class="sb-label">Contanos en una frase qué buscás 👇</div>
+      <div class="sbar">
+        <input type="text" id="s1-input" placeholder="Ej: Tengo USD 1500, somos dos, quiero playa y relax..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
+        <button class="sbtn" onclick="goToQuiz()">Encontrar el mío →</button>
+      </div>
+      <div class="sb-or">— o elegí tu vibe directamente —</div>
+      <div class="vpills">
+        <button class="vp vp-vibe" data-vibe="relax" onclick="toggleLandingVibe(this,'relax')">🌊 relax</button>
+        <button class="vp vp-vibe" data-vibe="romance" onclick="toggleLandingVibe(this,'romance')">💑 romance</button>
+        <button class="vp vp-vibe" data-vibe="aventura" onclick="toggleLandingVibe(this,'aventura')">🏄 surf</button>
+        <button class="vp vp-vibe" data-vibe="naturaleza" onclick="toggleLandingVibe(this,'naturaleza')">🌿 naturaleza</button>
+        <button class="vp vp-vibe" data-vibe="social" onclick="toggleLandingVibe(this,'social')">🎉 fiesta</button>
+        <button class="vp vp-vibe" data-vibe="exclusividad" onclick="toggleLandingVibe(this,'exclusividad')">💎 lujo</button>
+        <button class="vp vp-vibe" data-vibe="gastronomia" onclick="toggleLandingVibe(this,'gastronomia')">🍽️ gastronomía</button>
+        <button class="vp vp-vibe" data-vibe="autenticidad" onclick="toggleLandingVibe(this,'autenticidad')">🧭 autenticidad</button>
+        <button class="vp vp-vibe" data-vibe="buceo" onclick="toggleLandingVibe(this,'buceo')">🤿 buceo</button>
+      </div>
+      <div class="sb-or">— y tu presupuesto —</div>
+      <div class="vpills" id="landing-budget-pills">
+        <button class="vp" onclick="toggleLandingBudget(this,750)">💸 hasta USD 900</button>
+        <button class="vp" onclick="toggleLandingBudget(this,1500)">💵 USD 900–2.000</button>
+        <button class="vp" onclick="toggleLandingBudget(this,2500)">💎 USD 2.000–3.500</button>
+        <button class="vp" onclick="toggleLandingBudget(this,4000)">👑 sin límite</button>
+      </div>
+      <div class="sb-custom-budget">
+        <span class="sb-custom-lbl">Tu presupuesto es:</span>
+        <div class="sb-custom-row">
+          <span class="sb-custom-prefix">USD</span>
+          <input type="number" id="custom-budget-input" placeholder="ej: 1280" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
+        </div>
+      </div>
+      <div class="hstats">
+        <div class="hst"><div class="hst-n">10</div><div class="hst-l">destinos</div></div>
+        <div class="hst"><div class="hst-n">3</div><div class="hst-l">escenarios</div></div>
+        <div class="hst"><div class="hst-n">100%</div><div class="hst-l">Brasil</div></div>
+        <div class="hst"><div class="hst-n">gratis</div><div class="hst-l">sin registro</div></div>
+      </div>
+    </section>
+
+    <section class="dsec">
+      <div class="sechdr"><div class="sect">10 destinos cargados</div><span class="secl" onclick="go(2)">Buscar el mío →</span></div>
+      <div class="dgrid">
+        <div class="dcard" onclick="openDetail('rio')"><div class="dthumb rio"><span class="dmatch">social·cultura</span></div><div class="dbody"><div class="dname">Río de Janeiro</div><div class="dvibe">Ciudad completa · intensa</div><div class="dprice">USD 1.400–3.000 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('buzios')"><div class="dthumb buzios"><span class="dmatch">romance·relax</span></div><div class="dbody"><div class="dname">Búzios</div><div class="dvibe">Playa chic · romántico</div><div class="dprice">USD 900–2.500 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('pipa')"><div class="dthumb pipa"><span class="dmatch">surf·bohemio</span></div><div class="dbody"><div class="dname">Pipa</div><div class="dvibe">Surf · nordeste auténtico</div><div class="dprice">USD 700–1.800 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('noronha')"><div class="dthumb noronha"><span class="dmatch">paraíso</span></div><div class="dbody"><div class="dname">Noronha</div><div class="dvibe">Isla · exclusivo · buceo</div><div class="dprice">USD 1.500–3.500 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('floripa')"><div class="dthumb floripa"><span class="dmatch">social·joven</span></div><div class="dbody"><div class="dname">Florianópolis</div><div class="dvibe">Surf · beach clubs · 7 zonas</div><div class="dprice">USD 800–2.200 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('foz')"><div class="dthumb foz"><span class="dmatch">aventura</span></div><div class="dbody"><div class="dname">Foz do Iguaçu</div><div class="dvibe">Cataratas · 3 países</div><div class="dprice">USD 600–1.600 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('saopaulo')"><div class="dthumb saopaulo"><span class="dmatch">gastronomía</span></div><div class="dbody"><div class="dname">São Paulo</div><div class="dvibe">Capital gastronómica</div><div class="dprice">USD 700–2.200 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('salvador')"><div class="dthumb salvador"><span class="dmatch">cultura</span></div><div class="dbody"><div class="dname">Salvador</div><div class="dvibe">Afrobrasileño · histórico</div><div class="dprice">USD 600–1.800 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('paraty')"><div class="dthumb paraty"><span class="dmatch">romance</span></div><div class="dbody"><div class="dname">Paraty</div><div class="dvibe">Colonial · UNESCO</div><div class="dprice">USD 700–2.000 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('angra')"><div class="dthumb angra"><span class="dmatch">lujo náutico</span></div><div class="dbody"><div class="dname">Angra dos Reis</div><div class="dvibe">365 islas · yates</div><div class="dprice">USD 900–2.800 / via</div></div></div>
+      </div>
+    </section>
+
+    <section class="hwsec">
+      <div class="sect">Tu Brasil en 3 pasos</div>
+      <div class="hwcards">
+        <div class="hwcard"><div class="hwico g"><i class="ti ti-adjustments-horizontal"></i></div><div><div class="hwt">Contanos tu vibe</div><div class="hwd">Presupuesto, grupo, días y qué querés sentir. Sin formularios fríos.</div></div></div>
+        <div class="hwcard"><div class="hwico y"><i class="ti ti-sparkles"></i></div><div><div class="hwt">El sistema matchea</div><div class="hwd">Calculamos tu % de match con cada destino y te mostramos los 3 mejores.</div></div></div>
+        <div class="hwcard"><div class="hwico b"><i class="ti ti-share"></i></div><div><div class="hwt">Explorás y compartís</div><div class="hwd">Ajustás con un click. Compartible por WhatsApp al instante.</div></div></div>
+      </div>
+    </section>
+
+    <div class="ctastrip">
+      <div class="ctat">¿Listo para encontrar tu Brasil?</div>
+      <div class="ctas">Gratis · Sin registro · Solo contanos tu vibe</div>
+      <button class="btwh" onclick="go(2)">Empezar ahora ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ -->
+<!-- SCREEN 2 — QUIZ      -->
+<!-- ══════════════════════ -->
+<div class="screen" id="s2">
+  <nav class="tnav">
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="nav-r"><button class="bsm bo" onclick="go(1)" style="font-size:11px;padding:6px 12px">← Inicio</button></div>
+  </nav>
+
+  <div class="quiz-body">
+    <div class="qprog">
+      <div class="qpb act" id="qp0"></div>
+      <div class="qpb" id="qp1"></div>
+      <div class="qpb" id="qp2"></div>
+      <div class="qpb" id="qp3"></div>
+      <div class="qpb" id="qp4"></div>
+    </div>
+
+    <!-- Q0: Vibe -->
+    <div class="qcard on" id="q0">
+      <div class="qlabel">Paso 1 de 5</div>
+      <div class="qtitle">¿Qué querés sentir?</div>
+      <div class="qsub">No pienses en el destino todavía — pensá en la sensación.</div>
+      <div class="qopts multi" id="q0opts">
+        <button class="qopt" data-vibe="relax" onclick="toggleMulti(this,'relax')"><span class="qopt-icon">🌊</span><span class="qopt-text"><span class="qopt-main">Relax total</span><span class="qopt-sub">Desconectarme, silencio, tranquilidad</span></span></button>
+        <button class="qopt" data-vibe="romance" onclick="toggleMulti(this,'romance')"><span class="qopt-icon">💑</span><span class="qopt-text"><span class="qopt-main">Romántico</span><span class="qopt-sub">Sunsets, buena mesa, intimidad</span></span></button>
+        <button class="qopt" data-vibe="social" onclick="toggleMulti(this,'social')"><span class="qopt-icon">🎉</span><span class="qopt-text"><span class="qopt-main">Fiesta y movida</span><span class="qopt-sub">Beach clubs, vida nocturna, gente</span></span></button>
+        <button class="qopt" data-vibe="aventura" onclick="toggleMulti(this,'aventura')"><span class="qopt-icon">🏄</span><span class="qopt-text"><span class="qopt-main">Aventura y surf</span><span class="qopt-sub">Deportes, naturaleza activa, adrenalina</span></span></button>
+        <button class="qopt" data-vibe="naturaleza" onclick="toggleMulti(this,'naturaleza')"><span class="qopt-icon">🌿</span><span class="qopt-text"><span class="qopt-main">Naturaleza pura</span><span class="qopt-sub">Mar cristalino, fauna, paisajes únicos</span></span></button>
+        <button class="qopt" data-vibe="gastronomia" onclick="toggleMulti(this,'gastronomia')"><span class="qopt-icon">🍽️</span><span class="qopt-text"><span class="qopt-main">Gastronomía</span><span class="qopt-sub">Buenos restaurantes, cocina local</span></span></button>
+        <button class="qopt" data-vibe="exclusividad" onclick="toggleMulti(this,'exclusividad')"><span class="qopt-icon">💎</span><span class="qopt-text"><span class="qopt-main">Lujo y exclusividad</span><span class="qopt-sub">Boutique, privacidad, sofisticación</span></span></button>
+        <button class="qopt" data-vibe="autenticidad" onclick="toggleMulti(this,'autenticidad')"><span class="qopt-icon">🧭</span><span class="qopt-text"><span class="qopt-main">Autenticidad</span><span class="qopt-sub">Local, genuino, sin turismo masivo</span></span></button>
+        <button class="qopt" data-vibe="buceo" onclick="toggleMulti(this,'buceo')"><span class="qopt-icon">🤿</span><span class="qopt-text"><span class="qopt-main">Buceo y mar cristalino</span><span class="qopt-sub">Snorkel, visibilidad, fauna marina</span></span></button>
+      </div>
+      <div class="qnav"><button class="qbtn primary" onclick="nextQ(1)">Siguiente →</button></div>
+    </div>
+
+    <!-- Q1: Grupo -->
+    <div class="qcard" id="q1">
+      <div class="qlabel">Paso 2 de 5</div>
+      <div class="qtitle">¿Con quién viajás?</div>
+      <div class="qsub">El grupo cambia todo — logística, tipo de hospedaje y energía del viaje.</div>
+      <div class="qopts" id="q1opts">
+        <button class="qopt" onclick="selectSingle(this,'q1opts','COUPLE')"><span class="qopt-icon">👫</span><span class="qopt-text"><span class="qopt-main">Pareja</span><span class="qopt-sub">Viaje romántico o de dos</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q1opts','FRIENDS')"><span class="qopt-icon">👯</span><span class="qopt-text"><span class="qopt-main">Amigos</span><span class="qopt-sub">Grupo de amigos / amigas</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q1opts','FAMILY')"><span class="qopt-icon">👨‍👩‍👧</span><span class="qopt-text"><span class="qopt-main">Familia con hijos</span><span class="qopt-sub">Con chicos de cualquier edad</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q1opts','SOLO')"><span class="qopt-icon">🧍</span><span class="qopt-text"><span class="qopt-main">Solo/a</span><span class="qopt-sub">Viaje individual</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q1opts','BACKPACK')"><span class="qopt-icon">🎒</span><span class="qopt-text"><span class="qopt-main">Mochilero/a</span><span class="qopt-sub">Flexible, económico, aventurero</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q1opts','LUXE')"><span class="qopt-icon">✨</span><span class="qopt-text"><span class="qopt-main">Luxury</span><span class="qopt-sub">Sin restricciones, máximo confort</span></span></button>
+      </div>
+      <div class="q1-headcount" id="q1-headcount" style="display:none">
+        <div class="q1hc-label">¿Cuántos son en total?</div>
+        <div class="q1hc-row">
+          <button class="q1hc-btn" onclick="setHeadcount(2,this)">2</button>
+          <button class="q1hc-btn" onclick="setHeadcount(3,this)">3</button>
+          <button class="q1hc-btn" onclick="setHeadcount(4,this)">4</button>
+          <button class="q1hc-btn" onclick="setHeadcount(5,this)">5</button>
+          <button class="q1hc-btn" onclick="setHeadcount(6,this)">6+</button>
+        </div>
+        <div class="q1hc-result" id="q1hc-result"></div>
+      </div>
+      <div class="qnav"><button class="qbtn secondary" onclick="nextQ(0)">← Atrás</button><button class="qbtn primary" onclick="nextQ(2)">Siguiente →</button></div>
+    </div>
+
+    <!-- Q2: Presupuesto -->
+    <div class="qcard" id="q2">
+      <div class="qlabel">Paso 3 de 5</div>
+      <div class="qtitle">¿Cuál es tu presupuesto?</div>
+      <div class="qsub">Total por persona para todo el viaje — vuelo, hospedaje, comida y actividades.</div>
+      <div class="qslider-wrap">
+        <div class="qslider-val" id="budget-display">USD 1.500</div>
+        <div class="qslider-sub">deslizá para ajustar</div>
+        <input class="qslider" type="range" min="500" max="4000" step="100" value="1500" id="budget-slider" oninput="updateBudget(this.value)"/>
+        <div class="qslider-labels"><span>USD 500</span><span>USD 4.000+</span></div>
+      </div>
+      <div class="qopts" id="q2opts">
+        <button class="qopt" onclick="setBudget(750,this,'q2opts')"><span class="qopt-icon">💸</span><span class="qopt-text"><span class="qopt-main">Económico — hasta USD 900</span><span class="qopt-sub">Hostel, low cost, comida local</span></span></button>
+        <button class="qopt" onclick="setBudget(1500,this,'q2opts')"><span class="qopt-icon">💵</span><span class="qopt-text"><span class="qopt-main">Mid — USD 900 a 2.000</span><span class="qopt-sub">Pousada, mid hotel, buen restaurante</span></span></button>
+        <button class="qopt" onclick="setBudget(2500,this,'q2opts')"><span class="qopt-icon">💳</span><span class="qopt-text"><span class="qopt-main">Premium — USD 2.000 a 3.500</span><span class="qopt-sub">Hotel boutique, gastronomía, confort</span></span></button>
+        <button class="qopt" onclick="setBudget(4000,this,'q2opts')"><span class="qopt-icon">👑</span><span class="qopt-text"><span class="qopt-main">Sin límite claro</span><span class="qopt-sub">Priorizo la experiencia</span></span></button>
+      </div>
+      <div class="qnav"><button class="qbtn secondary" onclick="nextQ(1)">← Atrás</button><button class="qbtn primary" onclick="nextQ(3)">Siguiente →</button></div>
+    </div>
+
+    <!-- Q3: Origen -->
+    <div class="qcard" id="q3">
+      <div class="qlabel">Paso 4 de 5</div>
+      <div class="qtitle">¿Desde dónde salís?</div>
+      <div class="qsub">El origen afecta precios de vuelo y opciones de conexión.</div>
+      <div class="origen-chips" id="q3opts">
+        <button class="orig-chip" onclick="selectOrigen(this,'BUE')"><span class="orig-icon">✈️</span><span class="orig-city">Buenos Aires</span><span class="orig-code">EZE / AEP</span></button>
+        <button class="orig-chip" onclick="selectOrigen(this,'MVD')"><span class="orig-icon">✈️</span><span class="orig-city">Montevideo</span><span class="orig-code">MVD</span></button>
+        <button class="orig-chip" onclick="selectOrigen(this,'SCL')"><span class="orig-icon">✈️</span><span class="orig-city">Santiago</span><span class="orig-code">SCL</span></button>
+        <button class="orig-chip" onclick="selectOrigen(this,'LIM')"><span class="orig-icon">✈️</span><span class="orig-city">Lima</span><span class="orig-code">LIM</span></button>
+      </div>
+      <div class="qnav"><button class="qbtn secondary" onclick="nextQ(2)">← Atrás</button><button class="qbtn primary" onclick="nextQ(4)">Siguiente →</button></div>
+    </div>
+
+    <!-- Q4: Días -->
+    <div class="qcard" id="q4">
+      <div class="qlabel">Paso 5 de 5</div>
+      <div class="qtitle">¿Cuántos días tenés?</div>
+      <div class="qsub">Contando desde que salís hasta que volvés.</div>
+      <div class="qopts" id="q4opts">
+        <button class="qopt" onclick="selectSingle(this,'q4opts',4)"><span class="qopt-icon">⚡</span><span class="qopt-text"><span class="qopt-main">4–5 días</span><span class="qopt-sub">Fin de semana largo o escapada corta</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q4opts',7)"><span class="qopt-icon">📅</span><span class="qopt-text"><span class="qopt-main">6–8 días</span><span class="qopt-sub">La semana clásica — ideal para casi todo</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q4opts',10)"><span class="qopt-icon">🌟</span><span class="qopt-text"><span class="qopt-main">9–12 días</span><span class="qopt-sub">Podés hacer dos destinos si querés</span></span></button>
+        <button class="qopt" onclick="selectSingle(this,'q4opts',15)"><span class="qopt-icon">🗺️</span><span class="qopt-text"><span class="qopt-main">Más de 2 semanas</span><span class="qopt-sub">Viaje largo — podés explorar Brasil en serio</span></span></button>
+      </div>
+      <div class="qnav"><button class="qbtn secondary" onclick="nextQ(3)">← Atrás</button><button class="qbtn primary" onclick="calcMatch()">Ver mis resultados ✨</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ -->
+<!-- SCREEN 3 — RESULTS   -->
+<!-- ══════════════════════ -->
+<div class="screen" id="s3">
+  <nav class="tnav">
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="nav-r"><button class="bsm bo" onclick="go(2)" style="font-size:11px;padding:6px 12px">← Editar</button></div>
+  </nav>
+
+  <div class="res-header">
+    <div class="res-ey">✨ Tus 3 mejores matches</div>
+    <div class="res-tt" id="res-tt">Tu Brasil perfecto</div>
+    <div class="res-sub">Basado en tu vibe, presupuesto y origen</div>
+    <div class="ctx-row" id="ctx-row"></div>
+    <div class="adj-row">
+      <button class="adj-btn" onclick="adjustVibe('relax')">🌊 Más relax</button>
+      <button class="adj-btn" onclick="adjustVibe('social')">🎉 Más fiesta</button>
+      <button class="adj-btn" onclick="adjustVibe('naturaleza')">🌿 Más naturaleza</button>
+      <button class="adj-btn" onclick="adjustVibe('gastronomia')">🍽️ Más gastronomía</button>
+      <button class="adj-btn" onclick="adjustBudget(-300)">💸 Más barato</button>
+      <button class="adj-btn" onclick="adjustBudget(500)">💎 Más lujo</button>
+    </div>
+  </div>
+
+  <div class="res-scroll" id="res-scroll"></div>
+
+  <div class="res-footer">
+    <div class="res-footer-t">Compartí con tu compañero/a</div>
+    <button class="wpp-btn"><i class="ti ti-brand-whatsapp" style="color:#25D366;font-size:16px"></i> WhatsApp</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ -->
+<!-- SCREEN 4 — DETAIL    -->
+<!-- ══════════════════════ -->
+<div class="screen" id="s4">
+  <nav class="tnav">
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="nav-r"><button class="bsm bo" id="det-back-btn" style="font-size:11px;padding:6px 12px">← Volver</button></div>
+  </nav>
+  <div class="det-wrap" id="det-wrap"></div>
+</div>
+
+<!-- ══════════════════════ -->
+<!-- SCREEN 5 — BOOKING    -->
+<!-- ══════════════════════ -->
+<div class="screen" id="s5">
+  <nav class="tnav">
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="nav-r"><button class="bsm bo" onclick="go(4)" style="font-size:11px;padding:6px 12px">← Volver</button></div>
+  </nav>
+  <div class="bk-body" id="bk-body"></div>
+</div>
+
+<!-- ══════════════════════ -->
+<!-- BOTTOM NAV            -->
+<!-- ══════════════════════ -->
+<nav class="bnav">
+  <button class="bni on" id="bn0" onclick="go(1)"><i class="ti ti-home"></i>Inicio</button>
+  <button class="bni" id="bn1" onclick="go(2)"><i class="ti ti-adjustments-horizontal"></i>Buscar</button>
+  <button class="bni" id="bn2" onclick="go(3)"><i class="ti ti-map"></i>Resultados</button>
+  <button class="bni" id="bn3"><i class="ti ti-heart"></i>Guardados</button>
+</nav>
+
+<script>
+// Fallback para cuando el archivo se abre standalone en el navegador
+// (sendPrompt es nativo del entorno de widgets de Claude, no existe acá)
+if (typeof sendPrompt === 'undefined') {
+  window.sendPrompt = function(msg) { alert(msg); };
+}
+
+// ═══════════════════════════════════════
+// DATA — 5 DESTINOS MVP
+// ═══════════════════════════════════════
+const DEST = {
+  rio: {
+    id:'rio', nombre:'Río de Janeiro', loc:'Rio de Janeiro · Brasil',
+    tipo:'ciudad_completa', cluster:'ciudad', cssClass:'rio',
+    temp:28, logistica:'fácil', aero:'GIG / GRU',
+    mejor:'Mar–Jun · Ago–Oct', evitar:'Ene–Feb (carnaval)',
+    dias_min:5, dias_ideal:7,
+    pmin:1400, pmax:3000,
+    escenario:'Río Vibrante',
+    desc:'La ciudad más intensa de Brasil. Playas, montañas, cultura y vida nocturna en un solo lugar. No es para descansar — es para vivir.',
+    tip:'Evitá enero y febrero — carnaval triplica precios y la ciudad colapsa. Marzo a junio y agosto a octubre son los mejores meses.',
+    scores:{relax:3,romance:7,social:10,aventura:7,naturaleza:6,gastronomia:9,exclusividad:6,autenticidad:8},
+    compat:{COUPLE:7,FRIENDS:10,FAMILY:6,SOLO:9,BACKPACK:9,LUXE:7},
+    vibes:['social','gastronomía','cultura','fiesta','playa urbana'],
+    buceo:"limitado", buceoNota:"Algunos spots en Arraial do Cabo cercano, pero Río ciudad no es destino de buceo.",
+    exclusion:[{cond:'relax',min:8,accion:'excluir'},{cond:'dias',max:4,accion:'bajar'}],
+    presupuesto_excedido_msg: null,
+    highlights:['Ipanema y Leblon','Pan de Azúcar al atardecer','Santa Teresa + Lapa','Corcovado','Gastronomía de Botafogo'],
+    logs:[{i:'✈️',t:'Vuelo',d:'Directo desde BUE/MVD/SCL. GIG o GRU.'},{i:'🚇',t:'Transporte',d:'Metro + Uber. Fácil de moverse.'},{i:'☀️',t:'Clima',d:'28°C promedio. Evitar carnaval.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo desde BUE ida/vuelta',r:'USD 250–520'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 560–1.120'},{c:'#D4A017',l:'Comida · USD 45/día',r:'USD 315'},{c:'#8A5C2A',l:'Actividades y transporte',r:'USD 280'},{c:'#D94040',l:'Extras varios',r:'USD 100'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Ipanema',d:'Check-in y primera caminata por Ipanema. Atardecer en Leblon.'},
+      {n:'2',t:'Corcovado y Santa Teresa',d:'Subís al Cristo y después bajás al barrio más bohemio de Río.'},
+      {n:'3',t:'Pan de Azúcar',d:'El teleférico al atardecer. Vista que no se olvida.'},
+      {n:'4–5',t:'Playa y gastronomía',d:'Mañanas en Ipanema/Leblon, noches en bares de Botafogo y Santa Teresa.'},
+      {n:'6',t:'Lapa y vida nocturna',d:'Los arcos de Lapa y la noche más intensa de Brasil.'},
+      {n:'7',t:'Regreso',d:'Mañana libre en la playa. Vuelta.'},
+    ]
+  },
+  buzios: {
+    id:'buzios', nombre:'Búzios', loc:'Rio de Janeiro · Brasil',
+    tipo:'playa', cluster:'playa_chic', cssClass:'buzios',
+    temp:27, logistica:'media', aero:'GIG + CBF',
+    mejor:'Mar–May · Ago–Oct', evitar:'Enero (carnaval)',
+    dias_min:4, dias_ideal:7,
+    pmin:900, pmax:2500,
+    escenario:'Búzios Sunset',
+    desc:'El destino más chic de la costa carioca. Playas increíbles, restaurantes de primer nivel y sunsets que no se olvidan.',
+    tip:'Enero es un caos. Marzo a mayo es el momento ideal: clima perfecto, menos gente, mejores precios y la Rua das Pedras con otra energía.',
+    scores:{relax:8,romance:9,social:6,aventura:4,naturaleza:7,gastronomia:9,exclusividad:8,autenticidad:6},
+    compat:{COUPLE:10,FRIENDS:8,FAMILY:6,SOLO:5,BACKPACK:3,LUXE:9},
+    vibes:['romance','gastronomía','relax','playa chic','sunsets'],
+    buceo:"bueno", buceoNota:"Snorkel en el passeio de barco por las 27 playas. Aguas cristalinas en João Fernandes.",
+    exclusion:[{cond:'presupuesto',max:900,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
+    highlights:['Praia de João Fernandes','Rua das Pedras','Orla Bardot al atardecer','Passeio de barco','Gastronomía en Ossos'],
+    logs:[{i:'✈️',t:'Vuelo',d:'A GIG o CBF. Transfer 3h o bus 1.5h.'},{i:'🚗',t:'Transporte',d:'Buggy o bici dentro de Búzios.'},{i:'☀️',t:'Clima',d:'27°C. Mejor mar–may y ago–oct.'},{i:'📅',t:'Días ideales',d:'Mínimo 4, ideal 7.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG ida/vuelta',r:'USD 240–500'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 700–1.400'},{c:'#D4A017',l:'Comida · USD 55/día',r:'USD 385'},{c:'#8A5C2A',l:'Actividades y passeios',r:'USD 245'},{c:'#D94040',l:'Transfer GIG-Búzios',r:'USD 80'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Primer sunset',d:'Transfer desde GIG. Bajá en la Orla Bardot para el primer sunset de Búzios.'},
+      {n:'2',t:'João Fernandes',d:'La playa más linda de Búzios. Aguas cristalinas, bares en la arena.'},
+      {n:'3',t:'Passeio de barco',d:'Recorrida por las 27 playas en barco. Paradas para snorkel.'},
+      {n:'4–5',t:'Exploración libre',d:'Mañanas en playa, tardes en Rua das Pedras, noches con buena mesa.'},
+      {n:'6',t:'Gastronomía',d:'Reservá el mejor restaurante de Ossos para la última noche.'},
+      {n:'7',t:'Regreso',d:'Último baño en João Fernandes. Transfer de vuelta.'},
+    ]
+  },
+  pipa: {
+    id:'pipa', nombre:'Praia de Pipa', loc:'Rio Grande do Norte · Brasil',
+    tipo:'playa', cluster:'surf_boho', cssClass:'pipa',
+    temp:28, logistica:'media', aero:'NAT',
+    mejor:'Ago–Dic', evitar:'Mar–Jun (lluvias del nordeste)',
+    dias_min:4, dias_ideal:7,
+    pmin:700, pmax:1800,
+    escenario:'Pipa Bohemia',
+    desc:'El nordeste auténtico. Falésias, mar azul, surf y una energía bohemia que no se encuentra en ningún otro lado de Brasil.',
+    tip:'Marzo a junio llueve fuerte por las tardes pero el mar sigue hermoso y los precios bajan bastante. Agosto a diciembre es el pico de sol.',
+    scores:{relax:8,romance:8,social:8,aventura:9,naturaleza:9,gastronomia:7,exclusividad:6,autenticidad:8},
+    compat:{COUPLE:8,FRIENDS:8,FAMILY:5,SOLO:9,BACKPACK:9,LUXE:4},
+    vibes:['surf','bohemio','naturaleza','relax','auténtico'],
+    buceo:"bueno", buceoNota:"Snorkel en los arrecifes cerca de Praia do Amor con marea baja.",
+    exclusion:[{cond:'exclusividad',min:8,accion:'excluir'},{cond:'perfil',val:'LUXE',accion:'excluir'}],
+    highlights:['Praia do Amor','Falésias de Pipa','Mirante das Golfinhos','Lagoa de Guaraíras','Surf al amanecer'],
+    logs:[{i:'✈️',t:'Vuelo',d:'A NAT con 1 escala. Transfer 1.5h.'},{i:'🚶',t:'Transporte',d:'A pie mayormente. Buggy o moto.'},{i:'☀️',t:'Clima',d:'28°C. Mejor ago–dic.'},{i:'📅',t:'Días ideales',d:'Mínimo 4, ideal 7.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → NAT ida/vuelta',r:'USD 290–600'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 420–910'},{c:'#D4A017',l:'Comida · USD 35/día',r:'USD 245'},{c:'#8A5C2A',l:'Surf, trilhas, actividades',r:'USD 175'},{c:'#D94040',l:'Transfer NAT-Pipa',r:'USD 40'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Primeras falésias',d:'Transfer desde NAT. Llegás a la tarde y ves el sunset desde las falésias.'},
+      {n:'2',t:'Praia do Amor',d:'La playa icónica de Pipa. Mar azul intenso y olas para surf.'},
+      {n:'3',t:'Golfinhos',d:'Temprano al Mirante dos Golfinhos — delfines giradores en la bahía.'},
+      {n:'4–5',t:'Lagoa y surf',d:'Lagoa de Guaraíras al atardecer. Clases de surf si querés.'},
+      {n:'6',t:'Trilhas y exploración',d:'Caminatas por las falésias. Descubrís calas escondidas.'},
+      {n:'7',t:'Regreso',d:'Mañana libre. Transfer de vuelta a NAT.'},
+    ]
+  },
+  noronha: {
+    id:'noronha', nombre:'Fernando de Noronha', loc:'Pernambuco · Brasil',
+    tipo:'isla', cluster:'lujo_naturaleza', cssClass:'noronha',
+    temp:28, logistica:'compleja', aero:'FEN vía REC/NAT',
+    mejor:'Ago–Feb', evitar:'Mar–Jul (mar agitado)',
+    dias_min:5, dias_ideal:7,
+    pmin:1500, pmax:3500,
+    escenario:'Noronha Dream',
+    desc:'La isla más bonita del Atlántico. Cupo limitado, fauna marina única y playas que no existen en ningún otro lado del mundo.',
+    tip:'Reservá hospedaje 3–6 meses antes — el cupo es real. Pagá la taxa ambiental (USD 70/semana) online antes de llegar. Primera vez en Brasil — considerá empezar por el continente.',
+    cargos:'Taxa de Preservação Ambiental: USD 70/persona/semana. Sin internet estable en la isla.',
+    scores:{relax:9,romance:9,social:2,aventura:9,naturaleza:10,gastronomia:6,exclusividad:9,autenticidad:10},
+    compat:{COUPLE:10,FRIENDS:7,FAMILY:5,SOLO:8,BACKPACK:2,LUXE:9},
+    vibes:['naturaleza','exclusivo','buceo','romance','bucket list'],
+    buceo:"excelente", buceoNota:"Visibilidad de hasta 50 metros. Uno de los mejores puntos de buceo del Atlántico Sur. Tortugas, manta rayas, golfinhos.",
+    exclusion:[{cond:'presupuesto',max:1500,accion:'excluir'},{cond:'dias',max:4,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
+    highlights:['Baía do Sancho','Mirante dos Golfinhos','Mergulho en Cabeço','Praia do Leão','Pôr do sol en Boldró'],
+    logs:[{i:'✈️',t:'Vuelo',d:'2 escalas desde BUE. ~18–20hs.'},{i:'🚗',t:'Transporte',d:'Buggy USD 80/día. Sin autos privados.'},{i:'📋',t:'Taxa ambiental',d:'USD 70/persona/semana. Online.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → FEN ida/vuelta',r:'USD 520–840'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 1.120–2.240'},{c:'#D4A017',l:'Comida · USD 65/día',r:'USD 455'},{c:'#8A5C2A',l:'Buggy + actividades + buceo',r:'USD 630'},{c:'#D94040',l:'Taxa ambiental · 2 personas',r:'USD 140'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Primer sunset',d:'BUE → REC → Noronha. Caminá hasta Boldró para el sunset. Ya justifica el viaje.'},
+      {n:'2',t:'Baía do Sancho',d:'La playa más linda del mundo. Bajás por escalera entre rocas. Snorkel con tortugas.'},
+      {n:'3',t:'Mergulho',d:'Buceo con visibilidad hasta 50 metros. Bautismo en barco si no sabés — experiencia única.'},
+      {n:'4–5',t:'Exploración libre',d:'Buggy por la isla. Praia do Leão, Atalaia, Cacimba do Padre. Comé en Ecologicus.'},
+      {n:'6',t:'Golfinhos al amanecer',d:'Mirante dos Golfinhos — cientos de delfines giradores. No se olvida nunca.'},
+      {n:'7',t:'Último baño · Regreso',d:'Mañana libre en Sancho. Vuelo tarde a Recife y conexión a BUE.'},
+    ]
+  },
+  floripa: {
+    id:'floripa', nombre:'Florianópolis', loc:'Santa Catarina · Brasil',
+    tipo:'playa+ciudad', cluster:'social_joven', cssClass:'floripa',
+    temp:24, logistica:'fácil', aero:'FLN',
+    mejor:'Dic · Mar · Jun–Ago', evitar:'Ene–Feb (masivo)',
+    dias_min:5, dias_ideal:7,
+    pmin:800, pmax:2200,
+    escenario:'Floripa Total',
+    desc:'La isla más vibrante del sur. Surf, beach clubs, lagoas y gastronomía que sorprende. Para cada vibe hay una zona distinta.',
+    tip:'Enero y febrero son masivos — precios altos y playas llenas. Diciembre o marzo dan lo mismo con mucho menos gente. Invierno (jun–ago): precios bajos, olas perfectas.',
+    scores:{relax:5,romance:6,social:9,aventura:8,naturaleza:7,gastronomia:8,exclusividad:5,autenticidad:5},
+    compat:{COUPLE:7,FRIENDS:10,FAMILY:7,SOLO:7,BACKPACK:7,LUXE:6},
+    vibes:['social','nightlife','surf','naturaleza','gastronomía'],
+    buceo:"bueno", buceoNota:"Buceo en naufragios cerca de la isla. Bombinhas (a 1.5h) es el destino de buceo top de Santa Catarina si quieren extender.",
+    exclusion:[{cond:'relax',min:9,accion:'excluir'}],
+    zonas:[
+      {n:'Jurerê Internacional',d:'Beach clubs, fiesta, gente linda. La Ibiza del sur de Brasil.'},
+      {n:'Praia Brava',d:'Surf, joven, menos masivo que Jurerê. Bares en la arena.'},
+      {n:'Canasvieiras',d:'Familiar, animado, muy frecuentado por argentinos. Aguas tranquilas.'},
+      {n:'Joaquina',d:'Surf clásico, dunas, viento constante. Sede de competiciones internacionales.'},
+      {n:'Lagoa da Conceição',d:'Gastronomía, bares, kitesurf. El corazón social de la isla.'},
+      {n:'Campeche',d:'Tranquilo, auténtico, surf. La Ilha do Campeche enfrente con aguas cristalinas.'},
+      {n:'Ribeirão da Ilha',d:'Ostras, frutos do mar, colonial portugués. Se va a comer, no a tomar sol.'},
+    ],
+    highlights:['Jurerê Internacional','Lagoa da Conceição','Surf en Joaquina','Ostras en Ribeirão','Pôr do sol en Campeche'],
+    logs:[{i:'✈️',t:'Vuelo',d:'Directo desde BUE/MVD. FLN.'},{i:'🚗',t:'Transporte',d:'Auto recomendado. Playas muy separadas.'},{i:'☀️',t:'Clima',d:'24°C promedio. 28°C en verano.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → FLN ida/vuelta',r:'USD 140–400'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 490–1.050'},{c:'#D4A017',l:'Comida · USD 45/día',r:'USD 315'},{c:'#8A5C2A',l:'Auto alquilado · 7 días',r:'USD 245'},{c:'#D94040',l:'Actividades y salidas',r:'USD 210'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Lagoa da Conceição',d:'Check-in. Primera noche en los bares de la Lagoa.'},
+      {n:'2',t:'Jurerê Internacional',d:'Beach clubs y la playa más famosa de Floripa.'},
+      {n:'3',t:'Surf en Joaquina',d:'Dunas y olas. Clase de surf si querés.'},
+      {n:'4',t:'Campeche',d:'La playa más tranquila. Boat trip a la Ilha do Campeche.'},
+      {n:'5',t:'Ribeirão da Ilha',d:'Almuerzo de ostras en la parte más auténtica de la isla.'},
+      {n:'6',t:'Praia Brava',d:'Surf y sunset con menos masas que Jurerê.'},
+      {n:'7',t:'Regreso',d:'Mañana libre. Vuelo de vuelta.'},
+    ]
+  },
+
+  foz: {
+    id:'foz', nombre:"Foz do Iguaçu", loc:"Paraná · Brasil",
+    tipo:'naturaleza', cluster:'aventura', cssClass:'foz',
+    temp:23, logistica:"fácil", aero:"IGU",
+    mejor:"Todo el año", evitar:"—",
+    dias_min:2, dias_ideal:4,
+    pmin:600, pmax:1600,
+    escenario:"Iguazú Salvaje",
+    desc:"Foz do Iguaçu no es solo las cataratas — es un combo de 3 países. Lado brasileño para la vista panorámica completa, lado argentino para la experiencia inmersiva con pasarelas, y Ciudad del Este en Paraguay para shopping de electrónica y perfumería. En 3 o 4 noches lo conocés todo.",
+    tip:"Si tenés los días, cruzá también al lado argentino — la experiencia es distinta y se complementa con la vista panorámica brasileña. Y un día de shopping en Ciudad del Este (Paraguay) es clásico — solo necesitás el pasaporte, sin visa.",
+    scores:{relax:4,romance:5,social:3,aventura:9,naturaleza:10,gastronomia:5,exclusividad:4,autenticidad:6},
+    compat:{COUPLE:7,FRIENDS:7,FAMILY:9,SOLO:8,BACKPACK:8,LUXE:5},
+    vibes:["naturaleza","aventura","bucket list","cataratas","familiar","triple frontera"],
+    buceo:"ninguno", buceoNota:"Sin actividad de buceo — destino de cataratas y selva, no de mar.",
+    combinable:true, combos:[{n:"Cruce a Puerto Iguazú, Argentina",d:"Vista inmersiva con pasarelas sobre el agua. Solo pasaporte, sin visa."},{n:"Ciudad del Este, Paraguay",d:"Shopping de electrónica, perfumería y artículos duty-free."},{n:"Itaipú + Parque das Aves",d:"La represa más grande del mundo y un parque de aves tropicales."}],
+    highlights:["Cataratas lado brasileño","Cataratas lado argentino","Parque das Aves","Represa de Itaipú","Shopping en Ciudad del Este"],
+    logs:[{i:'✈️',t:'Vuelo',d:'Directo a IGU desde varias capitales.'},{i:'🌎',t:'Triple frontera',d:'Cruce a Argentina y Paraguay solo con pasaporte.'},{i:'☀️',t:'Clima',d:'23°C. Bueno todo el año.'},{i:'📅',t:'Días ideales',d:'3 a 4 noches con los combos.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → IGU ida/vuelta',r:'USD 180–320'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 220–440'},{c:'#D4A017',l:'Comida · USD 40/día',r:'USD 160'},{c:'#8A5C2A',l:'Entradas + shopping Paraguay',r:'USD 180'},{c:'#D94040',l:'Traslados entre fronteras',r:'USD 60'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Lado brasileño',d:'Visitás las Cataratas desde el lado brasileño — la vista panorámica completa.'},
+      {n:'2',t:'Lado argentino',d:'Cruzás a Puerto Iguazú para la experiencia inmersiva con pasarelas sobre el agua.'},
+      {n:'3',t:'Ciudad del Este, Paraguay',d:'Día de shopping de electrónica y perfumería cruzando el Puente de la Amistad.'},
+      {n:'4',t:'Itaipú + Parque das Aves',d:'La represa más grande del mundo y un parque de aves tropicales de primer nivel.'},
+    ]
+  },
+
+  saopaulo: {
+    id:'saopaulo', nombre:"São Paulo", loc:"São Paulo · Brasil",
+    tipo:'ciudad_completa', cluster:'ciudad', cssClass:'saopaulo',
+    temp:21, logistica:"fácil", aero:"GRU + CGH",
+    mejor:"Abr–Jun · Sep–Nov", evitar:"Dic–Feb (lluvias)",
+    dias_min:3, dias_ideal:4,
+    pmin:700, pmax:2200,
+    escenario:"São Paulo Gourmet",
+    desc:"São Paulo no es de playa ni de relax — es la ciudad más cosmopolita de Brasil. Tiene el título de capital mundial de la gastronomía, museos de primer nivel, la mejor vida nocturna del país y barrios como Jardins y Vila Madalena que parecen otra liga. Si querés combinar con playa, el litoral paulista está a unas horas.",
+    tip:"4 días alcanzan para la ciudad. Si tenés más tiempo, sumá 2-3 días en Ilhabela — es la joya del litoral paulista y muy poca gente de fuera de Brasil la conoce.",
+    scores:{relax:2,romance:5,social:9,aventura:3,naturaleza:2,gastronomia:10,exclusividad:7,autenticidad:6},
+    compat:{COUPLE:6,FRIENDS:9,FAMILY:5,SOLO:8,BACKPACK:7,LUXE:9},
+    vibes:["gastronomia","cultura","negocios","nightlife","arte","moda"],
+    buceo:"ninguno", buceoNota:"Sin costa propia — sin buceo. El litoral paulista (Ilhabela) tiene opciones si se combina.",
+    combinable:true, combos:[{n:"Ilhabela",d:"La joya del litoral paulista — isla con playas, cascadas y selva."},{n:"Ubatuba",d:"Surf, naturaleza y un ambiente más bohemio."},{n:"Santos / Guarujá",d:"La opción más accesible y cercana."}],
+    highlights:["Mercado Municipal","Vila Madalena de noche","Avenida Paulista","MASP","Restaurantes de Jardins"],
+    logs:[{i:'✈️',t:'Vuelo',d:'Hub principal de Brasil. GRU o CGH.'},{i:'🚇',t:'Transporte',d:'Metro extenso y eficiente.'},{i:'🍽️',t:'Gastronomía',d:'Capital mundial de la gastronomía.'},{i:'📅',t:'Días ideales',d:'4 días ciudad, +2-3 con litoral.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GRU ida/vuelta',r:'USD 130–250'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 240–520'},{c:'#D4A017',l:'Comida · USD 70/día',r:'USD 280'},{c:'#8A5C2A',l:'Museos, tours, nightlife',r:'USD 140'},{c:'#D94040',l:'Transporte local',r:'USD 60'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Jardins',d:'Check-in y primera noche de gastronomía en Jardins.'},
+      {n:'2',t:'Centro y MASP',d:'Avenida Paulista, museo MASP y Mercado Municipal.'},
+      {n:'3',t:'Vila Madalena',d:'Arte urbano de día, bares y vida nocturna por la noche.'},
+      {n:'4',t:'Gastronomía a fondo',d:'Reservá el mejor restaurante de la ciudad para la última noche.'},
+    ]
+  },
+
+  salvador: {
+    id:'salvador', nombre:"Salvador", loc:"Bahia · Brasil",
+    tipo:'ciudad_completa', cluster:'cultura', cssClass:'salvador',
+    temp:26, logistica:"fácil", aero:"SSA",
+    mejor:"Sep–Mar", evitar:"Abr–Jul (lluvias)",
+    dias_min:3, dias_ideal:5,
+    pmin:600, pmax:1800,
+    escenario:"Salvador Cultural",
+    desc:"Salvador es Brasil en su forma más cultural. El Pelourinho (patrimonio UNESCO), la música por todos lados, la comida bahiana (moqueca, acarajé) y una energía afrobrasileña que no se siente en ningún otro lado del país. No es de playa paradisíaca — para eso están Morro de São Paulo o Praia do Forte, a horas de distancia.",
+    tip:"Si solo tenés 5 días, quedate en la ciudad y disfrutala a fondo. Pero si querés el viaje completo de Bahía, sumale Morro de São Paulo (3 días extra) — el combo ciudad + isla es de 10 a 12 días y es de los mejores viajes que se pueden hacer en Brasil.",
+    scores:{relax:4,romance:6,social:7,aventura:5,naturaleza:5,gastronomia:9,exclusividad:4,autenticidad:10},
+    compat:{COUPLE:6,FRIENDS:8,FAMILY:6,SOLO:9,BACKPACK:9,LUXE:4},
+    vibes:["cultura","musica","historia","gastronomia","autenticidad","afrobrasileño"],
+    buceo:"limitado", buceoNota:"Algunos puntos cerca de la ciudad, pero no es el fuerte. Morro de São Paulo (combo) tiene mejores opciones.",
+    combinable:true, combos:[{n:"Morro de São Paulo",d:"Isla sin autos, playas espectaculares, ambiente bohemio."},{n:"Praia do Forte",d:"Más accesible, proyecto de conservación de tortugas."},{n:"Itacaré",d:"Surf, naturaleza, más al sur."}],
+    highlights:["Pelourinho","Elevador Lacerda","Mercado Modelo","Rio Vermelho de noche","Praia do Porto da Barra"],
+    logs:[{i:'✈️',t:'Vuelo',d:'Directo a SSA desde varias capitales.'},{i:'🎭',t:'Cultura',d:'Pelourinho, patrimonio UNESCO.'},{i:'☀️',t:'Clima',d:'26°C. Mejor sep-mar.'},{i:'📅',t:'Días ideales',d:'5 días ciudad, 10-12 con playas.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → SSA ida/vuelta',r:'USD 260–470'},{c:'#0E8C5A',l:'Hospedaje mid · 5 noches',r:'USD 250–500'},{c:'#D4A017',l:'Comida · USD 45/día',r:'USD 225'},{c:'#8A5C2A',l:'Tours culturales y shows',r:'USD 150'},{c:'#D94040',l:'Transporte local',r:'USD 75'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Pelourinho',d:'Centro histórico colonial, patrimonio de la UNESCO.'},
+      {n:'2',t:'Cultura afrobrasileña',d:'Capoeira, candomblé y la música que está en cada esquina.'},
+      {n:'3',t:'Gastronomía bahiana',d:'Moqueca, acarajé y los sabores más auténticos de Brasil.'},
+      {n:'4–5',t:'Rio Vermelho y playas',d:'Vida nocturna en Rio Vermelho, playa en Porto da Barra.'},
+    ]
+  },
+
+  paraty: {
+    id:'paraty', nombre:"Paraty", loc:"Rio de Janeiro · Brasil",
+    tipo:'playa+ciudad', cluster:'cultura', cssClass:'paraty',
+    temp:24, logistica:"media", aero:"Sin aeropuerto propio (vía GIG)",
+    mejor:"Abr–Jun · Ago–Oct", evitar:"Carnaval (fecha móvil)",
+    dias_min:2, dias_ideal:4,
+    pmin:700, pmax:2000,
+    escenario:"Paraty Colonial",
+    desc:"Paraty es la postal colonial de Brasil — calles empedradas, casas coloridas y un centro histórico que la marea alta inunda de forma mágica. Está en el camino entre Río y São Paulo, así que se combina fácil con cualquiera de las dos. Ideal para parejas que buscan romance con historia.",
+    tip:"El Carnaval acá es de fecha móvil cada año — verificá la fecha exacta y considerá evitarlo, se llena mucho y sube de precio. Si tenés un día extra, sumá Ilha Grande — está muy cerca.",
+    scores:{relax:8,romance:9,social:4,aventura:6,naturaleza:8,gastronomia:7,exclusividad:8,autenticidad:8},
+    compat:{COUPLE:10,FRIENDS:5,FAMILY:6,SOLO:7,BACKPACK:5,LUXE:8},
+    vibes:["colonial","romance","historia","relax","naturaleza","unesco"],
+    buceo:"bueno", buceoNota:"Snorkel y buceo liviano en los passeios de barco por las islas. Ilha Grande (combo) tiene mejores puntos.",
+    combinable:true, combos:[{n:"Río de Janeiro",d:"Parada en la Costa Verde antes o después de Río."},{n:"Ilha Grande",d:"Isla sin autos con playas paradisíacas, muy cerca de Paraty."}],
+    highlights:["Centro histórico al atardecer","Calles inundadas con marea alta","Passeio de barco","Cachoeira do Tobogã","Ilha Grande cerca"],
+    logs:[{i:'🚗',t:'Traslado',d:'Sin aeropuerto propio — desde Río ~3.5h.'},{i:'🏛️',t:'Centro histórico',d:'Colonial portugués, patrimonio UNESCO.'},{i:'🌊',t:'Particularidad',d:'Las calles se inundan con marea alta.'},{i:'📅',t:'Días ideales',d:'4 días, ideal combinado con Río.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 320–560'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 280–560'},{c:'#D4A017',l:'Comida · USD 55/día',r:'USD 220'},{c:'#8A5C2A',l:'Passeio de barco + cachoeiras',r:'USD 140'},{c:'#D94040',l:'Traslados locales',r:'USD 50'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Centro histórico',d:'Calles coloniales empedradas, primera caminata al atardecer.'},
+      {n:'2',t:'Passeio de barco',d:'Recorrida por las islas y playas cercanas en barco.'},
+      {n:'3',t:'Cachoeiras',d:'Cascadas en la selva cerca del centro.'},
+      {n:'4',t:'Ilha Grande (opcional)',d:'Si tenés un día extra, la isla está muy cerca.'},
+    ]
+  },
+
+  angra: {
+    id:'angra', nombre:"Angra dos Reis", loc:"Rio de Janeiro · Brasil",
+    tipo:'playa', cluster:'lujo', cssClass:'angra',
+    temp:25, logistica:"fácil-media", aero:"Sin aeropuerto propio (vía GIG)",
+    mejor:"Abr–Jun · Ago–Oct", evitar:"Carnaval · fines de semana largos",
+    dias_min:2, dias_ideal:4,
+    pmin:900, pmax:2800,
+    escenario:"Angra Náutica",
+    desc:"Angra dos Reis es puro mar y lujo discreto. 365 islas en la bahía, passeios de barco que son el centro de todo, y resorts donde el yate viene incluido. Es el destino de finde largo preferido de los cariocas y paulistas con plata.",
+    tip:"Si tu presupuesto es ajustado, Ilha Grande está al lado y ofrece islas y playas igual de hermosas con mucho menos costo. Angra vale la inversión si querés la experiencia de yate privado o resort de lujo con marina propia.",
+    scores:{relax:8,romance:8,social:5,aventura:6,naturaleza:9,gastronomia:6,exclusividad:9,autenticidad:5},
+    compat:{COUPLE:9,FRIENDS:7,FAMILY:7,SOLO:5,BACKPACK:3,LUXE:10},
+    vibes:["lujo","nautico","islas","relax","naturaleza","yates"],
+    buceo:"bueno", buceoNota:"Aguas cristalinas en varias de las 365 islas. Snorkel incluido en casi todos los passeios de barco.",
+    combinable:true, combos:[{n:"Río de Janeiro",d:"El combo más obvio — ciudad + bahía de lujo a 2-2.5h."},{n:"Paraty",d:"Mismo camino de la Costa Verde."},{n:"Ilha Grande",d:"Prácticamente al lado — más auténtica y económica."}],
+    highlights:["Ilha de Gipóia","Lagoa Azul","Passeio de barco por las 365 islas","Marina de Frade"],
+    logs:[{i:'🚗',t:'Traslado',d:'Sin aeropuerto propio — desde Río ~2-2.5h.'},{i:'⛵',t:'Actividad central',d:'Passeio de barco por las 365 islas.'},{i:'💎',t:'Perfil',d:'Destino de lujo náutico — yates y resorts.'},{i:'📅',t:'Días ideales',d:'3-4 días, clásico finde largo.'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 320–560'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 480–1.000'},{c:'#D4A017',l:'Comida · USD 70/día',r:'USD 280'},{c:'#8A5C2A',l:'Passeio de barco',r:'USD 320'},{c:'#D94040',l:'Traslados locales',r:'USD 60'}],
+    itinerary:[
+      {n:'1',t:'Llegada · Marina',d:'Check-in en resort con marina propia.'},
+      {n:'2',t:'365 islas',d:'Passeio de barco por la bahía — Ilha de Gipóia, Lagoa Azul.'},
+      {n:'3',t:'Snorkel y relax',d:'Aguas cristalinas, snorkel en alguna de las islas.'},
+      {n:'4',t:'Ilha Grande (opcional)',d:'Si querés extender, la isla está al lado.'},
+    ]
+  }
+};
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let state = {
+  vibes: [],
+  perfil: null,
+  cantidadPersonas: 2,
+  tipoHabitacion: null,
+  presupuesto: 1500,
+  presupuestoElegidoEnLanding: false,
+  origen: null,
+  dias: 7,
+  results: [],
+  currentDetail: null,
+  detailFrom: 3, // which screen to go back to
+};
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  document.getElementById('s'+n).classList.add('on');
+  document.querySelectorAll('.bni').forEach((b,i) => b.classList.toggle('on', i === n-1));
+}
+
+// ═══════════════════════════════════════
+// QUIZ LOGIC
+// ═══════════════════════════════════════
+function nextQ(n) {
+  document.querySelectorAll('.qcard').forEach(c => c.classList.remove('on'));
+  document.getElementById('q'+n).classList.add('on');
+  // update progress
+  for(let i=0;i<5;i++){
+    const pb = document.getElementById('qp'+i);
+    pb.className = 'qpb' + (i<n?' done':i===n?' act':'');
+  }
+}
+
+function toggleMulti(btn, vibe) {
+  btn.classList.toggle('sel');
+  if(btn.classList.contains('sel')) {
+    if(!state.vibes.includes(vibe)) state.vibes.push(vibe);
+  } else {
+    state.vibes = state.vibes.filter(v => v !== vibe);
+  }
+}
+
+function toggleLandingVibe(btn, vibe) {
+  btn.classList.toggle('on');
+  if(!state.vibes.includes(vibe)) state.vibes.push(vibe);
+  else state.vibes = state.vibes.filter(v => v !== vibe);
+}
+
+function toggleLandingBudget(btn, val) {
+  document.querySelectorAll('#landing-budget-pills .vp').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('custom-budget-input').value = '';
+  state.presupuesto = val;
+  state.presupuestoElegidoEnLanding = true;
+}
+
+function setCustomLandingBudget(val) {
+  const n = parseInt(val);
+  if (!n || n < 100) { state.presupuestoElegidoEnLanding = false; return; }
+  document.querySelectorAll('#landing-budget-pills .vp').forEach(b => b.classList.remove('on'));
+  state.presupuesto = n;
+  state.presupuestoElegidoEnLanding = true;
+}
+
+// Lleva de la landing al quiz SIN repetir lo que ya eligió (ni vibe ni presupuesto)
+function goToQuiz() {
+  go(2);
+  syncQuizVibesFromLanding();
+  syncQuizBudgetFromLanding();
+}
+
+function syncQuizVibesFromLanding() {
+  // marca en el paso 1 del quiz (vibe) las mismas opciones ya elegidas en la landing,
+  // así el usuario ve que "ya contamos eso" en vez de que se le pregunte de nuevo
+  document.querySelectorAll('#q0opts .qopt').forEach(btn => {
+    const vibe = btn.getAttribute('data-vibe');
+    btn.classList.toggle('sel', vibe && state.vibes.includes(vibe));
+  });
+  if (state.vibes.length > 0) {
+    document.querySelector('#q0 .qsub').textContent = 'Ya tomamos nota de lo que elegiste abajo — sumá algo más o tocá Siguiente.';
+  }
+}
+
+function syncQuizBudgetFromLanding() {
+  if (!state.presupuestoElegidoEnLanding) return;
+  document.getElementById('budget-slider').value = state.presupuesto;
+  document.getElementById('budget-display').textContent = 'USD ' + state.presupuesto.toLocaleString('es-AR');
+  const valores = [750, 1500, 2500, 4000];
+  const idx = valores.indexOf(state.presupuesto);
+  document.querySelectorAll('#q2opts .qopt').forEach((b,i) => b.classList.toggle('sel', i === idx));
+  document.querySelector('#q2 .qsub').textContent = 'Ya tomamos nota de tu presupuesto — ajustalo si querés o tocá Siguiente.';
+}
+
+function selectSingle(btn, groupId, val) {
+  document.querySelectorAll('#'+groupId+' .qopt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  if(groupId === 'q1opts') { state.perfil = val; handlePerfilHeadcount(val); }
+  if(groupId === 'q4opts') state.dias = val;
+}
+
+// Tipo de habitación según cantidad de personas — afecta el precio por persona
+function ocupacionDesdeCantidad(n) {
+  if (n <= 1) return { tipo: 'single', label: 'Habitación individual', icon: '🛏️', mult: 1.6 };
+  if (n === 2) return { tipo: 'doble', label: 'Habitación doble', icon: '🛏️🛏️', mult: 1.0 };
+  if (n === 3) return { tipo: 'triple', label: 'Habitación triple', icon: '🛏️🛏️🛏️', mult: 0.85 };
+  if (n === 4) return { tipo: 'cuadruple', label: 'Habitación cuádruple', icon: '🛏️x4', mult: 0.75 };
+  return { tipo: 'multiple', label: `Grupo de ${n} · varias habitaciones`, icon: '🏠', mult: 0.9 };
+}
+
+// Solo preguntamos cantidad exacta para Amigos/Familia — el resto tiene un default razonable
+function handlePerfilHeadcount(val) {
+  const hc = document.getElementById('q1-headcount');
+  if (val === 'FRIENDS' || val === 'FAMILY') {
+    hc.style.display = 'block';
+  } else {
+    hc.style.display = 'none';
+    const defaults = { COUPLE: 2, SOLO: 1, BACKPACK: 1, LUXE: 2 };
+    const n = defaults[val] ?? 2;
+    state.cantidadPersonas = n;
+    state.tipoHabitacion = ocupacionDesdeCantidad(n);
+  }
+}
+
+function setHeadcount(n, btn) {
+  document.querySelectorAll('#q1-headcount .q1hc-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  state.cantidadPersonas = n;
+  state.tipoHabitacion = ocupacionDesdeCantidad(n);
+  document.getElementById('q1hc-result').innerHTML = `<i class="ti ti-bed" style="font-size:13px"></i> ${state.tipoHabitacion.label}`;
+}
+
+function selectOrigen(btn, code) {
+  document.querySelectorAll('#q3opts .orig-chip').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  state.origen = code;
+}
+
+function updateBudget(val) {
+  state.presupuesto = parseInt(val);
+  document.getElementById('budget-display').textContent = 'USD ' + parseInt(val).toLocaleString('es-AR');
+}
+
+function setBudget(val, btn, groupId) {
+  document.querySelectorAll('#'+groupId+' .qopt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  state.presupuesto = val;
+  document.getElementById('budget-slider').value = val;
+  document.getElementById('budget-display').textContent = 'USD ' + val.toLocaleString('es-AR');
+}
+
+function setLang(btn, lang) {
+  document.querySelectorAll('.lb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ═══════════════════════════════════════
+// MATCH CALCULATION
+// ═══════════════════════════════════════
+function calcMatch() {
+  const scored = Object.values(DEST).map(d => {
+    // Check hard exclusions
+    for(const rule of d.exclusion) {
+      if(rule.cond === 'relax' && state.vibes.includes('relax') && d.scores.relax < (10-rule.min+1)) {
+        if(rule.accion === 'excluir') return null;
+      }
+      if(rule.cond === 'presupuesto' && rule.max && state.presupuesto < rule.max) {
+        if(rule.accion === 'excluir') return null;
+      }
+      if(rule.cond === 'perfil' && rule.val && state.perfil === rule.val) {
+        if(rule.accion === 'excluir') return null;
+      }
+      if(rule.cond === 'exclusividad' && state.vibes.includes('exclusividad') && d.scores.exclusividad < rule.min) {
+        if(rule.accion === 'excluir') return null;
+      }
+      if(rule.cond === 'dias' && rule.max && state.dias < rule.max) {
+        if(rule.accion === 'excluir') return null;
+      }
+    }
+
+    // Score calculation
+    let score = 0, total = 0;
+
+    // Vibe match (40% weight)
+    if(state.vibes.length > 0) {
+      const buceoMap = { ninguno:1, limitado:4, bueno:7, excelente:10 };
+      const vibeScore = state.vibes.reduce((acc, v) => {
+        if (v === 'buceo') return acc + (buceoMap[d.buceo] || 3);
+        return acc + (d.scores[v] || 5);
+      }, 0) / state.vibes.length;
+      score += vibeScore * 4;
+      total += 40;
+    }
+
+    // Perfil match (25% weight)
+    if(state.perfil) {
+      score += (d.compat[state.perfil] || 5) * 2.5;
+      total += 25;
+    }
+
+    // Presupuesto match (20% weight)
+    const budgetScore = state.presupuesto >= d.pmin && state.presupuesto <= d.pmax ? 10 :
+      state.presupuesto > d.pmax ? Math.max(0, 10 - (state.presupuesto - d.pmax) / 200) :
+      Math.max(0, 10 - (d.pmin - state.presupuesto) / 100);
+    score += budgetScore * 2;
+    total += 20;
+
+    // Dias match (15% weight)
+    const diasScore = state.dias >= d.dias_min ? 10 : Math.max(0, 10 - (d.dias_min - state.dias) * 2);
+    score += diasScore * 1.5;
+    total += 15;
+
+    const pct = total > 0 ? Math.round((score / total) * 100) : 50;
+
+    // Budget warning
+    let budgetWarning = null;
+    if(state.presupuesto < d.pmin) {
+      const diff = d.pmin - state.presupuesto;
+      const pctOver = (diff / state.presupuesto) * 100;
+      if(pctOver <= 40) budgetWarning = `Este destino necesita aprox. USD ${diff} más de tu presupuesto. Te lo mostramos igual porque vale mucho la pena considerarlo.`;
+    }
+
+    return { ...d, matchPct: Math.min(99, pct), budgetWarning };
+  }).filter(Boolean);
+
+  // Sort by match
+  scored.sort((a,b) => b.matchPct - a.matchPct);
+  state.results = scored.slice(0,3);
+
+  renderResults();
+  go(3);
+}
+
+function adjustVibe(vibe) {
+  if(!state.vibes.includes(vibe)) {
+    state.vibes.push(vibe);
+    calcMatch();
+  }
+}
+function adjustBudget(delta) {
+  state.presupuesto = Math.max(500, state.presupuesto + delta);
+  calcMatch();
+}
+
+// ═══════════════════════════════════════
+// RENDER RESULTS
+// ═══════════════════════════════════════
+function renderResults() {
+  // Context chips
+  const ctxRow = document.getElementById('ctx-row');
+  ctxRow.innerHTML = '';
+  const chips = [];
+  if(state.presupuesto) chips.push(`💰 USD ${state.presupuesto.toLocaleString()}`);
+  if(state.perfil) chips.push({COUPLE:'👫 Pareja',FRIENDS:'👯 Amigos',FAMILY:'👨‍👩‍👧 Familia',SOLO:'🧍 Solo/a',BACKPACK:'🎒 Mochilero',LUXE:'✨ Luxury'}[state.perfil]||state.perfil);
+  if(state.dias) chips.push(`📅 ${state.dias} días`);
+  if(state.origen) chips.push(`✈️ ${state.origen}`);
+  if(state.vibes.length) chips.push(...state.vibes.slice(0,2).map(v => '✨ '+v));
+  chips.forEach(ch => {
+    const s = document.createElement('span');
+    s.className = 'ctx-chip'; s.textContent = ch;
+    ctxRow.appendChild(s);
+  });
+
+  // Result cards
+  const scroll = document.getElementById('res-scroll');
+  scroll.innerHTML = '';
+
+  state.results.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = 'rcard' + (i===0?' feat':'');
+    card.onclick = () => openDetail(d.id, 3);
+
+    // Budget estimate
+    const estTotal = Math.round(state.presupuesto * (0.85 + Math.random()*0.3));
+
+    card.innerHTML = `
+      <div class="rphoto ${d.cssClass}">
+        <div class="rbadges">
+          ${i===0?'<span class="rbadge feat">⭐ Mejor match</span>':''}
+          <span class="rbadge match">${d.matchPct}% match</span>
+          ${d.budgetWarning?'<span class="rbadge dark">💸 Stretch</span>':i===1?'<span class="rbadge dark">💸 Opción económica</span>':''}
+        </div>
+        <button class="rheart" onclick="event.stopPropagation()"><i class="ti ti-heart"></i></button>
+      </div>
+      <div class="rbody">
+        <div class="rhead">
+          <div><div class="rname">${d.escenario}</div><div class="rloc">${d.nombre} · ${d.loc.split('·')[0].trim()}</div></div>
+          <div><div class="rprice-n">USD ${state.presupuesto.toLocaleString()}</div><div class="rprice-l">presup. disponible</div></div>
+        </div>
+        <div class="rvt">${d.vibes.slice(0,4).map((v,j) => `<span class="rv ${j<2?'g':j===2?'y':''}">${v}</span>`).join('')}</div>
+        <div class="rdets">
+          <div class="rdet"><div class="rdet-i">✈️</div><div class="rdet-l">Vuelo</div><div class="rdet-v">${d.aero.split('/')[0].trim()}</div></div>
+          <div class="rdet"><div class="rdet-i">☀️</div><div class="rdet-l">Mejor mes</div><div class="rdet-v">${d.mejor.split('·')[0].trim()}</div></div>
+          <div class="rdet"><div class="rdet-i">📅</div><div class="rdet-l">Días ideal</div><div class="rdet-v">${d.dias_ideal} días</div></div>
+        </div>
+        <div class="rbbar">
+          <div class="rbi" style="flex:3;background:#1A4FA8"></div>
+          <div class="rbi" style="flex:4;background:#0E8C5A"></div>
+          <div class="rbi" style="flex:2;background:#D4A017"></div>
+          <div class="rbi" style="flex:1;background:#E87830"></div>
+        </div>
+        ${d.budgetWarning?`<div class="rwarn"><i class="ti ti-alert-triangle"></i><span>${d.budgetWarning}</span></div>`:''}
+        ${d.tip?`<div class="rwarn" style="background:var(--gl);border-color:rgba(14,140,90,.25)"><i class="ti ti-info-circle" style="color:var(--g)"></i><span><strong>Tip local:</strong> ${d.tip.substring(0,100)}...</span></div>`:''}
+        <div class="rcta">
+          <button class="rcta-main" style="background:${i===0?'var(--g)':i===1?'var(--b)':'var(--am)'}" onclick="event.stopPropagation();openDetail('${d.id}',3)">Ver itinerario completo →</button>
+          <button class="rcta-sh" onclick="event.stopPropagation()"><i class="ti ti-share"></i></button>
+        </div>
+      </div>`;
+    scroll.appendChild(card);
+  });
+
+  // Footer
+  const footer = document.createElement('div');
+  footer.className = 'res-footer';
+  footer.innerHTML = `<div class="res-footer-t">Compartí con tu compañero/a</div><button class="wpp-btn"><i class="ti ti-brand-whatsapp" style="color:#25D366;font-size:16px"></i> WhatsApp</button>`;
+  scroll.appendChild(footer);
+}
+
+// ═══════════════════════════════════════
+// RENDER DETAIL
+// ═══════════════════════════════════════
+function openDetail(destId, fromScreen) {
+  const d = DEST[destId];
+  if(!d) return;
+  state.currentDetail = destId;
+  state.detailFrom = fromScreen || 3;
+
+  document.getElementById('det-back-btn').onclick = () => go(state.detailFrom);
+
+  const wrap = document.getElementById('det-wrap');
+  const scoreColors = {relax:'#1A4FA8',romance:'#D85A30',social:'#533AB7',aventura:'#D4A017',naturaleza:'#0E8C5A',gastronomia:'#8A5C2A',exclusividad:'#533AB7',autenticidad:'#D85A30'};
+  const scoreLabels = {relax:'Relax',romance:'Romance',social:'Social',aventura:'Aventura',naturaleza:'Naturaleza',gastronomia:'Gastronomía',exclusividad:'Exclusividad',autenticidad:'Autenticidad'};
+
+  const zonaSection = d.zonas ? `
+    <div>
+      <div class="dsl">Zonas y playas</div>
+      <div class="zonas-list">
+        ${d.zonas.map(z=>`<div class="zona-item"><div class="zona-name">${z.n}</div><div class="zona-desc">${z.d}</div></div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const cargosSection = d.cargos ? `
+    <div class="dwarn">
+      <i class="ti ti-alert-triangle"></i>
+      <div><div class="dwt">Cargos especiales</div><div class="dwd">${d.cargos}</div></div>
+    </div>` : '';
+
+  const combosSection = d.combinable && d.combos ? `
+    <div>
+      <div class="dsl">🔗 Se combina bien con</div>
+      <div class="zonas-list">
+        ${d.combos.map(c=>`<div class="zona-item"><div class="zona-name">${c.n}</div><div class="zona-desc">${c.d}</div></div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const buceoSection = d.buceo ? `
+    <div class="dwarn" style="background:var(--bl);border-color:rgba(26,79,168,.25)">
+      <i class="ti ti-anchor" style="color:var(--b)"></i>
+      <div><div class="dwt" style="color:var(--b)">🤿 Buceo: ${d.buceo}</div><div class="dwd" style="color:var(--b)">${d.buceoNota || ''}</div></div>
+    </div>` : '';
+
+  // Similar destinations
+  const similares = Object.values(DEST).filter(x => x.id !== d.id).slice(0,2);
+
+  wrap.innerHTML = `
+    <div class="dhero ${d.cssClass}">
+      <button class="dback" onclick="go(${state.detailFrom})">← Volver</button>
+      <div class="dhact">
+        <button class="dhb"><i class="ti ti-heart"></i></button>
+        <button class="dhb"><i class="ti ti-share"></i></button>
+      </div>
+      <div class="dhmatch">${d.matchPct || '—'}% match · ${d.cluster.replace('_',' ')}</div>
+      <div class="dhtitle">${d.escenario}</div>
+      <div class="dhsub">${d.nombre} · ${d.loc}</div>
+    </div>
+
+    <div class="dqs">
+      <div class="dqs-i"><div class="dqs-ic">💰</div><div class="dqs-v">USD ${d.pmin.toLocaleString()}+</div><div class="dqs-l">Presupuesto</div></div>
+      <div class="dqs-i"><div class="dqs-ic">✈️</div><div class="dqs-v">${d.logistica}</div><div class="dqs-l">Logística</div></div>
+      <div class="dqs-i"><div class="dqs-ic">🌡️</div><div class="dqs-v">${d.temp}°C</div><div class="dqs-l">Temperatura</div></div>
+      <div class="dqs-i"><div class="dqs-ic">📅</div><div class="dqs-v">${d.dias_ideal} días</div><div class="dqs-l">Ideal</div></div>
+    </div>
+
+    <div class="dbody">
+      <div class="dwarn">
+        <i class="ti ti-info-circle" style="color:var(--g)"></i>
+        <div><div class="dwt">${d.desc}</div></div>
+      </div>
+      ${cargosSection}
+
+      <div>
+        <div class="dsl">Perfil del destino</div>
+        <div class="dscores">
+          ${Object.entries(d.scores).map(([k,v])=>`
+            <div class="dsr">
+              <div class="dsr-l">${scoreLabels[k]}</div>
+              <div class="dsr-t"><div class="dsr-f" style="width:${v*10}%;background:${scoreColors[k]}"></div></div>
+              <div class="dsr-n">${v}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      ${zonaSection}
+      ${combosSection}
+      ${buceoSection}
+
+      <div>
+        <div class="dsl">Itinerario sugerido · ${d.dias_ideal} días</div>
+        <div class="ditinerary">
+          ${d.itinerary.map((it,i)=>`
+            <div class="dday">
+              <div class="dday-line">
+                <div class="dday-dot">${it.n}</div>
+                ${i<d.itinerary.length-1?'<div class="dday-conn"></div>':''}
+              </div>
+              <div class="dday-c">
+                <div class="dday-lbl">Día ${it.n}</div>
+                <div class="dday-t">${it.t}</div>
+                <div class="dday-d">${it.d}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="dbudget">
+      <div class="dsl" style="margin-bottom:0">Presupuesto estimado · 2 personas · ${d.dias_ideal} días</div>
+      <div class="dbud-card">
+        <div class="dbud-hdr">
+          <div class="dbud-lbl">Total estimado</div>
+          <div class="dbud-tot">USD ${(d.pmin + Math.round((d.pmax-d.pmin)*0.4)).toLocaleString()}</div>
+          <div class="dbud-sub">Estimación mid · ${d.dias_ideal} noches</div>
+          <div class="dbbar">${d.budget_lines.map(bl=>`<div class="dbbl" style="flex:1;background:${bl.c}"></div>`).join('')}</div>
+        </div>
+        <div class="dblines">
+          ${d.budget_lines.map(bl=>`
+            <div class="dbline">
+              <div class="dbline-l"><div class="dbline-d" style="background:${bl.c}"></div>${bl.l}</div>
+              <div class="dbline-r">${bl.r}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <div>
+        <div class="dsl">Logística real</div>
+        <div class="dlog-grid">
+          ${d.logs.map(l=>`<div class="dlog"><div class="dlog-i">${l.i}</div><div class="dlog-t">${l.t}</div><div class="dlog-d">${l.d}</div></div>`).join('')}
+        </div>
+      </div>
+
+      <div>
+        <div class="dsl">💡 Tip local honesto</div>
+        <div class="dwarn" style="background:var(--gl);border-color:rgba(14,140,90,.25)">
+          <i class="ti ti-bulb" style="color:var(--g)"></i>
+          <div class="dwd" style="color:var(--gd)">${d.tip}</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="dsl">También te puede gustar</div>
+        <div class="dsim-row">
+          ${similares.map(s=>`
+            <div class="dsim" onclick="openDetail('${s.id}',${state.detailFrom})">
+              <div class="dsim-t ${s.cssClass}"></div>
+              <div class="dsim-b"><div class="dsim-n">${s.escenario}</div><div class="dsim-m">${s.cluster.replace('_',' ')}</div></div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="dcta">
+      <button class="dcta-main" style="background:var(--g)" onclick="startBooking('${d.id}')">Planear este viaje →</button>
+      <button class="dcta-wpp"><i class="ti ti-brand-whatsapp"></i> Compartir por WhatsApp</button>
+    </div>`;
+
+  go(4);
+}
+
+// ═══════════════════════════════════════
+// SCREEN 5 — BOOKING FLOW (Fase 1: ayuda + derivación)
+// ═══════════════════════════════════════
+
+// Mock de aerolíneas reales por destino (basado en el campo "aero" de cada DEST)
+const AIRLINES_MOCK = {
+  rio:      ['LATAM', 'GOL', 'Azul'],
+  buzios:   ['LATAM', 'Azul'],
+  pipa:     ['GOL', 'Azul'],
+  noronha:  ['Azul'],
+  floripa:  ['LATAM', 'GOL', 'Azul'],
+  foz:      ['LATAM', 'GOL'],
+  saopaulo: ['LATAM', 'GOL', 'Azul'],
+  salvador: ['LATAM', 'GOL', 'Azul'],
+  paraty:   ['LATAM', 'GOL'],   // vía GIG, sin aeropuerto propio
+  angra:    ['LATAM', 'GOL'],   // vía GIG, sin aeropuerto propio
+};
+
+const PROVIDER_URLS = {
+  LATAM: 'https://www.latamairlines.com',
+  GOL:   'https://www.voegol.com.br',
+  Azul:  'https://www.voeazul.com.br',
+  booking: 'https://www.booking.com',
+  hotelbeds: '#', // mayorista B2B, no tiene sitio de consumidor final
+};
+
+let bk = { destId: null, step: 0, flight: null, hotel: null, transfer: null };
+
+function startBooking(destId) {
+  const d = DEST[destId];
+  if (!d) return;
+  bk = { destId, step: 0, flight: null, hotel: null, transfer: null };
+  renderBookingStep();
+  go(5);
+}
+
+function generateFlightOptions(d) {
+  const airlines = AIRLINES_MOCK[d.id] || ['LATAM'];
+  const baseFlight = Math.round(d.pmin * 0.22);
+  return [
+    { airline: airlines[0], tipo: 'Más económico', escalas: '1 escala', duracion: '5h 40min', precio: baseFlight, badge: 'y' },
+    { airline: airlines[Math.min(1, airlines.length-1)], tipo: 'Directo', escalas: 'Sin escalas', duracion: '2h 50min', precio: Math.round(baseFlight * 1.35), badge: 'g' },
+    { airline: airlines[airlines.length-1], tipo: 'Mejor horario', escalas: airlines.length>1?'1 escala':'Sin escalas', duracion: '4h 10min', precio: Math.round(baseFlight * 1.15), badge: 'b' },
+  ];
+}
+
+function generateHotelOptions(d) {
+  const opts = [];
+  const ocup = state.tipoHabitacion || ocupacionDesdeCantidad(state.cantidadPersonas || 2);
+  const mult = ocup.mult;
+  // Curaduría directa — simulamos que existe para los 5 destinos MVP originales
+  const tieneCuraduria = ['rio','buzios','pipa','noronha','floripa'].includes(d.id);
+  if (tieneCuraduria) {
+    opts.push({
+      nombre: d.id === 'buzios' ? 'Pousada Sole Búzios' : d.id === 'pipa' ? 'Pousada Vento Norte' : d.id === 'noronha' ? 'Pousada Zé Maria' : d.id === 'floripa' ? 'Pousada Lagoa Bela' : 'Pousada Vista Santa Teresa',
+      tipo: 'Elegida por Vibe.br', curada: true, fuente: 'curaduría directa',
+      precioNoche: Math.round(d.pmin * 0.09 * mult), noches: d.dias_ideal, ocupacion: ocup,
+    });
+  }
+  opts.push({
+    nombre: 'Opción Hotelbeds — hotel 3★ bien ubicado',
+    tipo: 'Mid', curada: false, fuente: 'hotelbeds',
+    precioNoche: Math.round(d.pmin * 0.085 * mult), noches: d.dias_ideal, ocupacion: ocup,
+  });
+  opts.push({
+    nombre: 'Opción Booking.com — pousada económica',
+    tipo: 'Económico', curada: false, fuente: 'booking',
+    precioNoche: Math.round(d.pmin * 0.06 * mult), noches: d.dias_ideal, ocupacion: ocup,
+  });
+  // ordenar: curaduría siempre primero, después por precio
+  opts.sort((a,b) => (b.curada - a.curada) || (a.precioNoche - b.precioNoche));
+  return opts.slice(0,3);
+}
+
+function necesitaTraslado(d) {
+  return d.aero && d.aero.toLowerCase().includes('sin aeropuerto propio');
+}
+
+function generateTransferOptions(d) {
+  if (necesitaTraslado(d)) {
+    // Paraty, Angra — sin aeropuerto propio, traslado desde Río es relevante
+    return [
+      { nombre: 'Transfer privado desde Río (GIG)', duracion: '~2h 30min', precio: 75, badge: 'g', tipo: 'Privado · puerta a puerta' },
+      { nombre: 'Bus + combi desde Río', duracion: '~3h 30min', precio: 28, badge: 'y', tipo: 'Económico' },
+    ];
+  }
+  return [
+    { nombre: `Transfer aeropuerto–centro (${d.aero.split('/')[0].split('+')[0].trim()})`, duracion: '20–40min', precio: 18, badge: 'g', tipo: 'Privado' },
+    { nombre: 'Taxi / Uber al llegar', duracion: 'variable', precio: 12, badge: 'y', tipo: 'Económico' },
+  ];
+}
+
+const BK_STEPS = [
+  { key: 'flight', label: 'Vuelo', icon: '✈️' },
+  { key: 'hotel', label: 'Hospedaje', icon: '🏨' },
+  { key: 'transfer', label: 'Traslado', icon: '🚐' },
+  { key: 'summary', label: 'Resumen', icon: '✨' },
+];
+
+function renderBookingStep() {
+  const d = DEST[bk.destId];
+  const body = document.getElementById('bk-body');
+  const skipTransfer = !necesitaTraslado(d) && bk.step === 2 && false; // siempre mostramos, pero con opciones livianas si no es crítico
+
+  // Progress pills
+  const stepsHtml = BK_STEPS.map((s, i) => `
+    <div class="bk-step-pill ${i===bk.step?'active':i<bk.step?'done':''}">
+      <div class="bk-step-ic">${i<bk.step?'✓':s.icon}</div>
+      <div class="bk-step-lbl">${s.label}</div>
+    </div>`).join('');
+
+  let content = '';
+
+  if (bk.step === 0) {
+    const opts = generateFlightOptions(d);
+    content = `
+      <div class="bk-section">
+        <div class="bk-sec-title">Elegí tu vuelo</div>
+        <div class="bk-sec-sub">Precios reales de búsqueda · ${state.origen || 'BUE'} → ${d.aero.split('/')[0].split('+')[0].trim()}</div>
+        ${opts.map((o,i) => `
+          <div class="bk-card ${bk.flight===i?'curada':''}" onclick="selectBkOption('flight',${i})">
+            <div class="bk-card-top">
+              <div><div class="bk-card-name">${o.airline}</div><div class="bk-card-meta">${o.escalas} · ${o.duracion}</div></div>
+              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precio}</div><div class="bk-price-l">por persona</div></div>
+            </div>
+            <div class="bk-badges-row"><span class="bk-badge ${o.badge}">${o.tipo}</span></div>
+            <div class="bk-card-foot">
+              <div class="bk-provider"><i class="ti ti-building-airport" style="font-size:12px"></i> Vía Duffel · búsqueda</div>
+              <button class="bk-go-btn redirect" onclick="event.stopPropagation();goToProvider('${o.airline}')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver en ${o.airline}</button>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  }
+
+  if (bk.step === 1) {
+    const opts = generateHotelOptions(d);
+    const ocup = opts[0].ocupacion;
+    content = `
+      <div class="bk-section">
+        <div class="bk-sec-title">Elegí tu hospedaje</div>
+        <div class="bk-sec-sub">${d.dias_ideal} noches · ${ocup.label} (${state.cantidadPersonas||2} persona${(state.cantidadPersonas||2)>1?'s':''}) · precio ya ajustado por persona</div>
+        ${opts.map((o,i) => `
+          <div class="bk-card ${o.curada?'curada':''}" onclick="selectBkOption('hotel',${i})">
+            <div class="bk-card-top">
+              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.noches} noches · USD ${o.precioNoche}/persona/noche</div></div>
+              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precioNoche*o.noches}</div><div class="bk-price-l">por persona</div></div>
+            </div>
+            <div class="bk-badges-row">
+              ${o.curada?'<span class="bk-badge curada-tag">⭐ Elegida por Vibe.br</span>':`<span class="bk-badge ${o.fuente==='hotelbeds'?'b':'y'}">${o.tipo}</span>`}
+              <span class="bk-badge g">${o.ocupacion.icon} ${o.ocupacion.label}</span>
+            </div>
+            <div class="bk-card-foot">
+              <div class="bk-provider"><i class="ti ti-building-store" style="font-size:12px"></i> ${o.curada?'Contacto directo':o.fuente==='hotelbeds'?'Vía Hotelbeds':'Vía Booking.com'}</div>
+              <button class="bk-go-btn ${o.fuente==='booking'?'redirect':''}" onclick="event.stopPropagation();goToProvider('${o.fuente}')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver opción</button>
+            </div>
+            ${o.fuente==='booking'?'<div class="bk-redirect-note"><i class="ti ti-info-circle" style="font-size:11px"></i> Esta opción se completa en Booking.com</div>':''}
+          </div>`).join('')}
+      </div>`;
+  }
+
+  if (bk.step === 2) {
+    const opts = generateTransferOptions(d);
+    const critico = necesitaTraslado(d);
+    content = `
+      <div class="bk-section">
+        <div class="bk-sec-title">Elegí tu traslado</div>
+        <div class="bk-sec-sub">${critico ? d.nombre+' no tiene aeropuerto propio — el traslado es una parte real del presupuesto' : 'Opcional, pero útil para llegar desde el aeropuerto'}</div>
+        ${opts.map((o,i) => `
+          <div class="bk-card ${bk.transfer===i?'curada':''}" onclick="selectBkOption('transfer',${i})">
+            <div class="bk-card-top">
+              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.duracion}</div></div>
+              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precio}</div><div class="bk-price-l">por persona</div></div>
+            </div>
+            <div class="bk-badges-row"><span class="bk-badge ${o.badge}">${o.tipo}</span></div>
+            <div class="bk-card-foot">
+              <div class="bk-provider"><i class="ti ti-route" style="font-size:12px"></i> Vía Hotelbeds Transfers</div>
+              <button class="bk-go-btn redirect" onclick="event.stopPropagation();goToProvider('hotelbeds')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver opción</button>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  }
+
+  if (bk.step === 3) {
+    const flights = generateFlightOptions(d);
+    const hotels = generateHotelOptions(d);
+    const transfers = generateTransferOptions(d);
+    const f = flights[bk.flight ?? 0];
+    const h = hotels[bk.hotel ?? 0];
+    const t = transfers[bk.transfer ?? 0];
+    const total = f.precio + (h.precioNoche*h.noches) + t.precio;
+
+    content = `
+      <div class="bk-summary-hero">
+        <div class="bk-summary-check"><i class="ti ti-check"></i></div>
+        <div class="bk-summary-title">Tu viaje a ${d.nombre} está armado</div>
+        <div class="bk-summary-sub">Presupuesto estimado por persona</div>
+        <div class="bk-summary-total">USD ${total}</div>
+        <div class="bk-summary-total-l">vuelo + hospedaje + traslado</div>
+      </div>
+      <div class="bk-recap">
+        <div class="bk-recap-item">
+          <div class="bk-recap-ic">✈️</div>
+          <div class="bk-recap-txt"><div class="bk-recap-t">${f.airline} · ${f.tipo}</div><div class="bk-recap-d">${f.escalas} · ${f.duracion}</div></div>
+          <div class="bk-recap-p">USD ${f.precio}</div>
+        </div>
+        <div class="bk-recap-item">
+          <div class="bk-recap-ic">🏨</div>
+          <div class="bk-recap-txt"><div class="bk-recap-t">${h.nombre}</div><div class="bk-recap-d">${h.noches} noches · USD ${h.precioNoche}/noche</div></div>
+          <div class="bk-recap-p">USD ${h.precioNoche*h.noches}</div>
+        </div>
+        <div class="bk-recap-item">
+          <div class="bk-recap-ic">🚐</div>
+          <div class="bk-recap-txt"><div class="bk-recap-t">${t.nombre}</div><div class="bk-recap-d">${t.duracion}</div></div>
+          <div class="bk-recap-p">USD ${t.precio}</div>
+        </div>
+      </div>
+      <div class="bk-helper" style="margin:0 1rem 1rem">
+        <i class="ti ti-info-circle"></i>
+        <div><div class="bk-helper-t">Recordá</div><div class="bk-helper-d">Vibe.br te ayuda a armar y comparar — cada reserva se completa directo con el prestador (aerolínea, Hotelbeds, Booking.com o la pousada). No procesamos pagos.</div></div>
+      </div>
+      <div class="bk-cta-final">
+        <button class="bk-nav-btn primary" onclick="saveTrip()"><i class="ti ti-device-floppy"></i> Guardar este viaje</button>
+        <button class="dcta-wpp" onclick="shareTrip()"><i class="ti ti-brand-whatsapp"></i> Compartir por WhatsApp</button>
+      </div>`;
+  }
+
+  const nav = bk.step < 3 ? `
+    <div class="bk-nav">
+      ${bk.step > 0 ? `<button class="bk-nav-btn secondary" onclick="bkPrev()">← Atrás</button>` : `<button class="bk-nav-btn secondary" onclick="go(4)">Cancelar</button>`}
+      <button class="bk-nav-btn primary" onclick="bkNext()">${bk.step === 2 ? 'Ver resumen ✨' : 'Siguiente →'}</button>
+    </div>` : `<div style="height:1.2rem"></div>`;
+
+  body.innerHTML = `
+    <div class="bk-helper">
+      <i class="ti ti-bulb"></i>
+      <div><div class="bk-helper-t">Cómo funciona</div><div class="bk-helper-d">Te mostramos precios reales y te ayudamos a comparar. Cada reserva se completa directo con la aerolínea, el hotel o la pousada — Vibe.br no cobra nada.</div></div>
+    </div>
+    <div class="bk-steps">${stepsHtml}</div>
+    ${content}
+    ${nav}`;
+}
+
+function selectBkOption(type, idx) {
+  bk[type] = idx;
+  renderBookingStep();
+}
+
+function bkNext() {
+  if (bk.step === 0 && bk.flight === null) bk.flight = 0;
+  if (bk.step === 1 && bk.hotel === null) bk.hotel = 0;
+  if (bk.step === 2 && bk.transfer === null) bk.transfer = 0;
+  bk.step = Math.min(3, bk.step + 1);
+  renderBookingStep();
+}
+function bkPrev() {
+  bk.step = Math.max(0, bk.step - 1);
+  renderBookingStep();
+}
+
+function goToProvider(key) {
+  const url = PROVIDER_URLS[key] || '#';
+  if (url === '#') {
+    sendPrompt(`(Demo) En producción esto abriría el canal de reserva de ${key} en una pestaña nueva.`);
+    return;
+  }
+  window.open(url, '_blank');
+}
+
+function saveTrip() {
+  sendPrompt('Quiero guardar este viaje armado para verlo después');
+}
+function shareTrip() {
+  const d = DEST[bk.destId];
+  sendPrompt(`Quiero compartir por WhatsApp mi viaje armado a ${d.nombre}`);
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+// (la sincronización landing→quiz ahora vive en goToQuiz/syncQuizVibesFromLanding)
+</script>
+</body>
+</html>
