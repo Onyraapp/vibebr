@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="theme-color" content="#ffffff"/>
-<title>VIBE.BR</title>
+<title>Vibe Brasil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
@@ -31,6 +31,13 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 
 /* ─── SCREENS ─── */
 .screen{display:none;position:fixed;inset:0;height:100dvh;flex-direction:column;overflow:hidden}
+@media (min-width:680px){
+  body{background:#dde2df}
+  /* Quiz y Reserva: flujos lineales, se mantienen angostos y centrados (como una app) */
+  #s2,#s5{left:50%;right:auto;width:430px;transform:translateX(-50%);box-shadow:0 0 70px rgba(0,0,0,.12)}
+  /* Landing, Resultados y Detalle: aprovechan el ancho de escritorio */
+  #s1,#s3,#s4{left:50%;right:auto;width:min(1080px,94vw);transform:translateX(-50%);box-shadow:0 0 70px rgba(0,0,0,.10)}
+}
 .screen.on{display:flex}
 
 /* ─── TOP NAV ─── */
@@ -60,6 +67,10 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .s1-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom))}
 
 .hero{background:var(--wh);padding:1.8rem 1.1rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+@media (min-width:680px){
+  .htitle,.hsub,.sb-label,.sb-or,.sbar,.hstats,.trip-fields{max-width:620px;margin-left:auto;margin-right:auto}
+  .vpills{max-width:760px;margin-left:auto;margin-right:auto;justify-content:center}
+}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 0%,rgba(14,140,90,.12) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 5% 100%,rgba(212,160,23,.08) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 95% 90%,rgba(26,79,168,.06) 0%,transparent 55%);pointer-events:none}
 .hero::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g) 0%,var(--y) 50%,var(--b) 100%);opacity:.65}
 
@@ -71,6 +82,14 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 
 .sb-label{font-size:11px;font-weight:600;color:var(--mid);margin-bottom:7px;position:relative}
 .sb-or{font-size:10px;color:var(--soft);margin:.7rem 0 .6rem;position:relative}
+.trip-fields{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:420px;margin:0 auto}
+.tf-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.tf-label{font-size:11px;font-weight:600;color:var(--mid)}
+.tf-req{color:var(--y);margin-left:2px}
+.tf-row{display:flex;gap:8px}
+.tf-select{appearance:none;background:var(--wh) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A9990' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;border:1.5px solid var(--br);border-radius:var(--rs);padding:9px 30px 9px 12px;font-size:12.5px;font-weight:500;color:var(--tx);font-family:inherit;flex:1;min-width:0;cursor:pointer;transition:border-color .2s}
+.tf-select:focus{outline:none;border-color:var(--g)}
+.tf-select.full{width:100%}
 .sb-custom-budget{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:.6rem;flex-wrap:wrap}
 .sb-custom-lbl{font-size:11px;color:var(--soft)}
 .sb-custom-row{display:flex;align-items:center;gap:0;background:var(--cr);border:1.5px solid var(--br);border-radius:20px;padding:4px 6px 4px 12px;transition:border-color .2s}
@@ -88,9 +107,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .vpills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:1.2rem;position:relative}
 .vp{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--br);background:var(--cr);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s}
 .vp.on{border-color:var(--g);color:var(--g);background:var(--gl)}
-.vp-vibe{background:var(--yl);border-color:rgba(212,160,23,.35);color:#7A5600}
-.vp-vibe:hover{background:#F5E6B8;border-color:var(--y)}
-.vp-vibe.on{background:var(--y);border-color:var(--y);color:#fff;font-weight:700}
 
 .hstats{display:flex;justify-content:center;position:relative}
 .hst{text-align:center;padding:0 .9rem;border-right:1px solid var(--br)}
@@ -104,6 +120,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .sect{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--tx)}
 .secl{font-size:12px;color:var(--g);font-weight:600;cursor:pointer}
 .dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media (min-width:680px){.dgrid{grid-template-columns:repeat(4,1fr);gap:12px}}
 .dcard{border-radius:var(--r);overflow:hidden;border:1px solid var(--br);background:var(--wh);cursor:pointer;transition:all .2s}
 .dcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px)}
 .dthumb{height:68px;position:relative}
@@ -188,12 +205,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .orig-code{font-size:10px;color:var(--soft)}
 
 .qnav{display:flex;gap:8px;margin-top:1.5rem}
-.q1-headcount{margin-top:.9rem;padding:13px 14px;background:var(--cr);border-radius:var(--r);border:1px solid var(--br);animation:fadeIn .25s ease}
-.q1hc-label{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:9px}
-.q1hc-row{display:flex;gap:6px}
-.q1hc-btn{flex:1;padding:9px 0;border-radius:10px;border:1.5px solid var(--br);background:var(--wh);font-size:13px;font-weight:700;color:var(--mid);cursor:pointer;font-family:inherit;transition:all .15s}
-.q1hc-btn:hover,.q1hc-btn.sel{border-color:var(--g);background:var(--gl);color:var(--g)}
-.q1hc-result{font-size:11px;color:var(--g);font-weight:600;margin-top:9px;display:flex;align-items:center;gap:5px;min-height:14px}
 .qbtn{flex:1;padding:13px;border-radius:var(--rs);font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .15s}
 .qbtn.primary{background:var(--g);color:#fff}
 .qbtn.primary:hover{background:var(--gd)}
@@ -215,6 +226,11 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .adj-btn:hover{border-color:var(--g);color:var(--g);background:var(--gl)}
 
 .res-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+@media (min-width:680px){
+  .res-scroll{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;align-content:start}
+  .rcard{border:1.5px solid var(--br);border-radius:var(--r);border-bottom:1.5px solid var(--br);overflow:hidden}
+  .rcard.feat{border-color:var(--g)}
+}
 
 .rcard{background:var(--wh);border-bottom:8px solid var(--bg);cursor:pointer}
 .rcard.feat{border-left:3px solid var(--g)}
@@ -272,6 +288,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 /* SCREEN 4 — DETAIL           */
 /* ════════════════════════════ */
 .det-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+@media (min-width:680px){.det-wrap{max-width:720px;width:100%;margin:0 auto}}
 .dhero{height:170px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem 1.1rem;flex-shrink:0}
 .dhero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.52) 0%,transparent 55%)}
 .dhero.rio    {background:linear-gradient(155deg,#0a2060 0%,#1a5fa8 40%,#2a9ad4 70%)}
@@ -386,7 +403,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .bk-helper-d{font-size:11px;color:var(--gd);line-height:1.5}
 
 .bk-steps{display:flex;gap:6px;padding:0 1rem;margin-bottom:1rem}
-.bk-step-pill{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:var(--rs);background:var(--cr);border:1.5px solid var(--br);transition:all .2s}
+.bk-step-pill{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:var(--rs);background:var(--cr);border:1.5px solid var(--br);transition:all .2s;cursor:pointer}
 .bk-step-pill.active{background:var(--gl);border-color:var(--g)}
 .bk-step-pill.done{background:var(--gl);border-color:var(--g);opacity:.7}
 .bk-step-ic{font-size:16px}
@@ -397,21 +414,28 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 .bk-sec-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--tx);margin-bottom:3px}
 .bk-sec-sub{font-size:12px;color:var(--soft);margin-bottom:.9rem}
 
-.bk-card{background:var(--wh);border:1.5px solid var(--br);border-radius:var(--r);padding:13px;margin-bottom:9px;transition:all .15s}
-.bk-card.curada{border-color:var(--g);background:var(--gl)}
-.bk-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px}
+.bk-card{background:var(--wh);border:1.5px solid var(--br);border-radius:var(--r);padding:13px;margin-bottom:14px;transition:all .15s;cursor:pointer;overflow:hidden}
+.bk-card.curada{border-color:var(--g)}
+.bk-card-photo-wrap{position:relative;width:calc(100% + 26px);margin:-13px -13px 10px -13px;height:160px;background:var(--bl);overflow:hidden}
+.bk-card-photo{width:100%;height:100%;object-fit:cover;display:block}
+.bk-card-photo-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px}
+.bk-card-photo-ph.curada{background:linear-gradient(135deg,var(--g),#0a6b46)}
+.bk-card-photo-ph.hotelbeds{background:linear-gradient(135deg,var(--b),#0d3a82)}
+.bk-card-photo-ph.booking{background:linear-gradient(135deg,#D4A017,#9c7600)}
+.bk-card-badge-overlay{position:absolute;top:10px;left:10px}
+.bk-card-badge-overlay .bk-badge{box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.bk-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;gap:10px}
 .bk-card-name{font-size:14px;font-weight:700;color:var(--tx)}
 .bk-card-meta{font-size:11px;color:var(--soft);margin-top:2px}
 .bk-card-price{text-align:right;flex-shrink:0}
 .bk-price-n{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--tx)}
 .bk-price-l{font-size:9px;color:var(--soft)}
-.bk-badges-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
 .bk-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:10px}
 .bk-badge.g{background:var(--gl);color:var(--g);border:1px solid rgba(14,140,90,.25)}
 .bk-badge.b{background:var(--bl);color:var(--b);border:1px solid rgba(26,79,168,.2)}
 .bk-badge.y{background:var(--yl);color:#8A6300;border:1px solid rgba(212,160,23,.25)}
 .bk-badge.curada-tag{background:var(--g);color:#fff}
-.bk-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bk-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
 .bk-provider{font-size:10px;color:var(--soft);display:flex;align-items:center;gap:4px}
 .bk-go-btn{padding:8px 16px;border-radius:18px;background:var(--g);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .bk-go-btn:hover{background:var(--gd)}
@@ -451,7 +475,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 <!-- ══════════════════════ -->
 <div class="screen on" id="s1">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r">
       <div class="lsw">
         <button class="lb on" onclick="setLang(this,'ES')">ES</button>
@@ -474,15 +498,56 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
       </div>
       <div class="sb-or">— o elegí tu vibe directamente —</div>
       <div class="vpills">
-        <button class="vp vp-vibe" data-vibe="relax" onclick="toggleLandingVibe(this,'relax')">🌊 relax</button>
-        <button class="vp vp-vibe" data-vibe="romance" onclick="toggleLandingVibe(this,'romance')">💑 romance</button>
-        <button class="vp vp-vibe" data-vibe="aventura" onclick="toggleLandingVibe(this,'aventura')">🏄 surf</button>
-        <button class="vp vp-vibe" data-vibe="naturaleza" onclick="toggleLandingVibe(this,'naturaleza')">🌿 naturaleza</button>
-        <button class="vp vp-vibe" data-vibe="social" onclick="toggleLandingVibe(this,'social')">🎉 fiesta</button>
-        <button class="vp vp-vibe" data-vibe="exclusividad" onclick="toggleLandingVibe(this,'exclusividad')">💎 lujo</button>
-        <button class="vp vp-vibe" data-vibe="gastronomia" onclick="toggleLandingVibe(this,'gastronomia')">🍽️ gastronomía</button>
-        <button class="vp vp-vibe" data-vibe="autenticidad" onclick="toggleLandingVibe(this,'autenticidad')">🧭 autenticidad</button>
-        <button class="vp vp-vibe" data-vibe="buceo" onclick="toggleLandingVibe(this,'buceo')">🤿 buceo</button>
+        <button class="vp" data-vibe="relax" onclick="toggleLandingVibe(this,'relax')">🌊 relax</button>
+        <button class="vp" data-vibe="romance" onclick="toggleLandingVibe(this,'romance')">💑 romance</button>
+        <button class="vp" data-vibe="aventura" onclick="toggleLandingVibe(this,'aventura')">🏄 surf</button>
+        <button class="vp" data-vibe="naturaleza" onclick="toggleLandingVibe(this,'naturaleza')">🌿 naturaleza</button>
+        <button class="vp" data-vibe="social" onclick="toggleLandingVibe(this,'social')">🎉 fiesta</button>
+        <button class="vp" data-vibe="exclusividad" onclick="toggleLandingVibe(this,'exclusividad')">💎 lujo</button>
+        <button class="vp" data-vibe="gastronomia" onclick="toggleLandingVibe(this,'gastronomia')">🍽️ gastronomía</button>
+        <button class="vp" data-vibe="autenticidad" onclick="toggleLandingVibe(this,'autenticidad')">🧭 autenticidad</button>
+        <button class="vp" data-vibe="buceo" onclick="toggleLandingVibe(this,'buceo')">🤿 buceo</button>
+      </div>
+      <div class="sb-or">— y los datos de tu viaje —</div>
+      <div class="trip-fields">
+        <div class="tf-group">
+          <label class="tf-label">¿Cuándo te gustaría ir?</label>
+          <div class="tf-row">
+            <select class="tf-select" id="landing-mes" onchange="state.mesViaje=this.value||null">
+              <option value="">Seleccione un mes</option>
+              <option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option>
+              <option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option>
+              <option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+            </select>
+            <select class="tf-select" id="landing-anio" onchange="state.anioViaje=this.value||null">
+              <option value="">Seleccione un año</option>
+              <option>2026</option><option>2027</option>
+            </select>
+          </div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group">
+            <label class="tf-label">¿Cuánto tiempo?<span class="tf-req">*</span></label>
+            <select class="tf-select full" id="landing-duracion" onchange="state.dias=this.value?parseInt(this.value):state.dias">
+              <option value="">Duración</option>
+              <option value="4">4–5 días</option>
+              <option value="7">6–8 días</option>
+              <option value="10">9–12 días</option>
+              <option value="15">Más de 2 semanas</option>
+            </select>
+          </div>
+          <div class="tf-group">
+            <label class="tf-label">¿Cuántas personas?<span class="tf-req">*</span></label>
+            <select class="tf-select full" id="landing-personas" onchange="state.personas=this.value?parseInt(this.value):null">
+              <option value="">Cantidad</option>
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 o más</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="sb-or">— y tu presupuesto —</div>
       <div class="vpills" id="landing-budget-pills">
@@ -492,14 +557,14 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
         <button class="vp" onclick="toggleLandingBudget(this,4000)">👑 sin límite</button>
       </div>
       <div class="sb-custom-budget">
-        <span class="sb-custom-lbl">Tu presupuesto es:</span>
+        <span class="sb-custom-lbl">¿Tenés un número exacto?</span>
         <div class="sb-custom-row">
           <span class="sb-custom-prefix">USD</span>
           <input type="number" id="custom-budget-input" placeholder="ej: 1280" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
         </div>
       </div>
       <div class="hstats">
-        <div class="hst"><div class="hst-n">10</div><div class="hst-l">destinos</div></div>
+        <div class="hst"><div class="hst-n">5</div><div class="hst-l">destinos MVP</div></div>
         <div class="hst"><div class="hst-n">3</div><div class="hst-l">escenarios</div></div>
         <div class="hst"><div class="hst-n">100%</div><div class="hst-l">Brasil</div></div>
         <div class="hst"><div class="hst-n">gratis</div><div class="hst-l">sin registro</div></div>
@@ -544,7 +609,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 <!-- ══════════════════════ -->
 <div class="screen" id="s2">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(1)" style="font-size:11px;padding:6px 12px">← Inicio</button></div>
   </nav>
 
@@ -588,17 +653,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
         <button class="qopt" onclick="selectSingle(this,'q1opts','SOLO')"><span class="qopt-icon">🧍</span><span class="qopt-text"><span class="qopt-main">Solo/a</span><span class="qopt-sub">Viaje individual</span></span></button>
         <button class="qopt" onclick="selectSingle(this,'q1opts','BACKPACK')"><span class="qopt-icon">🎒</span><span class="qopt-text"><span class="qopt-main">Mochilero/a</span><span class="qopt-sub">Flexible, económico, aventurero</span></span></button>
         <button class="qopt" onclick="selectSingle(this,'q1opts','LUXE')"><span class="qopt-icon">✨</span><span class="qopt-text"><span class="qopt-main">Luxury</span><span class="qopt-sub">Sin restricciones, máximo confort</span></span></button>
-      </div>
-      <div class="q1-headcount" id="q1-headcount" style="display:none">
-        <div class="q1hc-label">¿Cuántos son en total?</div>
-        <div class="q1hc-row">
-          <button class="q1hc-btn" onclick="setHeadcount(2,this)">2</button>
-          <button class="q1hc-btn" onclick="setHeadcount(3,this)">3</button>
-          <button class="q1hc-btn" onclick="setHeadcount(4,this)">4</button>
-          <button class="q1hc-btn" onclick="setHeadcount(5,this)">5</button>
-          <button class="q1hc-btn" onclick="setHeadcount(6,this)">6+</button>
-        </div>
-        <div class="q1hc-result" id="q1hc-result"></div>
       </div>
       <div class="qnav"><button class="qbtn secondary" onclick="nextQ(0)">← Atrás</button><button class="qbtn primary" onclick="nextQ(2)">Siguiente →</button></div>
     </div>
@@ -658,7 +712,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 <!-- ══════════════════════ -->
 <div class="screen" id="s3">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(2)" style="font-size:11px;padding:6px 12px">← Editar</button></div>
   </nav>
 
@@ -690,7 +744,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 <!-- ══════════════════════ -->
 <div class="screen" id="s4">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" id="det-back-btn" style="font-size:11px;padding:6px 12px">← Volver</button></div>
   </nav>
   <div class="det-wrap" id="det-wrap"></div>
@@ -701,7 +755,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'DM Sans',system-ui,sans-ser
 <!-- ══════════════════════ -->
 <div class="screen" id="s5">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">VIBE<span>.BR</span></div></div>
+    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(4)" style="font-size:11px;padding:6px 12px">← Volver</button></div>
   </nav>
   <div class="bk-body" id="bk-body"></div>
@@ -730,6 +784,7 @@ if (typeof sendPrompt === 'undefined') {
 const DEST = {
   rio: {
     id:'rio', nombre:'Río de Janeiro', loc:'Rio de Janeiro · Brasil',
+    hotelbedsCode:'RIO',
     tipo:'ciudad_completa', cluster:'ciudad', cssClass:'rio',
     temp:28, logistica:'fácil', aero:'GIG / GRU',
     mejor:'Mar–Jun · Ago–Oct', evitar:'Ene–Feb (carnaval)',
@@ -758,6 +813,7 @@ const DEST = {
   },
   buzios: {
     id:'buzios', nombre:'Búzios', loc:'Rio de Janeiro · Brasil',
+    hotelbedsCode:'BZI',
     tipo:'playa', cluster:'playa_chic', cssClass:'buzios',
     temp:27, logistica:'media', aero:'GIG + CBF',
     mejor:'Mar–May · Ago–Oct', evitar:'Enero (carnaval)',
@@ -1013,12 +1069,13 @@ const DEST = {
 let state = {
   vibes: [],
   perfil: null,
-  cantidadPersonas: 2,
-  tipoHabitacion: null,
   presupuesto: 1500,
   presupuestoElegidoEnLanding: false,
   origen: null,
   dias: 7,
+  mesViaje: null,
+  anioViaje: null,
+  personas: null,
   results: [],
   currentDetail: null,
   detailFrom: 3, // which screen to go back to
@@ -1109,39 +1166,8 @@ function syncQuizBudgetFromLanding() {
 function selectSingle(btn, groupId, val) {
   document.querySelectorAll('#'+groupId+' .qopt').forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
-  if(groupId === 'q1opts') { state.perfil = val; handlePerfilHeadcount(val); }
+  if(groupId === 'q1opts') state.perfil = val;
   if(groupId === 'q4opts') state.dias = val;
-}
-
-// Tipo de habitación según cantidad de personas — afecta el precio por persona
-function ocupacionDesdeCantidad(n) {
-  if (n <= 1) return { tipo: 'single', label: 'Habitación individual', icon: '🛏️', mult: 1.6 };
-  if (n === 2) return { tipo: 'doble', label: 'Habitación doble', icon: '🛏️🛏️', mult: 1.0 };
-  if (n === 3) return { tipo: 'triple', label: 'Habitación triple', icon: '🛏️🛏️🛏️', mult: 0.85 };
-  if (n === 4) return { tipo: 'cuadruple', label: 'Habitación cuádruple', icon: '🛏️x4', mult: 0.75 };
-  return { tipo: 'multiple', label: `Grupo de ${n} · varias habitaciones`, icon: '🏠', mult: 0.9 };
-}
-
-// Solo preguntamos cantidad exacta para Amigos/Familia — el resto tiene un default razonable
-function handlePerfilHeadcount(val) {
-  const hc = document.getElementById('q1-headcount');
-  if (val === 'FRIENDS' || val === 'FAMILY') {
-    hc.style.display = 'block';
-  } else {
-    hc.style.display = 'none';
-    const defaults = { COUPLE: 2, SOLO: 1, BACKPACK: 1, LUXE: 2 };
-    const n = defaults[val] ?? 2;
-    state.cantidadPersonas = n;
-    state.tipoHabitacion = ocupacionDesdeCantidad(n);
-  }
-}
-
-function setHeadcount(n, btn) {
-  document.querySelectorAll('#q1-headcount .q1hc-btn').forEach(b => b.classList.remove('sel'));
-  btn.classList.add('sel');
-  state.cantidadPersonas = n;
-  state.tipoHabitacion = ocupacionDesdeCantidad(n);
-  document.getElementById('q1hc-result').innerHTML = `<i class="ti ti-bed" style="font-size:13px"></i> ${state.tipoHabitacion.label}`;
 }
 
 function selectOrigen(btn, code) {
@@ -1267,6 +1293,8 @@ function renderResults() {
   if(state.presupuesto) chips.push(`💰 USD ${state.presupuesto.toLocaleString()}`);
   if(state.perfil) chips.push({COUPLE:'👫 Pareja',FRIENDS:'👯 Amigos',FAMILY:'👨‍👩‍👧 Familia',SOLO:'🧍 Solo/a',BACKPACK:'🎒 Mochilero',LUXE:'✨ Luxury'}[state.perfil]||state.perfil);
   if(state.dias) chips.push(`📅 ${state.dias} días`);
+  if(state.personas) chips.push(`👥 ${state.personas} ${state.personas===1?'persona':'personas'}`);
+  if(state.mesViaje) chips.push(`🗓️ ${state.mesViaje}${state.anioViaje?' '+state.anioViaje:''}`);
   if(state.origen) chips.push(`✈️ ${state.origen}`);
   if(state.vibes.length) chips.push(...state.vibes.slice(0,2).map(v => '✨ '+v));
   chips.forEach(ch => {
@@ -1526,6 +1554,101 @@ function startBooking(destId) {
   go(5);
 }
 
+function goToBkStep(i) {
+  bk.step = Math.min(3, Math.max(0, i));
+  renderBookingStep();
+}
+
+// ═══════════════════════════════════════
+// CONEXIÓN REAL CON HOTELBEDS (vía nuestro backend)
+// ═══════════════════════════════════════
+const VIBRASIL_API = 'https://vibrasil-hotelbeds-backend.onrender.com';
+// cache por destino + parámetros de viaje: undefined = nunca se intentó, null = cargando, false = falló, objeto = OK
+const realHotelCache = {};
+function realHotelCacheKey(d) {
+  return `${d.id}|${state.personas || 2}|${state.mesViaje || ''}|${state.anioViaje || ''}`;
+}
+
+async function loadRealHotelbedsOption(d) {
+  if (!d.hotelbedsCode) return;
+  if (realHotelCache[realHotelCacheKey(d)] !== undefined) return; // ya cargado, cargando, o falló antes
+  realHotelCache[realHotelCacheKey(d)] = null;
+  try {
+    // Fecha: usamos el mes/año elegido en Landing si existe (día 10 de ese mes,
+    // una fecha arbitraria dentro del mes), si no, +45 días desde hoy.
+    const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    let checkIn = null;
+    if (state.mesViaje && state.anioViaje) {
+      const mesIndex = MESES.indexOf(state.mesViaje);
+      if (mesIndex >= 0) checkIn = new Date(parseInt(state.anioViaje), mesIndex, 10);
+    }
+    if (!checkIn || checkIn < new Date()) {
+      checkIn = new Date(); checkIn.setDate(checkIn.getDate() + 45);
+    }
+    const checkOut = new Date(checkIn); checkOut.setDate(checkOut.getDate() + (d.dias_ideal || 7));
+    const fmt = dt => dt.toISOString().slice(0,10);
+
+    // Ocupación: repartimos la cantidad de personas elegida en Landing en
+    // habitaciones de ~2 personas (estimación razonable, a confirmar contra
+    // la API real cuando haya cuota disponible).
+    const personas = state.personas || 2;
+    const rooms = Math.max(1, Math.ceil(personas / 2));
+    const adultsPerRoom = Math.ceil(personas / rooms);
+
+    const res = await fetch(`${VIBRASIL_API}/public/availability`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        stay: { checkIn: fmt(checkIn), checkOut: fmt(checkOut) },
+        occupancies: [{ rooms, adults: adultsPerRoom, children: 0 }],
+        destination: { code: d.hotelbedsCode },
+      }),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const hotel = data?.hotels?.hotels?.[0];
+    const rate = hotel?.rooms?.[0]?.rates?.[0];
+    if (!hotel || !rate) throw new Error('Sin resultados de Hotelbeds para este destino/fecha');
+
+    const nights = d.dias_ideal || 7;
+    let imagen = null;
+    try {
+      const contentRes = await fetch(`${VIBRASIL_API}/public/content/${hotel.code}`);
+      if (contentRes.ok) {
+        const contentData = await contentRes.json();
+        const images = contentData?.hotel?.images || [];
+        const elegida = images.find((img) => img.type?.code === 'GEN') || images[0];
+        // Nota: patron de URL de fotos de Hotelbeds escrito de memoria,
+        // verificar que cargue bien la primera vez que se prueba.
+        if (elegida?.path) imagen = `https://photos.hotelbeds.com/giata/bigger/${elegida.path}`;
+      }
+    } catch (e) {
+      console.error('No se pudo cargar la foto del hotel:', e);
+    }
+
+    realHotelCache[realHotelCacheKey(d)] = {
+      nombre: hotel.name,
+      tipo: 'Hotelbeds · precio real',
+      curada: false, fuente: 'hotelbeds', real: true,
+      precioNoche: Math.round(parseFloat(rate.net) / nights),
+      noches: nights,
+      imagen,
+    };
+  } catch (err) {
+    console.error('No se pudo cargar precio real de Hotelbeds:', err);
+    realHotelCache[realHotelCacheKey(d)] = false;
+  }
+  // si seguimos en este mismo destino/paso, re-renderizamos con el dato ya cargado
+  if (bk.destId === d.id && bk.step === 1) renderBookingStep();
+}
+
+function hotelThumbFallback(imgEl, fuente) {
+  const ph = document.createElement('div');
+  ph.className = 'bk-card-photo-ph ' + fuente;
+  ph.innerHTML = '<i class="ti ti-building-store"></i>';
+  imgEl.replaceWith(ph);
+}
+
 function generateFlightOptions(d) {
   const airlines = AIRLINES_MOCK[d.id] || ['LATAM'];
   const baseFlight = Math.round(d.pmin * 0.22);
@@ -1538,26 +1661,31 @@ function generateFlightOptions(d) {
 
 function generateHotelOptions(d) {
   const opts = [];
-  const ocup = state.tipoHabitacion || ocupacionDesdeCantidad(state.cantidadPersonas || 2);
-  const mult = ocup.mult;
+  if (d.combinable === undefined) {} // no-op, kept for clarity
   // Curaduría directa — simulamos que existe para los 5 destinos MVP originales
   const tieneCuraduria = ['rio','buzios','pipa','noronha','floripa'].includes(d.id);
   if (tieneCuraduria) {
     opts.push({
       nombre: d.id === 'buzios' ? 'Pousada Sole Búzios' : d.id === 'pipa' ? 'Pousada Vento Norte' : d.id === 'noronha' ? 'Pousada Zé Maria' : d.id === 'floripa' ? 'Pousada Lagoa Bela' : 'Pousada Vista Santa Teresa',
-      tipo: 'Elegida por Vibe.br', curada: true, fuente: 'curaduría directa',
-      precioNoche: Math.round(d.pmin * 0.09 * mult), noches: d.dias_ideal, ocupacion: ocup,
+      tipo: 'Elegida por Vibrasil', curada: true, fuente: 'curaduría directa',
+      precioNoche: Math.round(d.pmin * 0.09), noches: d.dias_ideal,
+    });
+  }
+  const real = realHotelCache[realHotelCacheKey(d)];
+  if (real) {
+    opts.push(real);
+  } else {
+    opts.push({
+      nombre: 'Opción Hotelbeds — hotel 3★ bien ubicado',
+      tipo: real === null ? 'Buscando precio real…' : 'Mid',
+      curada: false, fuente: 'hotelbeds',
+      precioNoche: Math.round(d.pmin * 0.085), noches: d.dias_ideal,
     });
   }
   opts.push({
-    nombre: 'Opción Hotelbeds — hotel 3★ bien ubicado',
-    tipo: 'Mid', curada: false, fuente: 'hotelbeds',
-    precioNoche: Math.round(d.pmin * 0.085 * mult), noches: d.dias_ideal, ocupacion: ocup,
-  });
-  opts.push({
     nombre: 'Opción Booking.com — pousada económica',
     tipo: 'Económico', curada: false, fuente: 'booking',
-    precioNoche: Math.round(d.pmin * 0.06 * mult), noches: d.dias_ideal, ocupacion: ocup,
+    precioNoche: Math.round(d.pmin * 0.06), noches: d.dias_ideal,
   });
   // ordenar: curaduría siempre primero, después por precio
   opts.sort((a,b) => (b.curada - a.curada) || (a.precioNoche - b.precioNoche));
@@ -1596,7 +1724,7 @@ function renderBookingStep() {
 
   // Progress pills
   const stepsHtml = BK_STEPS.map((s, i) => `
-    <div class="bk-step-pill ${i===bk.step?'active':i<bk.step?'done':''}">
+    <div class="bk-step-pill ${i===bk.step?'active':i<bk.step?'done':''}" onclick="goToBkStep(${i})">
       <div class="bk-step-ic">${i<bk.step?'✓':s.icon}</div>
       <div class="bk-step-lbl">${s.label}</div>
     </div>`).join('');
@@ -1625,21 +1753,26 @@ function renderBookingStep() {
   }
 
   if (bk.step === 1) {
+    loadRealHotelbedsOption(d); // dispara la consulta real (no bloquea el render)
     const opts = generateHotelOptions(d);
-    const ocup = opts[0].ocupacion;
     content = `
       <div class="bk-section">
         <div class="bk-sec-title">Elegí tu hospedaje</div>
-        <div class="bk-sec-sub">${d.dias_ideal} noches · ${ocup.label} (${state.cantidadPersonas||2} persona${(state.cantidadPersonas||2)>1?'s':''}) · precio ya ajustado por persona</div>
+        <div class="bk-sec-sub">${d.dias_ideal} noches · comparado entre curaduría directa, Hotelbeds y Booking.com</div>
         ${opts.map((o,i) => `
           <div class="bk-card ${o.curada?'curada':''}" onclick="selectBkOption('hotel',${i})">
-            <div class="bk-card-top">
-              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.noches} noches · USD ${o.precioNoche}/persona/noche</div></div>
-              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precioNoche*o.noches}</div><div class="bk-price-l">por persona</div></div>
+            <div class="bk-card-photo-wrap">
+              ${o.imagen
+                ? `<img class="bk-card-photo" src="${o.imagen}" alt="" loading="lazy" onerror="hotelThumbFallback(this,'${o.fuente}')">`
+                : `<div class="bk-card-photo-ph ${o.curada?'curada':o.fuente}"><i class="ti ti-building-store"></i></div>`
+              }
+              <div class="bk-card-badge-overlay">
+                ${o.curada?'<span class="bk-badge curada-tag">⭐ Elegida por Vibrasil</span>':`<span class="bk-badge ${o.fuente==='hotelbeds'?'b':'y'}">${o.tipo}</span>`}
+              </div>
             </div>
-            <div class="bk-badges-row">
-              ${o.curada?'<span class="bk-badge curada-tag">⭐ Elegida por Vibe.br</span>':`<span class="bk-badge ${o.fuente==='hotelbeds'?'b':'y'}">${o.tipo}</span>`}
-              <span class="bk-badge g">${o.ocupacion.icon} ${o.ocupacion.label}</span>
+            <div class="bk-card-top">
+              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.noches} noches · USD ${o.precioNoche}/noche</div></div>
+              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precioNoche*o.noches}</div><div class="bk-price-l">total</div></div>
             </div>
             <div class="bk-card-foot">
               <div class="bk-provider"><i class="ti ti-building-store" style="font-size:12px"></i> ${o.curada?'Contacto directo':o.fuente==='hotelbeds'?'Vía Hotelbeds':'Vía Booking.com'}</div>
@@ -1708,7 +1841,7 @@ function renderBookingStep() {
       </div>
       <div class="bk-helper" style="margin:0 1rem 1rem">
         <i class="ti ti-info-circle"></i>
-        <div><div class="bk-helper-t">Recordá</div><div class="bk-helper-d">Vibe.br te ayuda a armar y comparar — cada reserva se completa directo con el prestador (aerolínea, Hotelbeds, Booking.com o la pousada). No procesamos pagos.</div></div>
+        <div><div class="bk-helper-t">Recordá</div><div class="bk-helper-d">Vibrasil te ayuda a armar y comparar — cada reserva se completa directo con el prestador (aerolínea, Hotelbeds, Booking.com o la pousada). No procesamos pagos.</div></div>
       </div>
       <div class="bk-cta-final">
         <button class="bk-nav-btn primary" onclick="saveTrip()"><i class="ti ti-device-floppy"></i> Guardar este viaje</button>
@@ -1725,7 +1858,7 @@ function renderBookingStep() {
   body.innerHTML = `
     <div class="bk-helper">
       <i class="ti ti-bulb"></i>
-      <div><div class="bk-helper-t">Cómo funciona</div><div class="bk-helper-d">Te mostramos precios reales y te ayudamos a comparar. Cada reserva se completa directo con la aerolínea, el hotel o la pousada — Vibe.br no cobra nada.</div></div>
+      <div><div class="bk-helper-t">Cómo funciona</div><div class="bk-helper-d">Te mostramos precios reales y te ayudamos a comparar. Cada reserva se completa directo con la aerolínea, el hotel o la pousada — Vibrasil no cobra nada.</div></div>
     </div>
     <div class="bk-steps">${stepsHtml}</div>
     ${content}
@@ -1770,6 +1903,22 @@ function shareTrip() {
 // INIT
 // ═══════════════════════════════════════
 // (la sincronización landing→quiz ahora vive en goToQuiz/syncQuizVibesFromLanding)
+
+// Atajo de testing: abrir el archivo con #destino:paso te lleva directo
+// a esa pantalla del flujo de reserva. Ej: vibebr_app-5.html#buzios:1
+// pasos: 0=vuelo, 1=hospedaje, 2=traslado, 3=resumen
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+  if (!hash) return;
+  const [destId, stepStr] = hash.split(':');
+  if (destId && DEST[destId]) {
+    startBooking(destId);
+    if (stepStr !== undefined) {
+      bk.step = Math.min(3, Math.max(0, parseInt(stepStr, 10) || 0));
+      renderBookingStep();
+    }
+  }
+});
 </script>
 </body>
 </html>
