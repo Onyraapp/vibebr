@@ -494,47 +494,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         <button class="vp" data-vibe="autenticidad" onclick="toggleLandingVibe(this,'autenticidad')">🧭 autenticidad</button>
         <button class="vp" data-vibe="buceo" onclick="toggleLandingVibe(this,'buceo')">🤿 buceo</button>
       </div>
-      <div class="sb-or">— y los datos de tu viaje (opcional) —</div>
-      <div class="trip-fields">
-        <div class="tf-group">
-          <label class="tf-label">¿Cuándo te gustaría ir?</label>
-          <div class="tf-row">
-            <select class="tf-select" id="landing-mes" onchange="state.mesViaje=this.value||null">
-              <option value="">Mes</option>
-              <option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option>
-              <option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option>
-              <option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
-            </select>
-            <select class="tf-select" id="landing-anio" onchange="state.anioViaje=this.value||null">
-              <option value="">Año</option>
-              <option>2026</option><option>2027</option>
-            </select>
-          </div>
-        </div>
-        <div class="tf-row">
-          <div class="tf-group">
-            <label class="tf-label">¿Cuánto tiempo?</label>
-            <select class="tf-select full" id="landing-duracion" onchange="state.dias=this.value?parseInt(this.value):state.dias">
-              <option value="">7 días (default)</option>
-              <option value="4">4–5 días</option>
-              <option value="7">6–8 días</option>
-              <option value="10">9–12 días</option>
-              <option value="15">Más de 2 semanas</option>
-            </select>
-          </div>
-          <div class="tf-group">
-            <label class="tf-label">¿Cuántas personas?</label>
-            <select class="tf-select full" id="landing-personas" onchange="state.personas=this.value?parseInt(this.value):2">
-              <option value="">2 (default)</option>
-              <option value="1">1 persona</option>
-              <option value="2">2 personas</option>
-              <option value="3">3 personas</option>
-              <option value="4">4 personas</option>
-              <option value="5">5 o más</option>
-            </select>
-          </div>
-        </div>
-      </div>
       <div class="sb-or">— y tu presupuesto —</div>
       <div class="vpills" id="landing-budget-pills">
         <button class="vp" onclick="toggleLandingBudget(this,750)">💸 hasta USD 900</button>
