@@ -119,6 +119,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .dcard{border-radius:var(--r);overflow:hidden;border:1px solid var(--br);background:var(--wh);cursor:pointer;transition:all .2s}
 .dcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px)}
 .dthumb{height:68px;position:relative}
+.dthumb-name{position:absolute;left:8px;bottom:6px;right:8px;font-family:'VAG Rounded','Fraunces',serif;font-size:26px;font-weight:700;color:#fff;line-height:1.05;text-shadow:0 1px 4px rgba(0,0,0,.35)}
 .dthumb.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
 .dthumb.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
 .dthumb.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
@@ -193,6 +194,9 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 /* origen chips */
 .origen-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .orig-chip{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;border-radius:var(--r);border:1.5px solid var(--br);background:var(--wh);cursor:pointer;transition:all .15s;font-family:inherit}
+.origen-input{width:100%;padding:11px 14px;border:1.5px solid var(--br);border-radius:var(--rs);font-size:13px;font-family:inherit;color:var(--tx);outline:none;transition:border-color .2s}
+.origen-input:focus{border-color:var(--g)}
+.origen-hint{font-size:11px;margin-top:6px;min-height:14px}
 .orig-chip:hover{border-color:var(--g)}
 .orig-chip.sel{border-color:var(--g);background:var(--gl)}
 .orig-icon{font-size:20px}
@@ -225,6 +229,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .rcard{background:var(--wh);border-bottom:8px solid var(--bg);cursor:pointer}
 .rcard.feat{border-left:3px solid var(--g)}
 .rphoto{height:120px;position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:10px 12px}
+.rphoto-name{position:absolute;left:12px;bottom:10px;right:12px;font-family:'VAG Rounded','Fraunces',serif;font-size:21px;font-weight:700;color:#fff;letter-spacing:-.01em;text-shadow:0 1px 6px rgba(0,0,0,.35);line-height:1.1}
 .rphoto.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
 .rphoto.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
 .rphoto.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
@@ -240,6 +245,8 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .rbadge.feat{background:var(--g);color:#fff}
 .rbadge.match{background:rgba(255,255,255,.92);color:var(--g)}
 .rbadge.dark{background:rgba(0,0,0,.38);color:rgba(255,255,255,.9)}
+.rbadge.ecs{background:rgba(255,255,255,.92);color:var(--tx)}
+.rbadge.ecs.loading{color:var(--soft);font-weight:600}
 .rheart{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--soft);cursor:pointer;font-family:inherit}
 
 .rbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:9px}
@@ -519,16 +526,16 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
     <section class="dsec">
       <div class="sechdr"><div class="sect">10 destinos cargados</div><span class="secl" onclick="go(2)">Buscar el mío →</span></div>
       <div class="dgrid">
-        <div class="dcard" onclick="openDetail('rio')"><div class="dthumb rio"><span class="dmatch">social·cultura</span></div><div class="dbody"><div class="dname">Río de Janeiro</div><div class="dvibe">Ciudad completa · intensa</div><div class="dprice">USD 1.400–3.000 / sem</div></div></div>
-        <div class="dcard" onclick="openDetail('buzios')"><div class="dthumb buzios"><span class="dmatch">romance·relax</span></div><div class="dbody"><div class="dname">Búzios</div><div class="dvibe">Playa chic · romántico</div><div class="dprice">USD 900–2.500 / sem</div></div></div>
-        <div class="dcard" onclick="openDetail('pipa')"><div class="dthumb pipa"><span class="dmatch">surf·bohemio</span></div><div class="dbody"><div class="dname">Pipa</div><div class="dvibe">Surf · nordeste auténtico</div><div class="dprice">USD 700–1.800 / sem</div></div></div>
-        <div class="dcard" onclick="openDetail('noronha')"><div class="dthumb noronha"><span class="dmatch">paraíso</span></div><div class="dbody"><div class="dname">Noronha</div><div class="dvibe">Isla · exclusivo · buceo</div><div class="dprice">USD 1.500–3.500 / sem</div></div></div>
-        <div class="dcard" onclick="openDetail('floripa')"><div class="dthumb floripa"><span class="dmatch">social·joven</span></div><div class="dbody"><div class="dname">Florianópolis</div><div class="dvibe">Surf · beach clubs · 7 zonas</div><div class="dprice">USD 800–2.200 / sem</div></div></div>
-        <div class="dcard" onclick="openDetail('foz')"><div class="dthumb foz"><span class="dmatch">aventura</span></div><div class="dbody"><div class="dname">Foz do Iguaçu</div><div class="dvibe">Cataratas · 3 países</div><div class="dprice">USD 600–1.600 / via</div></div></div>
-        <div class="dcard" onclick="openDetail('saopaulo')"><div class="dthumb saopaulo"><span class="dmatch">gastronomía</span></div><div class="dbody"><div class="dname">São Paulo</div><div class="dvibe">Capital gastronómica</div><div class="dprice">USD 700–2.200 / via</div></div></div>
-        <div class="dcard" onclick="openDetail('salvador')"><div class="dthumb salvador"><span class="dmatch">cultura</span></div><div class="dbody"><div class="dname">Salvador</div><div class="dvibe">Afrobrasileño · histórico</div><div class="dprice">USD 600–1.800 / via</div></div></div>
-        <div class="dcard" onclick="openDetail('paraty')"><div class="dthumb paraty"><span class="dmatch">romance</span></div><div class="dbody"><div class="dname">Paraty</div><div class="dvibe">Colonial · UNESCO</div><div class="dprice">USD 700–2.000 / via</div></div></div>
-        <div class="dcard" onclick="openDetail('angra')"><div class="dthumb angra"><span class="dmatch">lujo náutico</span></div><div class="dbody"><div class="dname">Angra dos Reis</div><div class="dvibe">365 islas · yates</div><div class="dprice">USD 900–2.800 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('rio')"><div class="dthumb rio"><span class="dmatch">social·cultura</span><div class="dthumb-name">Río de Janeiro</div></div><div class="dbody"><div class="dvibe">Ciudad completa · intensa</div><div class="dprice">USD 1.400–3.000 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('buzios')"><div class="dthumb buzios"><span class="dmatch">romance·relax</span><div class="dthumb-name">Búzios</div></div><div class="dbody"><div class="dvibe">Playa chic · romántico</div><div class="dprice">USD 900–2.500 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('pipa')"><div class="dthumb pipa"><span class="dmatch">surf·bohemio</span><div class="dthumb-name">Pipa</div></div><div class="dbody"><div class="dvibe">Surf · nordeste auténtico</div><div class="dprice">USD 700–1.800 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('noronha')"><div class="dthumb noronha"><span class="dmatch">paraíso</span><div class="dthumb-name">Noronha</div></div><div class="dbody"><div class="dvibe">Isla · exclusivo · buceo</div><div class="dprice">USD 1.500–3.500 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('floripa')"><div class="dthumb floripa"><span class="dmatch">social·joven</span><div class="dthumb-name">Florianópolis</div></div><div class="dbody"><div class="dvibe">Surf · beach clubs · 7 zonas</div><div class="dprice">USD 800–2.200 / sem</div></div></div>
+        <div class="dcard" onclick="openDetail('foz')"><div class="dthumb foz"><span class="dmatch">aventura</span><div class="dthumb-name">Foz do Iguaçu</div></div><div class="dbody"><div class="dvibe">Cataratas · 3 países</div><div class="dprice">USD 600–1.600 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('saopaulo')"><div class="dthumb saopaulo"><span class="dmatch">gastronomía</span><div class="dthumb-name">São Paulo</div></div><div class="dbody"><div class="dvibe">Capital gastronómica</div><div class="dprice">USD 700–2.200 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('salvador')"><div class="dthumb salvador"><span class="dmatch">cultura</span><div class="dthumb-name">Salvador</div></div><div class="dbody"><div class="dvibe">Afrobrasileño · histórico</div><div class="dprice">USD 600–1.800 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('paraty')"><div class="dthumb paraty"><span class="dmatch">romance</span><div class="dthumb-name">Paraty</div></div><div class="dbody"><div class="dvibe">Colonial · UNESCO</div><div class="dprice">USD 700–2.000 / via</div></div></div>
+        <div class="dcard" onclick="openDetail('angra')"><div class="dthumb angra"><span class="dmatch">lujo náutico</span><div class="dthumb-name">Angra dos Reis</div></div><div class="dbody"><div class="dvibe">365 islas · yates</div><div class="dprice">USD 900–2.800 / via</div></div></div>
       </div>
     </section>
 
@@ -633,6 +640,16 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         <button class="orig-chip" onclick="selectOrigen(this,'SCL')"><span class="orig-icon">✈️</span><span class="orig-city">Santiago</span><span class="orig-code">SCL</span></button>
         <button class="orig-chip" onclick="selectOrigen(this,'LIM')"><span class="orig-icon">✈️</span><span class="orig-city">Lima</span><span class="orig-code">LIM</span></button>
       </div>
+      <div class="sb-or" style="color:var(--soft);margin:.8rem 0 .5rem">— o escribí cualquier otra ciudad —</div>
+      <input type="text" id="origen-custom" class="origen-input" placeholder="Ej: São Paulo, Bogotá, Madrid..." list="ciudades-origen" oninput="selectOrigenCustom(this.value)" autocomplete="off"/>
+      <datalist id="ciudades-origen">
+        <option value="Buenos Aires"><option value="Córdoba"><option value="Mendoza"><option value="Rosario">
+        <option value="Montevideo"><option value="Santiago"><option value="Lima"><option value="Bogotá">
+        <option value="Quito"><option value="Asunción"><option value="La Paz"><option value="Caracas">
+        <option value="Ciudad de México"><option value="São Paulo"><option value="Madrid"><option value="Miami">
+        <option value="Nueva York">
+      </datalist>
+      <div class="origen-hint" id="origen-hint"></div>
       <div class="qnav"><button class="qbtn secondary" onclick="nextQ(2)">← Atrás</button><button class="qbtn primary" onclick="nextQ(4)">Siguiente →</button></div>
     </div>
 
@@ -729,6 +746,7 @@ if (typeof sendPrompt === 'undefined') {
 const DEST = {
   rio: {
     id:'rio', nombre:'Río de Janeiro', loc:'Rio de Janeiro · Brasil',
+    duffelCode:'GIG',
     hotelbedsCode:'RIO',
     tipo:'ciudad_completa', cluster:'ciudad', cssClass:'rio',
     temp:28, logistica:'fácil', aero:'GIG / GRU',
@@ -758,6 +776,7 @@ const DEST = {
   },
   buzios: {
     id:'buzios', nombre:'Búzios', loc:'Rio de Janeiro · Brasil',
+    duffelCode:'GIG',
     hotelbedsCode:'BZI',
     tipo:'playa', cluster:'playa_chic', cssClass:'buzios',
     temp:27, logistica:'media', aero:'GIG + CBF',
@@ -786,6 +805,8 @@ const DEST = {
   },
   pipa: {
     id:'pipa', nombre:'Praia de Pipa', loc:'Rio Grande do Norte · Brasil',
+    duffelCode:'NAT',
+    hotelbedsCode:'PDA',
     tipo:'playa', cluster:'surf_boho', cssClass:'pipa',
     temp:28, logistica:'media', aero:'NAT',
     mejor:'Ago–Dic', evitar:'Mar–Jun (lluvias del nordeste)',
@@ -813,6 +834,8 @@ const DEST = {
   },
   noronha: {
     id:'noronha', nombre:'Fernando de Noronha', loc:'Pernambuco · Brasil',
+    duffelCode:'REC',
+    hotelbedsCode:'FEN',
     tipo:'isla', cluster:'lujo_naturaleza', cssClass:'noronha',
     temp:28, logistica:'compleja', aero:'FEN vía REC/NAT',
     mejor:'Ago–Feb', evitar:'Mar–Jul (mar agitado)',
@@ -841,6 +864,8 @@ const DEST = {
   },
   floripa: {
     id:'floripa', nombre:'Florianópolis', loc:'Santa Catarina · Brasil',
+    duffelCode:'FLN',
+    hotelbedsCode:'FLO',
     tipo:'playa+ciudad', cluster:'social_joven', cssClass:'floripa',
     temp:24, logistica:'fácil', aero:'FLN',
     mejor:'Dic · Mar · Jun–Ago', evitar:'Ene–Feb (masivo)',
@@ -879,6 +904,7 @@ const DEST = {
 
   foz: {
     id:'foz', nombre:"Foz do Iguaçu", loc:"Paraná · Brasil",
+    duffelCode:'IGR',
     tipo:'naturaleza', cluster:'aventura', cssClass:'foz',
     temp:23, logistica:"fácil", aero:"IGU",
     mejor:"Todo el año", evitar:"—",
@@ -905,6 +931,8 @@ const DEST = {
 
   saopaulo: {
     id:'saopaulo', nombre:"São Paulo", loc:"São Paulo · Brasil",
+    duffelCode:'GRU',
+    hotelbedsCode:'SAO',
     tipo:'ciudad_completa', cluster:'ciudad', cssClass:'saopaulo',
     temp:21, logistica:"fácil", aero:"GRU + CGH",
     mejor:"Abr–Jun · Sep–Nov", evitar:"Dic–Feb (lluvias)",
@@ -931,6 +959,7 @@ const DEST = {
 
   salvador: {
     id:'salvador', nombre:"Salvador", loc:"Bahia · Brasil",
+    duffelCode:'SSA',
     tipo:'ciudad_completa', cluster:'cultura', cssClass:'salvador',
     temp:26, logistica:"fácil", aero:"SSA",
     mejor:"Sep–Mar", evitar:"Abr–Jul (lluvias)",
@@ -957,6 +986,7 @@ const DEST = {
 
   paraty: {
     id:'paraty', nombre:"Paraty", loc:"Rio de Janeiro · Brasil",
+    duffelCode:'GIG',
     tipo:'playa+ciudad', cluster:'cultura', cssClass:'paraty',
     temp:24, logistica:"media", aero:"Sin aeropuerto propio (vía GIG)",
     mejor:"Abr–Jun · Ago–Oct", evitar:"Carnaval (fecha móvil)",
@@ -983,6 +1013,7 @@ const DEST = {
 
   angra: {
     id:'angra', nombre:"Angra dos Reis", loc:"Rio de Janeiro · Brasil",
+    duffelCode:'GIG',
     tipo:'playa', cluster:'lujo', cssClass:'angra',
     temp:25, logistica:"fácil-media", aero:"Sin aeropuerto propio (vía GIG)",
     mejor:"Abr–Jun · Ago–Oct", evitar:"Carnaval · fines de semana largos",
@@ -1119,6 +1150,36 @@ function selectOrigen(btn, code) {
   document.querySelectorAll('#q3opts .orig-chip').forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
   state.origen = code;
+  document.getElementById('origen-custom').value = '';
+  document.getElementById('origen-hint').textContent = '';
+}
+
+const CIUDADES_ORIGEN = {
+  'buenos aires':'BUE', 'cordoba': 'COR', 'córdoba':'COR', 'mendoza':'MDZ', 'rosario':'ROS',
+  'montevideo':'MVD', 'santiago':'SCL', 'lima':'LIM', 'bogota':'BOG', 'bogotá':'BOG',
+  'quito':'UIO', 'asuncion':'ASU', 'asunción':'ASU', 'la paz':'LPB', 'caracas':'CCS',
+  'ciudad de mexico':'MEX', 'ciudad de méxico':'MEX', 'sao paulo':'SAO', 'são paulo':'SAO',
+  'madrid':'MAD', 'miami':'MIA', 'nueva york':'NYC',
+};
+
+function normalizar(str) {
+  return (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+function selectOrigenCustom(value) {
+  document.querySelectorAll('#q3opts .orig-chip').forEach(b => b.classList.remove('sel'));
+  const hint = document.getElementById('origen-hint');
+  const code = CIUDADES_ORIGEN[normalizar(value)];
+  if (code) {
+    state.origen = code;
+    hint.textContent = `✓ Usando código ${code}`;
+    hint.style.color = 'var(--g)';
+  } else if (value.trim().length > 0) {
+    hint.textContent = 'No encontramos esa ciudad — elegí una de la lista o un botón de arriba';
+    hint.style.color = 'var(--soft)';
+  } else {
+    hint.textContent = '';
+  }
 }
 
 function updateBudget(val) {
@@ -1265,9 +1326,11 @@ function renderResults() {
         <div class="rbadges">
           ${i===0?'<span class="rbadge feat">⭐ Mejor match</span>':''}
           <span class="rbadge match">${d.matchPct}% match</span>
+          ${ecsBadgeHtml(d)}
           ${d.budgetWarning?'<span class="rbadge dark">💸 Stretch</span>':i===1?'<span class="rbadge dark">💸 Opción económica</span>':''}
         </div>
         <button class="rheart" onclick="event.stopPropagation()"><i class="ti ti-heart"></i></button>
+        <div class="rphoto-name">${d.nombre}</div>
       </div>
       <div class="rbody">
         <div class="rhead">
@@ -1364,7 +1427,7 @@ function openDetail(destId, fromScreen) {
     <div class="dqs">
       <div class="dqs-i"><div class="dqs-ic">💰</div><div class="dqs-v">USD ${d.pmin.toLocaleString()}+</div><div class="dqs-l">Presupuesto</div></div>
       <div class="dqs-i"><div class="dqs-ic">✈️</div><div class="dqs-v">${d.logistica}</div><div class="dqs-l">Logística</div></div>
-      <div class="dqs-i"><div class="dqs-ic">🌡️</div><div class="dqs-v">${d.temp}°C</div><div class="dqs-l">Temperatura</div></div>
+      <div class="dqs-i">${ecsTileHtml(d)}</div>
       <div class="dqs-i"><div class="dqs-ic">📅</div><div class="dqs-v">${d.dias_ideal} días</div><div class="dqs-l">Ideal</div></div>
     </div>
 
@@ -1521,6 +1584,66 @@ function updateBkTrip(field, value) {
 // CONEXIÓN REAL CON HOTELBEDS (vía nuestro backend)
 // ═══════════════════════════════════════
 const VIBRASIL_API = 'https://vibrasil-hotelbeds-backend.onrender.com';
+
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+// Fecha de viaje compartida: usa mes/anio elegido (dia 10), o "manana" si no se elige nada.
+function computeTripDate() {
+  let d = null;
+  if (state.mesViaje && state.anioViaje) {
+    const mesIndex = MESES.indexOf(state.mesViaje);
+    if (mesIndex >= 0) d = new Date(parseInt(state.anioViaje), mesIndex, 10);
+  }
+  if (!d || d < new Date()) {
+    d = new Date(); d.setDate(d.getDate() + 1);
+  }
+  return d.toISOString().slice(0, 10);
+}
+
+const ecsCache = {};
+function ecsCacheKey(d) {
+  return `${d.id}|${state.mesViaje || ''}|${state.anioViaje || ''}`;
+}
+
+async function loadEcsScore(d) {
+  const key = ecsCacheKey(d);
+  if (ecsCache[key] !== undefined) return;
+  ecsCache[key] = null;
+  try {
+    const date = computeTripDate();
+    const res = await fetch(`${VIBRASIL_API}/public/ecs/${d.id}?date=${date}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    ecsCache[key] = await res.json();
+  } catch (err) {
+    console.error('No se pudo cargar el ECS de', d.id, err);
+    ecsCache[key] = false;
+  }
+  // Re-renderizar la pantalla activa para mostrar el score ya cargado
+  if (state.results.some(r => r.id === d.id)) renderResults();
+  if (state.currentDetail === d.id) openDetail(d.id, state.detailFrom);
+}
+
+function ecsTileHtml(d) {
+  const ecs = ecsCache[ecsCacheKey(d)];
+  if (ecs === undefined || ecs === null) {
+    loadEcsScore(d);
+    return `<div class="dqs-ic">🌤️</div><div class="dqs-v">…</div><div class="dqs-l">Calculando</div>`;
+  }
+  if (ecs === false) return `<div class="dqs-ic">🌡️</div><div class="dqs-v">${d.temp}°C</div><div class="dqs-l">Temperatura</div>`;
+  const emoji = ecs.ecs >= 90 ? '☀️' : ecs.ecs >= 70 ? '🌤️' : ecs.ecs >= 60 ? '⛅' : '🌧️';
+  return `<div class="dqs-ic">${emoji}</div><div class="dqs-v">${ecs.ecs}</div><div class="dqs-l">${ecs.clasificacion}</div>`;
+}
+
+function ecsBadgeHtml(d) {
+  const ecs = ecsCache[ecsCacheKey(d)];
+  if (ecs === undefined || ecs === null) {
+    loadEcsScore(d);
+    return '<span class="rbadge ecs loading">🌤️ Calculando…</span>';
+  }
+  if (ecs === false) return '';
+  const emoji = ecs.ecs >= 90 ? '☀️' : ecs.ecs >= 70 ? '🌤️' : ecs.ecs >= 60 ? '⛅' : '🌧️';
+  return `<span class="rbadge ecs" title="${ecs.fuente === 'pronostico_real' ? 'Pronóstico real' : 'Promedio histórico (10 años)'}">${emoji} ${ecs.ecs} · ${ecs.clasificacion}</span>`;
+}
 // cache por destino: undefined = nunca se intentó, null = cargando, false = falló, objeto = OK
 const realHotelCache = {};
 function realHotelCacheKey(d) {
@@ -1539,7 +1662,7 @@ async function loadRealHotelbedsOption(d) {
       if (mesIndex >= 0) checkIn = new Date(parseInt(state.anioViaje), mesIndex, 10);
     }
     if (!checkIn || checkIn < new Date()) {
-      checkIn = new Date(); checkIn.setDate(checkIn.getDate() + 45);
+      checkIn = new Date(); checkIn.setDate(checkIn.getDate() + 1);
     }
     const checkOut = new Date(checkIn); checkOut.setDate(checkOut.getDate() + (d.dias_ideal || 7));
     const fmt = dt => dt.toISOString().slice(0,10);
@@ -1579,11 +1702,73 @@ async function loadRealHotelbedsOption(d) {
   if (bk.destId === d.id && bk.step === 1) renderBookingStep();
 }
 
+const realFlightCache = {};
+function realFlightCacheKey(d) {
+  return `${d.id}|${state.origen || 'BUE'}|${state.personas || 2}|${state.mesViaje || ''}|${state.anioViaje || ''}`;
+}
+
+function formatDuffelDuration(iso) {
+  if (!iso) return '';
+  const match = /PT(?:(\d+)H)?(?:(\d+)M)?/.exec(iso);
+  if (!match) return iso;
+  return `${match[1] || '0'}h ${match[2] || '0'}min`;
+}
+
+async function loadRealFlightOptions(d) {
+  if (!d.duffelCode) return;
+  const key = realFlightCacheKey(d);
+  if (realFlightCache[key] !== undefined) return;
+  realFlightCache[key] = null;
+  try {
+    const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    let departure = null;
+    if (state.mesViaje && state.anioViaje) {
+      const mesIndex = MESES.indexOf(state.mesViaje);
+      if (mesIndex >= 0) departure = new Date(parseInt(state.anioViaje), mesIndex, 10);
+    }
+    if (!departure || departure < new Date()) {
+      departure = new Date(); departure.setDate(departure.getDate() + 1);
+    }
+    const fmt = dt => dt.toISOString().slice(0,10);
+
+    const res = await fetch(`${VIBRASIL_API}/public/flights`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        origin: state.origen || 'BUE',
+        destination: d.duffelCode,
+        departureDate: fmt(departure),
+        passengers: state.personas || 1,
+      }),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const offers = (data.offers || []).slice(0, 3);
+    if (!offers.length) throw new Error('Sin ofertas de Duffel para esta ruta/fecha');
+
+    realFlightCache[key] = offers.map((o, i) => ({
+      airline: o.airline,
+      tipo: i === 0 ? 'Más económico' : i === 1 ? 'Opción real' : 'Otra opción',
+      escalas: o.stops === 0 ? 'Sin escalas' : `${o.stops} escala(s)`,
+      duracion: formatDuffelDuration(o.duration),
+      precio: Math.round(parseFloat(o.price)),
+      badge: i === 0 ? 'y' : i === 1 ? 'g' : 'b',
+      real: true,
+    }));
+  } catch (err) {
+    console.error('No se pudo cargar vuelos reales de Duffel:', err);
+    realFlightCache[key] = false;
+  }
+  if (bk.destId === d.id && bk.step === 0) renderBookingStep();
+}
+
 function generateFlightOptions(d) {
+  const real = realFlightCache[realFlightCacheKey(d)];
+  if (real) return real;
   const airlines = AIRLINES_MOCK[d.id] || ['LATAM'];
   const baseFlight = Math.round(d.pmin * 0.22);
   return [
-    { airline: airlines[0], tipo: 'Más económico', escalas: '1 escala', duracion: '5h 40min', precio: baseFlight, badge: 'y' },
+    { airline: airlines[0], tipo: real === null ? 'Buscando precio real…' : 'Más económico', escalas: '1 escala', duracion: '5h 40min', precio: baseFlight, badge: 'y' },
     { airline: airlines[Math.min(1, airlines.length-1)], tipo: 'Directo', escalas: 'Sin escalas', duracion: '2h 50min', precio: Math.round(baseFlight * 1.35), badge: 'g' },
     { airline: airlines[airlines.length-1], tipo: 'Mejor horario', escalas: airlines.length>1?'1 escala':'Sin escalas', duracion: '4h 10min', precio: Math.round(baseFlight * 1.15), badge: 'b' },
   ];
@@ -1662,11 +1847,12 @@ function renderBookingStep() {
   let content = '';
 
   if (bk.step === 0) {
+    loadRealFlightOptions(d); // dispara la consulta real (no bloquea el render)
     const opts = generateFlightOptions(d);
     content = `
       <div class="bk-section">
         <div class="bk-sec-title">Elegí tu vuelo</div>
-        <div class="bk-sec-sub">Precios reales de búsqueda · ${state.origen || 'BUE'} → ${d.aero.split('/')[0].split('+')[0].trim()}</div>
+        <div class="bk-sec-sub">${state.origen || 'BUE'} → ${d.duffelCode || d.aero.split('/')[0].split('+')[0].trim()}</div>
         ${opts.map((o,i) => `
           <div class="bk-card ${bk.flight===i?'curada':''}" onclick="selectBkOption('flight',${i})">
             <div class="bk-card-top">
@@ -1675,7 +1861,7 @@ function renderBookingStep() {
             </div>
             <div class="bk-badges-row"><span class="bk-badge ${o.badge}">${o.tipo}</span></div>
             <div class="bk-card-foot">
-              <div class="bk-provider"><i class="ti ti-building-airport" style="font-size:12px"></i> Vía Duffel · búsqueda</div>
+              <div class="bk-provider"><i class="ti ti-building-airport" style="font-size:12px"></i> ${o.real ? 'Vía Duffel · precio real' : 'Vía Duffel · estimado'}</div>
               <button class="bk-go-btn redirect" onclick="event.stopPropagation();goToProvider('${o.airline}')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver en ${o.airline}</button>
             </div>
           </div>`).join('')}
