@@ -77,7 +77,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .hsub{font-size:13px;color:rgba(255,255,255,.82);line-height:1.65;margin-bottom:1.3rem;position:relative}
 .hsub strong{color:var(--tx)}
 
-.sb-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:7px;position:relative}
 .sb-or{font-size:10px;color:rgba(255,255,255,.55);margin:.7rem 0 .6rem;position:relative}
 .trip-fields{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:420px;margin:0 auto}
 .tf-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
@@ -86,29 +85,19 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .tf-select{appearance:none;background:var(--wh) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A9990' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;border:1.5px solid transparent;border-radius:var(--rs);padding:9px 30px 9px 12px;font-size:12.5px;font-weight:500;color:var(--tx);font-family:inherit;flex:1;min-width:0;cursor:pointer;transition:border-color .2s}
 .tf-select:focus{outline:none;border-color:var(--gl)}
 .tf-select.full{width:100%}
-.sb-custom-budget{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:.6rem;flex-wrap:wrap;background:var(--wh);border-radius:20px;padding:7px 16px}
-.sb-custom-lbl{font-size:11px;color:var(--mid)}
-.sb-custom-row{display:flex;align-items:center;gap:2px}
-.sb-custom-budget:focus-within{box-shadow:0 0 0 2px var(--g)}
-.sb-custom-prefix{font-size:12px;font-weight:600;color:var(--mid)}
-#custom-budget-input{width:80px;border:none;background:transparent;outline:none;font-size:13px;font-weight:600;color:var(--tx);padding:4px 6px;font-family:inherit}
-#custom-budget-input::placeholder{color:var(--soft);font-weight:400}
+
+/* Tarjeta de busqueda unica, estilo Booking/Airbnb: un solo bloque, filas separadas por una linea fina, CTA al final */
+.search-card{background:var(--wh);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.14);overflow:hidden;text-align:left;position:relative}
+.sc-row{display:flex;align-items:center;gap:10px;padding:14px 18px}
+.sc-row i{color:var(--soft);font-size:16px;flex-shrink:0}
+.sc-row input{flex:1;min-width:0;border:none;outline:none;font-size:14px;color:var(--tx);font-family:inherit;background:transparent}
+.sc-row input::placeholder{color:var(--soft)}
+.sc-budget-prefix{font-size:13px;font-weight:600;color:var(--soft);flex-shrink:0}
 #custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-.sbar{display:flex;align-items:center;gap:8px;background:var(--wh);border:1.5px solid var(--br);border-radius:40px;padding:7px 7px 7px 14px;box-shadow:0 3px 14px rgba(0,0,0,.06);margin-bottom:.4rem;position:relative;transition:border-color .2s}
-.sbar:focus-within{border-color:var(--g);box-shadow:0 0 0 3px rgba(33,66,47,.08)}
-.sbar input{flex:1;min-width:0;border:none;outline:none;font-size:13px;color:var(--tx);font-family:inherit;background:transparent}
-.sbar input::placeholder{color:var(--soft)}
-.sbtn{flex-shrink:0;padding:9px 16px;border-radius:30px;background:var(--g);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
-
-.vpills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:1.2rem;position:relative}
-.vp{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--br);background:var(--cr);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s}
-.vp.on{border-color:var(--g);color:var(--g);background:var(--gl)}
-
-.hstats{display:flex;justify-content:center;position:relative;margin-top:1.1rem}
-.hst{text-align:center;padding:0 1.3rem;border-right:1px solid rgba(255,255,255,.18)}
-.hst:last-child{border-right:none}
-.hst-n{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:#C7D1CB}
-.hst-l{font-size:9px;color:rgba(255,255,255,.55);margin-top:1px}
+.sc-divider{height:1px;background:var(--br);margin:0 18px}
+.sc-cta{width:100%;padding:15px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
+.sc-cta:hover{background:#1a3525}
+.sc-cta i{font-size:15px}
 
 /* DESTINOS */
 .dsec{padding:1.1rem 1rem;background:var(--cr);border-top:1px solid var(--br)}
@@ -484,42 +473,17 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
       <div class="eyebrow"><i class="ti ti-sparkles" style="font-size:12px"></i> Copiloto turístico para Brasil</div>
       <h1 class="htitle">Vibrá <span class="gi">tu <span class="gy">Brasil</span></span></h1>
       <p class="hsub">La gente no quiere buscar más.<br><strong>Quiere decidir mejor.</strong></p>
-      <div class="sb-label">Contanos en una frase qué buscás 👇</div>
-      <div class="sbar">
-        <input type="text" id="s1-input" placeholder="Ej: Tengo USD 1500, somos dos, quiero playa y relax..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
-        <button class="sbtn" onclick="goToQuiz()">Encontrar el mío →</button>
-      </div>
-      <div class="sb-or">— o elegí tu vibe directamente —</div>
-      <div class="vpills">
-        <button class="vp" data-vibe="relax" onclick="toggleLandingVibe(this,'relax')">🌊 relax</button>
-        <button class="vp" data-vibe="romance" onclick="toggleLandingVibe(this,'romance')">💑 romance</button>
-        <button class="vp" data-vibe="aventura" onclick="toggleLandingVibe(this,'aventura')">🏄 surf</button>
-        <button class="vp" data-vibe="naturaleza" onclick="toggleLandingVibe(this,'naturaleza')">🌿 naturaleza</button>
-        <button class="vp" data-vibe="social" onclick="toggleLandingVibe(this,'social')">🎉 fiesta</button>
-        <button class="vp" data-vibe="exclusividad" onclick="toggleLandingVibe(this,'exclusividad')">💎 lujo</button>
-        <button class="vp" data-vibe="gastronomia" onclick="toggleLandingVibe(this,'gastronomia')">🍽️ gastronomía</button>
-        <button class="vp" data-vibe="autenticidad" onclick="toggleLandingVibe(this,'autenticidad')">🧭 autenticidad</button>
-        <button class="vp" data-vibe="buceo" onclick="toggleLandingVibe(this,'buceo')">🤿 buceo</button>
-      </div>
-      <div class="sb-or">— y tu presupuesto —</div>
-      <div class="vpills" id="landing-budget-pills">
-        <button class="vp" onclick="toggleLandingBudget(this,750)">💸 hasta USD 900</button>
-        <button class="vp" onclick="toggleLandingBudget(this,1500)">💵 USD 900–2.000</button>
-        <button class="vp" onclick="toggleLandingBudget(this,2500)">💎 USD 2.000–3.500</button>
-        <button class="vp" onclick="toggleLandingBudget(this,4000)">👑 sin límite</button>
-      </div>
-      <div class="sb-custom-budget">
-        <span class="sb-custom-lbl">¿Tenés un número exacto?</span>
-        <div class="sb-custom-row">
-          <span class="sb-custom-prefix">USD</span>
-          <input type="number" id="custom-budget-input" placeholder="ej: 1280" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
+      <div class="search-card">
+        <div class="sc-row">
+          <i class="ti ti-search"></i>
+          <input type="text" id="s1-input" placeholder="Playa y relax, sin apuro..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
         </div>
-      </div>
-      <div class="hstats">
-        <div class="hst"><div class="hst-n">5</div><div class="hst-l">destinos MVP</div></div>
-        <div class="hst"><div class="hst-n">3</div><div class="hst-l">escenarios</div></div>
-        <div class="hst"><div class="hst-n">100%</div><div class="hst-l">Brasil</div></div>
-        <div class="hst"><div class="hst-n">gratis</div><div class="hst-l">sin registro</div></div>
+        <div class="sc-divider"></div>
+        <div class="sc-row">
+          <span class="sc-budget-prefix">USD</span>
+          <input type="number" id="custom-budget-input" placeholder="Presupuesto total (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
+        </div>
+        <button class="sc-cta" onclick="goToQuiz()">Encontrar el mío <i class="ti ti-arrow-right"></i></button>
       </div>
     </section>
 
@@ -1105,7 +1069,6 @@ function toggleLandingBudget(btn, val) {
 function setCustomLandingBudget(val) {
   const n = parseInt(val);
   if (!n || n < 100) { state.presupuestoElegidoEnLanding = false; return; }
-  document.querySelectorAll('#landing-budget-pills .vp').forEach(b => b.classList.remove('on'));
   state.presupuesto = n;
   state.presupuestoElegidoEnLanding = true;
 }
