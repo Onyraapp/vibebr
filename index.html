@@ -200,6 +200,8 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .origen-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .orig-chip{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;border-radius:var(--r);border:1.5px solid var(--br);background:var(--wh);cursor:pointer;transition:all .15s;font-family:inherit}
 .origen-input{width:100%;padding:11px 14px;border:1.5px solid var(--br);border-radius:var(--rs);font-size:13px;font-family:inherit;color:var(--tx);outline:none;transition:border-color .2s}
+.tf-select-q{appearance:none;background:var(--wh) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A9990' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;border:1.5px solid var(--br);border-radius:var(--rs);padding:11px 30px 11px 14px;font-size:13px;font-weight:500;color:var(--tx);font-family:inherit;flex:1;min-width:0;cursor:pointer;transition:border-color .2s}
+.tf-select-q:focus{outline:none;border-color:var(--g)}
 .origen-input:focus{border-color:var(--g)}
 .origen-hint{font-size:11px;margin-top:6px;min-height:14px}
 .orig-chip:hover{border-color:var(--g)}
@@ -634,8 +636,20 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
     <!-- Q4: Días -->
     <div class="qcard" id="q4">
       <div class="qlabel">Paso 4 de 4</div>
-      <div class="qtitle">¿Cuántos días tenés?</div>
-      <div class="qsub">Contando desde que salís hasta que volvés.</div>
+      <div class="qtitle">¿Cuándo y por cuánto tiempo?</div>
+      <div class="qsub">Esto define los precios reales que te vamos a mostrar.</div>
+      <div class="tf-row" style="margin-bottom:1.1rem">
+        <select class="tf-select-q" id="q4-mes" onchange="state.mesViaje=this.value||null">
+          <option value="">Mes (flexible)</option>
+          <option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option>
+          <option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option>
+          <option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+        </select>
+        <select class="tf-select-q" id="q4-anio" onchange="state.anioViaje=this.value||null">
+          <option value="">Año</option>
+          <option>2026</option><option>2027</option>
+        </select>
+      </div>
       <div class="qopts" id="q4opts">
         <button class="qopt" onclick="selectSingle(this,'q4opts',4)"><span class="qopt-icon">⚡</span><span class="qopt-text"><span class="qopt-main">4–5 días</span><span class="qopt-sub">Fin de semana largo o escapada corta</span></span></button>
         <button class="qopt" onclick="selectSingle(this,'q4opts',7)"><span class="qopt-icon">📅</span><span class="qopt-text"><span class="qopt-main">6–8 días</span><span class="qopt-sub">La semana clásica — ideal para casi todo</span></span></button>
