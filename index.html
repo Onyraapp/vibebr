@@ -899,6 +899,7 @@ const DEST = {
 
   foz: {
     id:'foz', nombre:"Foz do Iguaçu", loc:"Paraná · Brasil",
+    exclusion:[],
     duffelCode:'IGR',
     tipo:'naturaleza', cluster:'aventura', cssClass:'foz',
     temp:23, logistica:"fácil", aero:"IGU",
@@ -926,6 +927,7 @@ const DEST = {
 
   saopaulo: {
     id:'saopaulo', nombre:"São Paulo", loc:"São Paulo · Brasil",
+    exclusion:[],
     duffelCode:'GRU',
     hotelbedsCode:'SAO',
     tipo:'ciudad_completa', cluster:'ciudad', cssClass:'saopaulo',
@@ -954,6 +956,7 @@ const DEST = {
 
   salvador: {
     id:'salvador', nombre:"Salvador", loc:"Bahia · Brasil",
+    exclusion:[],
     duffelCode:'SSA',
     tipo:'ciudad_completa', cluster:'cultura', cssClass:'salvador',
     temp:26, logistica:"fácil", aero:"SSA",
@@ -981,6 +984,7 @@ const DEST = {
 
   paraty: {
     id:'paraty', nombre:"Paraty", loc:"Rio de Janeiro · Brasil",
+    exclusion:[],
     duffelCode:'GIG',
     tipo:'playa+ciudad', cluster:'cultura', cssClass:'paraty',
     temp:24, logistica:"media", aero:"Sin aeropuerto propio (vía GIG)",
@@ -1008,6 +1012,7 @@ const DEST = {
 
   angra: {
     id:'angra', nombre:"Angra dos Reis", loc:"Rio de Janeiro · Brasil",
+    exclusion:[],
     duffelCode:'GIG',
     tipo:'playa', cluster:'lujo', cssClass:'angra',
     temp:25, logistica:"fácil-media", aero:"Sin aeropuerto propio (vía GIG)",
@@ -1206,7 +1211,7 @@ function setLang(btn, lang) {
 function calcMatch() {
   const scored = Object.values(DEST).map(d => {
     // Check hard exclusions
-    for(const rule of d.exclusion) {
+    for(const rule of (d.exclusion || [])) {
       if(rule.cond === 'relax' && state.vibes.includes('relax') && d.scores.relax < (10-rule.min+1)) {
         if(rule.accion === 'excluir') return null;
       }
