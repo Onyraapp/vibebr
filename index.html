@@ -1804,9 +1804,9 @@ function generateHotelOptions(d) {
     });
   }
   opts.push({
-    nombre: 'Opción Booking.com — pousada económica',
-    tipo: 'Económico', curada: false, fuente: 'booking',
-    precioNoche: Math.round(d.pmin * 0.06), noches: d.dias_ideal,
+    nombre: 'Buscar en Booking.com',
+    tipo: 'Explorar opciones', curada: false, fuente: 'booking', sinPrecio: true,
+    precioNoche: Math.round(d.pmin * 0.06), noches: d.dias_ideal, // solo para ordenar, no se muestra
   });
   // ordenar: curaduría siempre primero, después por precio
   opts.sort((a,b) => (b.curada - a.curada) || (a.precioNoche - b.precioNoche));
@@ -1911,15 +1911,15 @@ function renderBookingStep() {
         ${opts.map((o,i) => `
           <div class="bk-card ${o.curada?'curada':''}" onclick="selectBkOption('hotel',${i})">
             <div class="bk-card-top">
-              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.noches} noches · USD ${o.precioNoche}/noche</div></div>
-              <div class="bk-card-price"><div class="bk-price-n">USD ${o.precioNoche*o.noches}</div><div class="bk-price-l">total</div></div>
+              <div><div class="bk-card-name">${o.nombre}</div><div class="bk-card-meta">${o.sinPrecio ? 'Miles de opciones · precios reales al buscar' : `${o.noches} noches · USD ${o.precioNoche}/noche`}</div></div>
+              ${o.sinPrecio ? '' : `<div class="bk-card-price"><div class="bk-price-n">USD ${o.precioNoche*o.noches}</div><div class="bk-price-l">total</div></div>`}
             </div>
             <div class="bk-badges-row">
               ${o.curada?'<span class="bk-badge curada-tag">⭐ Elegida por Vibrasil</span>':`<span class="bk-badge ${o.fuente==='hotelbeds'?'b':'y'}">${o.tipo}</span>`}
             </div>
             <div class="bk-card-foot">
               <div class="bk-provider"><i class="ti ti-building-store" style="font-size:12px"></i> ${o.curada?'Contacto directo':o.fuente==='hotelbeds'?'Vía Hotelbeds':'Vía Booking.com'}</div>
-              <button class="bk-go-btn ${o.fuente==='booking'?'redirect':''}" onclick="event.stopPropagation();goToProvider('${o.fuente}')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver opción</button>
+              <button class="bk-go-btn ${o.fuente==='booking'?'redirect':''}" onclick="event.stopPropagation();goToProvider('${o.fuente}',bk.destId)"><i class="ti ti-external-link" style="font-size:13px"></i> Ver opción</button>
             </div>
             ${o.fuente==='booking'?'<div class="bk-redirect-note"><i class="ti ti-info-circle" style="font-size:11px"></i> Esta opción se completa en Booking.com</div>':''}
           </div>`).join('')}
@@ -2025,7 +2025,63 @@ function bkPrev() {
   renderBookingStep();
 }
 
-function goToProvider(key) {
+// El % del presupuesto que se destina a hospedaje depende de DOS variables:
+// 1. Categoria de presupuesto: quien tiene mas presupuesto gasta proporcionalmente
+//    mas en alojamiento (de dormis compartidos a hoteles boutique).
+// 2. Duracion del viaje: en una escapada corta tiene sentido "darse el gusto" con
+//    el hospedaje (es casi toda la experiencia); en un viaje largo conviene repartir
+//    mas en comida/actividades de tantos dias, asi que el % de hospedaje baja.
+function porcentajeHospedaje(presupuesto, noches) {
+  // Presupuesto mas ajustado: sin margen para "darse el gusto" aunque el viaje sea corto,
+  // el % de hospedaje se mantiene fijo sin importar la duracion.
+  if (presupuesto <= 900) return 0.35;
+
+  // Con mas margen, la duracion si influye: en una escapada corta tiene sentido priorizar
+  // el hospedaje (es casi toda la experiencia); en un viaje largo conviene repartir mas
+  // en comida/actividades de tantos dias.
+  let pct = presupuesto <= 2000 ? 0.40 : presupuesto <= 3500 ? 0.45 : 0.50;
+  if (noches <= 5) pct += 0.10;
+  else if (noches <= 8) pct += 0;
+  else if (noches <= 12) pct -= 0.05;
+  else pct -= 0.10;
+  return Math.min(0.60, Math.max(0.20, pct));
+}
+
+// Tu link de afiliado CJ para Booking.com Brazil (sitio Vibrasil 101808109, link evergreen 17293138).
+// Misma base para los 10 destinos, solo cambia la busqueda al final.
+function buildBookingAffiliateLink(d) {
+  const checkIn = new Date(computeTripDate());
+  const noches = state.dias || d.dias_ideal || 7;
+  const checkOut = new Date(checkIn); checkOut.setDate(checkOut.getDate() + noches);
+  const fmt = dt => dt.toISOString().slice(0, 10);
+
+  const personas = state.personas || 2;
+  const rooms = Math.max(1, Math.ceil(personas / 2));
+  const adultsPerRoom = Math.ceil(personas / rooms);
+
+  const presupuestoTotal = state.presupuesto || 1500;
+  const presupuestoHospedajeTotal = presupuestoTotal * porcentajeHospedaje(presupuestoTotal, noches);
+  const techoPorNoche = Math.max(30, Math.round(presupuestoHospedajeTotal / noches));
+
+  const params = new URLSearchParams({
+    ss: d.nombre,
+    checkin: fmt(checkIn),
+    checkout: fmt(checkOut),
+    group_adults: adultsPerRoom,
+    no_rooms: rooms,
+    nflt: `price=USD-0-${techoPorNoche}-1`,
+  });
+  const busqueda = `https://www.booking.com/searchresults.html?${params.toString()}`;
+  return `https://www.kqzyfj.com/click-101808109-17293138?url=${encodeURIComponent(busqueda)}`;
+}
+
+function goToProvider(key, destId) {
+  if (key === 'booking') {
+    const d = DEST[destId];
+    const url = buildBookingAffiliateLink(d || { nombre: 'Brasil', dias_ideal: 7 });
+    window.open(url, '_blank');
+    return;
+  }
   const url = PROVIDER_URLS[key] || '#';
   if (url === '#') {
     sendPrompt(`(Demo) En producción esto abriría el canal de reserva de ${key} en una pestaña nueva.`);
