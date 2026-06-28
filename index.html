@@ -74,7 +74,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .htitle{font-family:'VAG Rounded','Fraunces',serif;font-size:clamp(26px,7.5vw,36px);font-weight:700;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:.65rem;position:relative}
 .htitle .gi{color:var(--gl);font-style:italic}
 .htitle .gy{color:var(--y)}
-.hsub{font-size:13px;color:rgba(255,255,255,.82);line-height:1.65;margin-bottom:1.3rem;position:relative}
+.hsub{font-size:15px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:1rem;position:relative}
 .hsub strong{color:var(--tx)}
 
 .sb-or{font-size:10px;color:rgba(255,255,255,.55);margin:.7rem 0 .6rem;position:relative}
@@ -93,11 +93,25 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .sc-row input{flex:1;min-width:0;border:none;outline:none;font-size:14px;color:var(--tx);font-family:inherit;background:transparent}
 .sc-row input::placeholder{color:var(--soft)}
 .sc-budget-prefix{font-size:13px;font-weight:600;color:var(--soft);flex-shrink:0}
+.sc-budget-box{display:flex;align-items:center;gap:8px;margin:2px 18px 14px;padding:11px 14px;border-radius:12px;border:1.5px solid var(--g);background:var(--gl)}
+.sc-budget-box:focus-within{box-shadow:0 0 0 3px rgba(33,66,47,.14)}
+.sc-budget-box input{flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:600;color:var(--tx);font-family:inherit;background:transparent}
+.sc-budget-box input::placeholder{color:var(--mid);font-weight:500}
 #custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .sc-divider{height:1px;background:var(--br);margin:0 18px}
 .sc-cta{width:100%;padding:15px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
 .sc-cta:hover{background:#1a3525}
 .sc-cta i{font-size:15px}
+
+.sc-chips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;padding:0 18px 14px}
+.sc-chip{font-size:12px;padding:7px 14px;border-radius:999px;border:none;background:var(--cr);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.sc-chip:hover{background:var(--gl);color:var(--g);transform:translateY(-1px);box-shadow:0 4px 10px rgba(33,66,47,.18)}
+.sc-chip:active{transform:translateY(0) scale(.97)}
+
+.how-it-works{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1.2rem;flex-wrap:wrap;position:relative}
+.hiw-step{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.85);font-weight:500}
+.hiw-n{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--y);color:var(--g);font-size:9px;font-weight:700}
+.hiw-arrow{font-size:11px;color:rgba(255,255,255,.4)}
 
 /* DESTINOS */
 .dsec{padding:1.1rem 1rem;background:var(--cr);border-top:1px solid var(--br)}
@@ -109,16 +123,16 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .dcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px)}
 .dthumb{height:68px;position:relative}
 .dthumb-name{position:absolute;left:8px;bottom:6px;right:8px;font-family:'VAG Rounded','Fraunces',serif;font-size:26px;font-weight:700;color:#fff;line-height:1.05;text-shadow:0 1px 4px rgba(0,0,0,.35)}
-.dthumb.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
-.dthumb.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
-.dthumb.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
-.dthumb.noronha{background:linear-gradient(145deg,#0a2060,#1a5fa8,#e8c870)}
-.dthumb.floripa{background:linear-gradient(145deg,#3a2a9a,#6a5ad4,#a088e8)}
-.dthumb.foz      {background:linear-gradient(145deg,#0a5040,#1a8a6a,#5dc8a0)}
-.dthumb.saopaulo {background:linear-gradient(145deg,#2a2a38,#4a4a60,#7878a0)}
-.dthumb.salvador {background:linear-gradient(145deg,#8a3010,#c85020,#e8a040)}
-.dthumb.paraty   {background:linear-gradient(145deg,#3a5a78,#6a8aa8,#c8d8e0)}
-.dthumb.angra    {background:linear-gradient(145deg,#0a3050,#1a6090,#4ab8c8)}
+.dthumb.rio    {background:linear-gradient(145deg,#0F3D2E,#0E6B6B,#D4A017)}
+.dthumb.buzios {background:linear-gradient(145deg,#0E4F4F,#159E9E,#7FD8C8)}
+.dthumb.pipa   {background:linear-gradient(145deg,#0F3D2E,#128C8C,#5FC9C9)}
+.dthumb.noronha{background:linear-gradient(145deg,#0B3D3D,#127A7A,#E0B33D)}
+.dthumb.floripa{background:linear-gradient(145deg,#154734,#1F7A52,#8FD4A8)}
+.dthumb.foz      {background:linear-gradient(145deg,#0F3D2E,#1F8A5A,#6FD6A0)}
+.dthumb.saopaulo {background:linear-gradient(145deg,#1C2E28,#34504A,#6B8C82)}
+.dthumb.salvador {background:linear-gradient(145deg,#3D2E0F,#8A6A1A,#D4A017)}
+.dthumb.paraty   {background:linear-gradient(145deg,#0F3D3D,#3D6B6B,#A8CFC9)}
+.dthumb.angra    {background:linear-gradient(145deg,#0B3D3D,#159E9E,#D4A017)}
 .dmatch{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:9px;background:rgba(255,255,255,.92);color:var(--g)}
 .dbody{padding:8px 10px 10px}
 .dname{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:1px}
@@ -219,16 +233,16 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .rcard.feat{border-left:3px solid var(--g)}
 .rphoto{height:120px;position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:10px 12px}
 .rphoto-name{position:absolute;left:12px;bottom:10px;right:12px;font-family:'VAG Rounded','Fraunces',serif;font-size:21px;font-weight:700;color:#fff;letter-spacing:-.01em;text-shadow:0 1px 6px rgba(0,0,0,.35);line-height:1.1}
-.rphoto.rio    {background:linear-gradient(145deg,#0a2060,#1a5fa8,#2a9ad4)}
-.rphoto.buzios {background:linear-gradient(145deg,#1a7a5e,#2aab82,#a8d4b8)}
-.rphoto.pipa   {background:linear-gradient(145deg,#1a5f8a,#2a8ab5,#8ac4d8)}
-.rphoto.noronha{background:linear-gradient(145deg,#0a2060,#1a5fa8,#e8c870)}
-.rphoto.floripa{background:linear-gradient(145deg,#3a2a9a,#6a5ad4,#a088e8)}
-.rphoto.foz      {background:linear-gradient(145deg,#0a5040,#1a8a6a,#5dc8a0)}
-.rphoto.saopaulo {background:linear-gradient(145deg,#2a2a38,#4a4a60,#7878a0)}
-.rphoto.salvador {background:linear-gradient(145deg,#8a3010,#c85020,#e8a040)}
-.rphoto.paraty   {background:linear-gradient(145deg,#3a5a78,#6a8aa8,#c8d8e0)}
-.rphoto.angra    {background:linear-gradient(145deg,#0a3050,#1a6090,#4ab8c8)}
+.rphoto.rio    {background:linear-gradient(145deg,#0F3D2E,#0E6B6B,#D4A017)}
+.rphoto.buzios {background:linear-gradient(145deg,#0E4F4F,#159E9E,#7FD8C8)}
+.rphoto.pipa   {background:linear-gradient(145deg,#0F3D2E,#128C8C,#5FC9C9)}
+.rphoto.noronha{background:linear-gradient(145deg,#0B3D3D,#127A7A,#E0B33D)}
+.rphoto.floripa{background:linear-gradient(145deg,#154734,#1F7A52,#8FD4A8)}
+.rphoto.foz      {background:linear-gradient(145deg,#0F3D2E,#1F8A5A,#6FD6A0)}
+.rphoto.saopaulo {background:linear-gradient(145deg,#1C2E28,#34504A,#6B8C82)}
+.rphoto.salvador {background:linear-gradient(145deg,#3D2E0F,#8A6A1A,#D4A017)}
+.rphoto.paraty   {background:linear-gradient(145deg,#0F3D3D,#3D6B6B,#A8CFC9)}
+.rphoto.angra    {background:linear-gradient(145deg,#0B3D3D,#159E9E,#D4A017)}
 .rbadges{display:flex;flex-direction:column;gap:4px}
 .rbadge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;backdrop-filter:blur(8px)}
 .rbadge.feat{background:var(--g);color:#fff}
@@ -472,14 +486,31 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
     <section class="hero">
       <div class="eyebrow"><i class="ti ti-sparkles" style="font-size:12px"></i> Copiloto turístico para Brasil</div>
       <h1 class="htitle">Vibrá <span class="gi">tu <span class="gy">Brasil</span></span></h1>
-      <p class="hsub">La gente no quiere buscar más.<br><strong>Quiere decidir mejor.</strong></p>
+      <p class="hsub">Contanos qué tipo de viaje buscás y tu presupuesto.</p>
+      <div class="how-it-works">
+        <div class="hiw-step"><span class="hiw-n">1</span> Contanos tu vibe</div>
+        <i class="ti ti-chevron-right hiw-arrow"></i>
+        <div class="hiw-step"><span class="hiw-n">2</span> Vemos 3 destinos</div>
+        <i class="ti ti-chevron-right hiw-arrow"></i>
+        <div class="hiw-step"><span class="hiw-n">3</span> Reservás con precio real</div>
+      </div>
       <div class="search-card">
         <div class="sc-row">
           <i class="ti ti-search"></i>
-          <input type="text" id="s1-input" placeholder="Playa y relax, sin apuro..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
+          <input type="text" id="s1-input" placeholder="Ej: playa y relax, sin apuro..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
         </div>
-        <div class="sc-divider"></div>
-        <div class="sc-row">
+        <div class="sc-chips">
+          <button type="button" class="sc-chip" onclick="fillExampleChip('playa y relax')">🌊 Relax</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('romántico para dos')">💑 Romance</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('aventura y surf')">🏄 Aventura</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('naturaleza y desconexión')">🌿 Naturaleza</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('fiesta y vida nocturna')">🎉 Fiesta</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('lujo y exclusividad')">💎 Lujo</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('gastronomía y buena comida')">🍽️ Gastronomía</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('auténtico y poco turístico')">🧭 Auténtico</button>
+          <button type="button" class="sc-chip" onclick="fillExampleChip('buceo y snorkel')">🤿 Buceo</button>
+        </div>
+        <div class="sc-budget-box">
           <span class="sc-budget-prefix">USD</span>
           <input type="number" id="custom-budget-input" placeholder="Presupuesto total (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
         </div>
@@ -1064,6 +1095,12 @@ function toggleLandingBudget(btn, val) {
   document.getElementById('custom-budget-input').value = '';
   state.presupuesto = val;
   state.presupuestoElegidoEnLanding = true;
+}
+
+function fillExampleChip(text) {
+  const input = document.getElementById('s1-input');
+  input.value = text;
+  input.focus();
 }
 
 function setCustomLandingBudget(val) {
