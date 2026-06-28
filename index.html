@@ -803,7 +803,7 @@ const DEST = {
     temp:28, logistica:'media', aero:'NAT',
     mejor:'Ago–Dic', evitar:'Mar–Jun (lluvias del nordeste)',
     dias_min:4, dias_ideal:7,
-    pmin:700, pmax:1800,
+    pmin:950, pmax:1800,
     escenario:'Pipa Bohemia',
     desc:'El nordeste auténtico. Falésias, mar azul, surf y una energía bohemia que no se encuentra en ningún otro lado de Brasil.',
     tip:'Marzo a junio llueve fuerte por las tardes pero el mar sigue hermoso y los precios bajan bastante. Agosto a diciembre es el pico de sol.',
@@ -931,7 +931,7 @@ const DEST = {
     temp:21, logistica:"fácil", aero:"GRU + CGH",
     mejor:"Abr–Jun · Sep–Nov", evitar:"Dic–Feb (lluvias)",
     dias_min:3, dias_ideal:4,
-    pmin:700, pmax:2200,
+    pmin:750, pmax:2200,
     escenario:"São Paulo Gourmet",
     desc:"São Paulo no es de playa ni de relax — es la ciudad más cosmopolita de Brasil. Tiene el título de capital mundial de la gastronomía, museos de primer nivel, la mejor vida nocturna del país y barrios como Jardins y Vila Madalena que parecen otra liga. Si querés combinar con playa, el litoral paulista está a unas horas.",
     tip:"4 días alcanzan para la ciudad. Si tenés más tiempo, sumá 2-3 días en Ilhabela — es la joya del litoral paulista y muy poca gente de fuera de Brasil la conoce.",
@@ -959,7 +959,7 @@ const DEST = {
     temp:26, logistica:"fácil", aero:"SSA",
     mejor:"Sep–Mar", evitar:"Abr–Jul (lluvias)",
     dias_min:3, dias_ideal:5,
-    pmin:600, pmax:1800,
+    pmin:700, pmax:1800,
     escenario:"Salvador Cultural",
     desc:"Salvador es Brasil en su forma más cultural. El Pelourinho (patrimonio UNESCO), la música por todos lados, la comida bahiana (moqueca, acarajé) y una energía afrobrasileña que no se siente en ningún otro lado del país. No es de playa paradisíaca — para eso están Morro de São Paulo o Praia do Forte, a horas de distancia.",
     tip:"Si solo tenés 5 días, quedate en la ciudad y disfrutala a fondo. Pero si querés el viaje completo de Bahía, sumale Morro de São Paulo (3 días extra) — el combo ciudad + isla es de 10 a 12 días y es de los mejores viajes que se pueden hacer en Brasil.",
@@ -987,7 +987,7 @@ const DEST = {
     temp:24, logistica:"media", aero:"Sin aeropuerto propio (vía GIG)",
     mejor:"Abr–Jun · Ago–Oct", evitar:"Carnaval (fecha móvil)",
     dias_min:2, dias_ideal:4,
-    pmin:700, pmax:2000,
+    pmin:750, pmax:2000,
     escenario:"Paraty Colonial",
     desc:"Paraty es la postal colonial de Brasil — calles empedradas, casas coloridas y un centro histórico que la marea alta inunda de forma mágica. Está en el camino entre Río y São Paulo, así que se combina fácil con cualquiera de las dos. Ideal para parejas que buscan romance con historia.",
     tip:"El Carnaval acá es de fecha móvil cada año — verificá la fecha exacta y considerá evitarlo, se llena mucho y sube de precio. Si tenés un día extra, sumá Ilha Grande — está muy cerca.",
@@ -2091,9 +2091,18 @@ function buildBookingAffiliateLink(d) {
   const rooms = Math.max(1, Math.ceil(personas / 2));
   const adultsPerRoom = Math.ceil(personas / rooms);
 
-  const presupuestoTotal = state.presupuesto || 1500;
-  const presupuestoHospedajeTotal = presupuestoTotal * porcentajeHospedaje(presupuestoTotal, noches);
-  const techoPorNoche = Math.max(30, Math.round(presupuestoHospedajeTotal / noches));
+  // El presupuesto es POR PERSONA (asi se lo pedimos en el Quiz). El filtro de precio
+  // de Booking.com es por HABITACION (que cubre a varias personas), asi que escalamos
+  // el techo por noche segun cuanta gente comparte cada cuarto.
+  const presupuestoPorPersona = state.presupuesto || 1500;
+  const presupuestoHospedajePorPersona = presupuestoPorPersona * porcentajeHospedaje(presupuestoPorPersona, noches);
+
+  // Quien viaja solo no tiene con quien repartir el costo de la habitacion completa.
+  // Los hoteles no cobran la mitad por una persona menos (el "single supplement" suele
+  // rondar 70-85% del precio de la doble), asi que le damos un margen extra al techo
+  // para que pueda encontrar calidad comparable a la de quien viaja acompañado.
+  const soloSupplement = adultsPerRoom === 1 ? 1.3 : 1;
+  const techoPorNoche = Math.max(30, Math.round((presupuestoHospedajePorPersona * adultsPerRoom * soloSupplement) / noches));
 
   const params = new URLSearchParams({
     ss: d.nombre,
