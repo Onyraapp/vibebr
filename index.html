@@ -99,6 +99,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .sc-budget-box input::placeholder{color:var(--mid);font-weight:500}
 #custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .sc-divider{height:1px;background:var(--br);margin:0 18px}
+.sc-cta-q{text-align:center;font-size:12px;font-weight:600;color:var(--mid);padding:0 18px 8px}
 .sc-cta{width:100%;padding:15px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
 .sc-cta:hover{background:#1a3525}
 .sc-cta i{font-size:15px}
@@ -107,6 +108,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .sc-chip{font-size:12px;padding:7px 14px;border-radius:999px;border:none;background:var(--cr);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .sc-chip:hover{background:var(--gl);color:var(--g);transform:translateY(-1px);box-shadow:0 4px 10px rgba(33,66,47,.18)}
 .sc-chip:active{transform:translateY(0) scale(.97)}
+.sc-chip.sel{background:var(--g);color:#fff;box-shadow:0 3px 10px rgba(33,66,47,.25)}
 
 .how-it-works{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1.2rem;flex-wrap:wrap;position:relative}
 .hiw-step{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.85);font-weight:500}
@@ -500,21 +502,22 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
           <input type="text" id="s1-input" placeholder="Ej: playa y relax, sin apuro..." onkeydown="if(event.key==='Enter')goToQuiz()"/>
         </div>
         <div class="sc-chips">
-          <button type="button" class="sc-chip" onclick="fillExampleChip('playa y relax')">🌊 Relax</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('romántico para dos')">💑 Romance</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('aventura y surf')">🏄 Aventura</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('naturaleza y desconexión')">🌿 Naturaleza</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('fiesta y vida nocturna')">🎉 Fiesta</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('lujo y exclusividad')">💎 Lujo</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('gastronomía y buena comida')">🍽️ Gastronomía</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('auténtico y poco turístico')">🧭 Auténtico</button>
-          <button type="button" class="sc-chip" onclick="fillExampleChip('buceo y snorkel')">🤿 Buceo</button>
+          <button type="button" class="sc-chip" data-label="Relax" onclick="toggleChip(this,'relax','Relax')">🌊 Relax</button>
+          <button type="button" class="sc-chip" data-label="Romance" onclick="toggleChip(this,'romance','Romance')">💑 Romance</button>
+          <button type="button" class="sc-chip" data-label="Aventura" onclick="toggleChip(this,'aventura','Aventura')">🏄 Aventura</button>
+          <button type="button" class="sc-chip" data-label="Naturaleza" onclick="toggleChip(this,'naturaleza','Naturaleza')">🌿 Naturaleza</button>
+          <button type="button" class="sc-chip" data-label="Fiesta" onclick="toggleChip(this,'social','Fiesta')">🎉 Fiesta</button>
+          <button type="button" class="sc-chip" data-label="Lujo" onclick="toggleChip(this,'exclusividad','Lujo')">💎 Lujo</button>
+          <button type="button" class="sc-chip" data-label="Gastronomía" onclick="toggleChip(this,'gastronomia','Gastronomía')">🍽️ Gastronomía</button>
+          <button type="button" class="sc-chip" data-label="Auténtico" onclick="toggleChip(this,'autenticidad','Auténtico')">🧭 Auténtico</button>
+          <button type="button" class="sc-chip" data-label="Buceo" onclick="toggleChip(this,'buceo','Buceo')">🤿 Buceo</button>
         </div>
         <div class="sc-budget-box">
           <span class="sc-budget-prefix">USD</span>
           <input type="number" id="custom-budget-input" placeholder="Presupuesto total (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
         </div>
-        <button class="sc-cta" onclick="goToQuiz()">Encontrar el mío <i class="ti ti-arrow-right"></i></button>
+        <div class="sc-cta-q">¿Listo para encontrar tu Brasil?</div>
+        <button class="sc-cta" onclick="goToQuiz()">Empezar ahora ↗</button>
       </div>
     </section>
 
@@ -566,31 +569,11 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
       <div class="qpb" id="qp1"></div>
       <div class="qpb" id="qp2"></div>
       <div class="qpb" id="qp3"></div>
-      <div class="qpb" id="qp4"></div>
-    </div>
-
-    <!-- Q0: Vibe -->
-    <div class="qcard on" id="q0">
-      <div class="qlabel">Paso 1 de 5</div>
-      <div class="qtitle">¿Qué querés sentir?</div>
-      <div class="qsub">No pienses en el destino todavía — pensá en la sensación.</div>
-      <div class="qopts multi" id="q0opts">
-        <button class="qopt" data-vibe="relax" onclick="toggleMulti(this,'relax')"><span class="qopt-icon">🌊</span><span class="qopt-text"><span class="qopt-main">Relax total</span><span class="qopt-sub">Desconectarme, silencio, tranquilidad</span></span></button>
-        <button class="qopt" data-vibe="romance" onclick="toggleMulti(this,'romance')"><span class="qopt-icon">💑</span><span class="qopt-text"><span class="qopt-main">Romántico</span><span class="qopt-sub">Sunsets, buena mesa, intimidad</span></span></button>
-        <button class="qopt" data-vibe="social" onclick="toggleMulti(this,'social')"><span class="qopt-icon">🎉</span><span class="qopt-text"><span class="qopt-main">Fiesta y movida</span><span class="qopt-sub">Beach clubs, vida nocturna, gente</span></span></button>
-        <button class="qopt" data-vibe="aventura" onclick="toggleMulti(this,'aventura')"><span class="qopt-icon">🏄</span><span class="qopt-text"><span class="qopt-main">Aventura y surf</span><span class="qopt-sub">Deportes, naturaleza activa, adrenalina</span></span></button>
-        <button class="qopt" data-vibe="naturaleza" onclick="toggleMulti(this,'naturaleza')"><span class="qopt-icon">🌿</span><span class="qopt-text"><span class="qopt-main">Naturaleza pura</span><span class="qopt-sub">Mar cristalino, fauna, paisajes únicos</span></span></button>
-        <button class="qopt" data-vibe="gastronomia" onclick="toggleMulti(this,'gastronomia')"><span class="qopt-icon">🍽️</span><span class="qopt-text"><span class="qopt-main">Gastronomía</span><span class="qopt-sub">Buenos restaurantes, cocina local</span></span></button>
-        <button class="qopt" data-vibe="exclusividad" onclick="toggleMulti(this,'exclusividad')"><span class="qopt-icon">💎</span><span class="qopt-text"><span class="qopt-main">Lujo y exclusividad</span><span class="qopt-sub">Boutique, privacidad, sofisticación</span></span></button>
-        <button class="qopt" data-vibe="autenticidad" onclick="toggleMulti(this,'autenticidad')"><span class="qopt-icon">🧭</span><span class="qopt-text"><span class="qopt-main">Autenticidad</span><span class="qopt-sub">Local, genuino, sin turismo masivo</span></span></button>
-        <button class="qopt" data-vibe="buceo" onclick="toggleMulti(this,'buceo')"><span class="qopt-icon">🤿</span><span class="qopt-text"><span class="qopt-main">Buceo y mar cristalino</span><span class="qopt-sub">Snorkel, visibilidad, fauna marina</span></span></button>
-      </div>
-      <div class="qnav"><button class="qbtn primary" onclick="nextQ(1)">Siguiente →</button></div>
     </div>
 
     <!-- Q1: Grupo -->
-    <div class="qcard" id="q1">
-      <div class="qlabel">Paso 2 de 5</div>
+    <div class="qcard on" id="q1">
+      <div class="qlabel">Paso 1 de 4</div>
       <div class="qtitle">¿Con quién viajás?</div>
       <div class="qsub">El grupo cambia todo — logística, tipo de hospedaje y energía del viaje.</div>
       <div class="qopts" id="q1opts">
@@ -601,12 +584,12 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         <button class="qopt" onclick="selectSingle(this,'q1opts','BACKPACK')"><span class="qopt-icon">🎒</span><span class="qopt-text"><span class="qopt-main">Mochilero/a</span><span class="qopt-sub">Flexible, económico, aventurero</span></span></button>
         <button class="qopt" onclick="selectSingle(this,'q1opts','LUXE')"><span class="qopt-icon">✨</span><span class="qopt-text"><span class="qopt-main">Luxury</span><span class="qopt-sub">Sin restricciones, máximo confort</span></span></button>
       </div>
-      <div class="qnav"><button class="qbtn secondary" onclick="nextQ(0)">← Atrás</button><button class="qbtn primary" onclick="nextQ(2)">Siguiente →</button></div>
+      <div class="qnav"><button class="qbtn primary" onclick="nextQ(2)">Siguiente →</button></div>
     </div>
 
     <!-- Q2: Presupuesto -->
     <div class="qcard" id="q2">
-      <div class="qlabel">Paso 3 de 5</div>
+      <div class="qlabel">Paso 2 de 4</div>
       <div class="qtitle">¿Cuál es tu presupuesto?</div>
       <div class="qsub">Total por persona para todo el viaje — vuelo, hospedaje, comida y actividades.</div>
       <div class="qslider-wrap">
@@ -626,7 +609,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 
     <!-- Q3: Origen -->
     <div class="qcard" id="q3">
-      <div class="qlabel">Paso 4 de 5</div>
+      <div class="qlabel">Paso 3 de 4</div>
       <div class="qtitle">¿Desde dónde salís?</div>
       <div class="qsub">El origen afecta precios de vuelo y opciones de conexión.</div>
       <div class="origen-chips" id="q3opts">
@@ -650,7 +633,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 
     <!-- Q4: Días -->
     <div class="qcard" id="q4">
-      <div class="qlabel">Paso 5 de 5</div>
+      <div class="qlabel">Paso 4 de 4</div>
       <div class="qtitle">¿Cuántos días tenés?</div>
       <div class="qsub">Contando desde que salís hasta que volvés.</div>
       <div class="qopts" id="q4opts">
@@ -1072,10 +1055,10 @@ function go(n) {
 function nextQ(n) {
   document.querySelectorAll('.qcard').forEach(c => c.classList.remove('on'));
   document.getElementById('q'+n).classList.add('on');
-  // update progress
-  for(let i=0;i<5;i++){
+  // update progress (4 pasos: q1..q4 -> barras qp0..qp3)
+  for(let i=0;i<4;i++){
     const pb = document.getElementById('qp'+i);
-    pb.className = 'qpb' + (i<n?' done':i===n?' act':'');
+    pb.className = 'qpb' + (i<n-1?' done':i===n-1?' act':'');
   }
 }
 
@@ -1102,10 +1085,36 @@ function toggleLandingBudget(btn, val) {
   state.presupuestoElegidoEnLanding = true;
 }
 
-function fillExampleChip(text) {
-  const input = document.getElementById('s1-input');
-  input.value = text;
-  input.focus();
+function toggleChip(btn, vibe, label) {
+  btn.classList.toggle('sel');
+  if (btn.classList.contains('sel')) {
+    if (!state.vibes.includes(vibe)) state.vibes.push(vibe);
+  } else {
+    state.vibes = state.vibes.filter(v => v !== vibe);
+  }
+  const labels = Array.from(document.querySelectorAll('.sc-chip.sel')).map(b => b.dataset.label || b.textContent.trim());
+  document.getElementById('s1-input').value = labels.join(', ');
+}
+
+// Por si alguien escribe libremente sin tocar los chips: detecta palabras clave
+// y suma esas vibes igual, asi la intencion cuenta para el matching.
+const VIBE_KEYWORDS = {
+  relax: ['relax','descans','tranquil','desconect','chill'],
+  romance: ['romant','romance','pareja','luna de miel','novia','novio'],
+  aventura: ['aventura','surf','adrenalin','extrem'],
+  naturaleza: ['natural','bosque','montana','paisaje'],
+  social: ['fiesta','social','nightlife','vida nocturna','bailar','boliche'],
+  exclusividad: ['lujo','exclusiv','boutique','sofistic','glamour'],
+  gastronomia: ['gastronom','comida','gourmet','restaurant','culinari'],
+  autenticidad: ['autentic','local','genuino','tradicional'],
+  buceo: ['buceo','snorkel','bucear','submarin'],
+};
+
+function parseVibesFromText(text) {
+  const norm = normalizar(text);
+  return Object.entries(VIBE_KEYWORDS)
+    .filter(([, keywords]) => keywords.some(k => norm.includes(k)))
+    .map(([vibe]) => vibe);
 }
 
 function setCustomLandingBudget(val) {
@@ -1118,20 +1127,12 @@ function setCustomLandingBudget(val) {
 // Lleva de la landing al quiz SIN repetir lo que ya eligió (ni vibe ni presupuesto)
 function goToQuiz() {
   go(2);
-  syncQuizVibesFromLanding();
-  syncQuizBudgetFromLanding();
-}
-
-function syncQuizVibesFromLanding() {
-  // marca en el paso 1 del quiz (vibe) las mismas opciones ya elegidas en la landing,
-  // así el usuario ve que "ya contamos eso" en vez de que se le pregunte de nuevo
-  document.querySelectorAll('#q0opts .qopt').forEach(btn => {
-    const vibe = btn.getAttribute('data-vibe');
-    btn.classList.toggle('sel', vibe && state.vibes.includes(vibe));
-  });
-  if (state.vibes.length > 0) {
-    document.querySelector('#q0 .qsub').textContent = 'Ya tomamos nota de lo que elegiste abajo — sumá algo más o tocá Siguiente.';
+  // Si escribio texto libre sin tocar chips, buscamos palabras clave de vibe ahi tambien
+  const texto = document.getElementById('s1-input').value;
+  if (texto) {
+    parseVibesFromText(texto).forEach(v => { if (!state.vibes.includes(v)) state.vibes.push(v); });
   }
+  syncQuizBudgetFromLanding();
 }
 
 function syncQuizBudgetFromLanding() {
