@@ -1099,22 +1099,36 @@ function toggleChip(btn, vibe, label) {
 // Por si alguien escribe libremente sin tocar los chips: detecta palabras clave
 // y suma esas vibes igual, asi la intencion cuenta para el matching.
 const VIBE_KEYWORDS = {
-  relax: ['relax','descans','tranquil','desconect','chill'],
-  romance: ['romant','romance','pareja','luna de miel','novia','novio'],
-  aventura: ['aventura','surf','adrenalin','extrem'],
-  naturaleza: ['natural','bosque','montana','paisaje'],
-  social: ['fiesta','social','nightlife','vida nocturna','bailar','boliche'],
-  exclusividad: ['lujo','exclusiv','boutique','sofistic','glamour'],
-  gastronomia: ['gastronom','comida','gourmet','restaurant','culinari'],
-  autenticidad: ['autentic','local','genuino','tradicional'],
-  buceo: ['buceo','snorkel','bucear','submarin'],
+  relax: ['relax','descans','tranquil','desconect','chill','sin apuro','sin nada que hacer','no hacer nada','paz','silencio','calma','desestres','vacaciones tranquilas','bajar un cambio'],
+  romance: ['romant','romance','pareja','luna de miel','novia','novio','aniversario','enamorad','escapada de a dos','en pareja'],
+  aventura: ['aventura','surf','adrenalin','extrem','trekking','hiking','rapel','tirolesa','deporte','activ','cataratas','explorar'],
+  naturaleza: ['natural','bosque','montana','paisaje','selva','cascada','ecotur','desconexion total','aire libre','verde','animales','fauna'],
+  social: ['fiesta','social','nightlife','vida nocturna','bailar','boliche','beach club','previa','salir de noche','animado','conocer gente','movida'],
+  exclusividad: ['lujo','exclusiv','boutique','sofistic','glamour','5 estrellas','premium','vip','privad','algo top','de categoria'],
+  gastronomia: ['gastronom','comida','gourmet','restaurant','culinari','probar platos','vinos','degustacion','buena mesa','comer bien'],
+  autenticidad: ['autentic','local','genuino','tradicional','poco turistico','no masivo','escondido','fuera del circuito','que no sea para turistas'],
+  buceo: ['buceo','snorkel','bucear','submarin','arrecife','corales','fondo del mar'],
 };
+
+const NEGADORES = ['no ', 'sin ', 'nada de ', 'evitar', ' ni ', 'tampoco'];
+
+function tieneNegacionCerca(norm, idx) {
+  // mira un poco antes de donde aparecio la palabra clave, buscando una negacion
+  const antes = norm.slice(Math.max(0, idx - 18), idx);
+  return NEGADORES.some(n => antes.includes(n));
+}
 
 function parseVibesFromText(text) {
   const norm = normalizar(text);
-  return Object.entries(VIBE_KEYWORDS)
-    .filter(([, keywords]) => keywords.some(k => norm.includes(k)))
-    .map(([vibe]) => vibe);
+  const encontradas = [];
+  for (const [vibe, keywords] of Object.entries(VIBE_KEYWORDS)) {
+    const match = keywords.some(k => {
+      const idx = norm.indexOf(k);
+      return idx !== -1 && !tieneNegacionCerca(norm, idx);
+    });
+    if (match) encontradas.push(vibe);
+  }
+  return encontradas;
 }
 
 function setCustomLandingBudget(val) {
@@ -1611,10 +1625,14 @@ function ecsCacheKey(d) {
   return `${d.id}|${state.mesViaje || ''}|${state.anioViaje || ''}`;
 }
 
+let ecsLaunchCounter = 0; // para espaciar los pedidos y no saturar Open-Meteo desde la misma IP
+
 async function loadEcsScore(d) {
   const key = ecsCacheKey(d);
   if (ecsCache[key] !== undefined) return;
   ecsCache[key] = null;
+  const delay = (ecsLaunchCounter++ % 5) * 700;
+  await new Promise(r => setTimeout(r, delay));
   try {
     const date = computeTripDate();
     const res = await fetch(`${VIBRASIL_API}/public/ecs/${d.id}?date=${date}`);
