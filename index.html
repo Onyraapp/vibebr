@@ -158,7 +158,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 /* ════════════════════════════ */
 /* SCREEN 2 — QUIZ             */
 /* ════════════════════════════ */
-.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.2rem 1rem;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom)+1rem)}
+.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.2rem 1rem;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom) + 1rem)}
 
 .qprog{display:flex;gap:4px;margin-bottom:1.4rem}
 .qpb{flex:1;height:4px;border-radius:4px;background:var(--br);transition:background .3s}
@@ -227,7 +227,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .adj-btn{flex-shrink:0;font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid var(--br);background:var(--wh);color:var(--mid);cursor:pointer;font-family:inherit;font-weight:500;white-space:nowrap;transition:all .15s}
 .adj-btn:hover{border-color:var(--g);color:var(--g);background:var(--gl)}
 
-.res-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+.res-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom))}
 
 .rcard{background:var(--wh);border-bottom:8px solid var(--bg);cursor:pointer}
 .rcard.feat{border-left:3px solid var(--g)}
@@ -287,7 +287,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 /* ════════════════════════════ */
 /* SCREEN 4 — DETAIL           */
 /* ════════════════════════════ */
-.det-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+.det-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom))}
 .dhero{height:170px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem 1.1rem;flex-shrink:0}
 .dhero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.52) 0%,transparent 55%)}
 .dhero.rio    {background:linear-gradient(155deg,#0a2060 0%,#1a5fa8 40%,#2a9ad4 70%)}
@@ -395,7 +395,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 /* ════════════════════════════ */
 /* SCREEN 5 — BOOKING FLOW     */
 /* ════════════════════════════ */
-.bk-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot)+env(safe-area-inset-bottom))}
+.bk-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom))}
 .bk-helper{display:flex;gap:9px;background:var(--gl);border:1px solid rgba(33,66,47,.2);border-radius:var(--r);padding:11px 13px;margin:1rem;align-items:flex-start}
 .bk-helper i{font-size:16px;color:var(--g);flex-shrink:0;margin-top:1px}
 .bk-helper-t{font-size:12px;font-weight:700;color:var(--gd);margin-bottom:2px}
@@ -471,7 +471,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <!-- ══════════════════════ -->
 <div class="screen on" id="s1">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
+    <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r">
       <div class="lsw">
         <button class="lb on" onclick="setLang(this,'ES')">ES</button>
@@ -556,7 +556,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <!-- ══════════════════════ -->
 <div class="screen" id="s2">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
+    <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(1)" style="font-size:11px;padding:6px 12px">← Inicio</button></div>
   </nav>
 
@@ -669,7 +669,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <!-- ══════════════════════ -->
 <div class="screen" id="s3">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
+    <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(2)" style="font-size:11px;padding:6px 12px">← Editar</button></div>
   </nav>
 
@@ -701,7 +701,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <!-- ══════════════════════ -->
 <div class="screen" id="s4">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
+    <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" id="det-back-btn" style="font-size:11px;padding:6px 12px">← Volver</button></div>
   </nav>
   <div class="det-wrap" id="det-wrap"></div>
@@ -712,7 +712,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <!-- ══════════════════════ -->
 <div class="screen" id="s5">
   <nav class="tnav">
-    <div class="logo"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
+    <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
     <div class="nav-r"><button class="bsm bo" onclick="go(4)" style="font-size:11px;padding:6px 12px">← Volver</button></div>
   </nav>
   <div class="bk-body" id="bk-body"></div>
