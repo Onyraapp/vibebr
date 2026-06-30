@@ -87,7 +87,11 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .tf-select.full{width:100%}
 
 /* Tarjeta de busqueda unica, estilo Booking/Airbnb: un solo bloque, filas separadas por una linea fina, CTA al final */
-.search-card{background:var(--wh);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.14);overflow:hidden;text-align:left;position:relative}
+.search-card{background:var(--wh);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.14);text-align:left;position:relative}
+.sc-cta-wrap{padding:4px 18px 18px}
+.sc-cta-q{text-align:center;font-size:12px;font-weight:600;color:var(--mid);padding:0 0 8px}
+.sc-cta{width:100%;padding:14px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s;border-radius:12px}
+.sc-cta:hover{background:#1a3525}
 .sc-row{display:flex;align-items:center;gap:10px;padding:14px 18px}
 .sc-row i{color:var(--soft);font-size:16px;flex-shrink:0}
 .sc-row input{flex:1;min-width:0;border:none;outline:none;font-size:14px;color:var(--tx);font-family:inherit;background:transparent}
@@ -101,7 +105,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 #custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .sc-divider{height:1px;background:var(--br);margin:0 18px}
 .sc-cta-q{text-align:center;font-size:12px;font-weight:600;color:var(--mid);padding:0 18px 8px}
-.sc-cta{width:100%;padding:15px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
+.sc-cta{width:100%;padding:15px;border:none;background:var(--g);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s;border-radius:0 0 18px 18px}
 .sc-cta:hover{background:#1a3525}
 .sc-cta i{font-size:15px}
 
@@ -483,7 +487,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         <button class="lb" onclick="setLang(this,'EN')">EN</button>
         <button class="lb" onclick="setLang(this,'PT')">PT</button>
       </div>
-      <button class="bsm bg" onclick="go(2)">Empezar</button>
     </div>
   </nav>
 
@@ -520,8 +523,10 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
           <input type="number" id="custom-budget-input" placeholder="¿Cuánto tenés por persona? (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
         </div>
         <div class="sc-budget-hint">💡 Contamos por persona — vuelo + hotel + comida</div>
-        <div class="sc-cta-q">¿Listo para encontrar tu Brasil?</div>
-        <button class="sc-cta" onclick="goToQuiz()">Empezar ahora ↗</button>
+        <div class="sc-cta-wrap">
+          <div class="sc-cta-q">¿Listo para encontrar tu Brasil?</div>
+          <button class="sc-cta" onclick="goToQuiz()">Empezar ahora ↗</button>
+        </div>
       </div>
     </section>
 
@@ -564,7 +569,6 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <div class="screen" id="s2">
   <nav class="tnav">
     <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
-    <div class="nav-r"><button class="bsm bo" onclick="go(1)" style="font-size:11px;padding:6px 12px">← Inicio</button></div>
   </nav>
 
   <div class="quiz-body">
