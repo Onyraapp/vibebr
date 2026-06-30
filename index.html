@@ -97,6 +97,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 .sc-budget-box:focus-within{box-shadow:0 0 0 3px rgba(33,66,47,.14)}
 .sc-budget-box input{flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:600;color:var(--tx);font-family:inherit;background:transparent}
 .sc-budget-box input::placeholder{color:var(--mid);font-weight:500}
+.sc-budget-hint{font-size:11px;color:rgba(255,255,255,.65);text-align:center;margin:-6px 18px 10px;}
 #custom-budget-input::-webkit-inner-spin-button,#custom-budget-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .sc-divider{height:1px;background:var(--br);margin:0 18px}
 .sc-cta-q{text-align:center;font-size:12px;font-weight:600;color:var(--mid);padding:0 18px 8px}
@@ -516,8 +517,9 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         </div>
         <div class="sc-budget-box">
           <span class="sc-budget-prefix">USD</span>
-          <input type="number" id="custom-budget-input" placeholder="Presupuesto total (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
+          <input type="number" id="custom-budget-input" placeholder="¿Cuánto tenés por persona? (opcional)" min="100" step="50" oninput="setCustomLandingBudget(this.value)"/>
         </div>
+        <div class="sc-budget-hint">💡 Contamos por persona — vuelo + hotel + comida</div>
         <div class="sc-cta-q">¿Listo para encontrar tu Brasil?</div>
         <button class="sc-cta" onclick="goToQuiz()">Empezar ahora ↗</button>
       </div>
@@ -592,8 +594,8 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
     <!-- Q2: Presupuesto -->
     <div class="qcard" id="q2">
       <div class="qlabel">Paso 2 de 4</div>
-      <div class="qtitle">¿Cuál es tu presupuesto?</div>
-      <div class="qsub">Total por persona para todo el viaje — vuelo, hospedaje, comida y actividades.</div>
+      <div class="qtitle" id="q2-title">¿Cuál es tu presupuesto?</div>
+      <div class="qsub" id="q2-sub">Contamos <strong>por persona</strong> — vuelo, hospedaje, comida y actividades incluidos.</div>
       <div class="qslider-wrap">
         <div class="qslider-val" id="budget-display">USD 1.500</div>
         <div class="qslider-sub">deslizá para ajustar</div>
@@ -1074,6 +1076,7 @@ function nextQ(n) {
     const pb = document.getElementById('qp'+i);
     pb.className = 'qpb' + (i<n-1?' done':i===n-1?' act':'');
   }
+  if(n === 2) updateBudgetCopy();
 }
 
 function toggleMulti(btn, vibe) {
@@ -1173,10 +1176,26 @@ function syncQuizBudgetFromLanding() {
   document.querySelector('#q2 .qsub').textContent = 'Ya tomamos nota de tu presupuesto — ajustalo si querés o tocá Siguiente.';
 }
 
+const PERFIL_BUDGET_COPY = {
+  COUPLE:  { titulo: '¿Cuánto tiene cada uno para el viaje?', sub: 'Contamos <strong>por persona</strong> — si dividís los gastos con tu pareja, ponés tu parte.' },
+  FRIENDS: { titulo: '¿Cuánto aporta cada uno del grupo?', sub: 'Contamos <strong>por persona</strong> — lo que mete cada integrante del grupo, no el total.' },
+  FAMILY:  { titulo: '¿Cuánto tienen disponible por adulto?', sub: 'Contamos <strong>por adulto</strong> — los chicos suelen tener costos distintos que ajustamos internamente.' },
+  SOLO:    { titulo: '¿Cuánto tenés disponible para el viaje?', sub: 'Contamos <strong>todo tu presupuesto</strong> — vuelo, hospedaje, comida y actividades.' },
+  BACKPACK:{ titulo: '¿Cuánto tenés para el viaje?', sub: 'Contamos <strong>por persona</strong>, incluyendo vuelo, hostel, comida y lo que necesites.' },
+  LUXE:    { titulo: '¿Con qué presupuesto manejás por persona?', sub: 'Contamos <strong>por persona</strong> — sin restricciones, priorizamos la experiencia.' },
+};
+
+function updateBudgetCopy() {
+  const copy = PERFIL_BUDGET_COPY[state.perfil];
+  if (!copy) return;
+  document.getElementById('q2-title').textContent = copy.titulo;
+  document.getElementById('q2-sub').innerHTML = copy.sub;
+}
+
 function selectSingle(btn, groupId, val) {
   document.querySelectorAll('#'+groupId+' .qopt').forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
-  if(groupId === 'q1opts') state.perfil = val;
+  if(groupId === 'q1opts') { state.perfil = val; }
   if(groupId === 'q4opts') state.dias = val;
 }
 
