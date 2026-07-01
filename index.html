@@ -716,7 +716,7 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
 <div class="screen" id="s5">
   <nav class="tnav">
     <div class="logo" onclick="go(1)" style="cursor:pointer"><div class="lm"><i class="ti ti-wave-sine"></i></div><div class="lt">Vibe<span> Brasil</span></div></div>
-    <div class="nav-r"><button class="bsm bo" onclick="go(4)" style="font-size:11px;padding:6px 12px">← Volver</button></div>
+    <div class="nav-r"><button class="bsm bo" onclick="go(4)" style="font-size:11px;padding:6px 12px">← Otros destinos</button></div>
   </nav>
   <div class="bk-body" id="bk-body"></div>
 </div>
@@ -1934,6 +1934,7 @@ function renderBookingStep() {
               <div class="bk-provider"><i class="ti ti-building-airport" style="font-size:12px"></i> ${o.real ? 'Vía Duffel · precio real' : 'Vía Duffel · estimado'}</div>
               <button class="bk-go-btn redirect" onclick="event.stopPropagation();goToProvider('${o.airline}')"><i class="ti ti-external-link" style="font-size:13px"></i> Ver en ${o.airline}</button>
             </div>
+            <div class="bk-redirect-note"><i class="ti ti-external-link" style="font-size:11px"></i> Abre en una pestaña nueva — cuando termines, volvé acá para seguir.</div>
           </div>`).join('')}
       </div>`;
   }
@@ -1985,7 +1986,7 @@ function renderBookingStep() {
               <div class="bk-provider"><i class="ti ti-building-store" style="font-size:12px"></i> ${o.curada?'Contacto directo':o.fuente==='hotelbeds'?'Vía Hotelbeds':'Vía Booking.com'}</div>
               <button class="bk-go-btn ${o.fuente==='booking'?'redirect':''}" onclick="event.stopPropagation();goToProvider('${o.fuente}',bk.destId)"><i class="ti ti-external-link" style="font-size:13px"></i> Ver opción</button>
             </div>
-            ${o.fuente==='booking'?'<div class="bk-redirect-note"><i class="ti ti-info-circle" style="font-size:11px"></i> Esta opción se completa en Booking.com</div>':''}
+            ${o.fuente==='booking'?'<div class="bk-redirect-note"><i class="ti ti-external-link" style="font-size:11px"></i> Abre en una pestaña nueva — cuando termines, volvé acá para seguir.</div>':''}
           </div>`).join('')}
       </div>`;
   }
@@ -2058,7 +2059,7 @@ function renderBookingStep() {
 
   const nav = bk.step < 3 ? `
     <div class="bk-nav">
-      ${bk.step > 0 ? `<button class="bk-nav-btn secondary" onclick="bkPrev()">← Atrás</button>` : `<button class="bk-nav-btn secondary" onclick="go(4)">Cancelar</button>`}
+      ${bk.step > 0 ? `<button class="bk-nav-btn secondary" onclick="bkPrev()">← Atrás</button>` : `<button class="bk-nav-btn secondary" onclick="go(4)">← Ver otros destinos</button>`}
       <button class="bk-nav-btn primary" onclick="bkNext()">${bk.step === 2 ? 'Ver resumen ✨' : 'Siguiente →'}</button>
     </div>` : `<div style="height:1.2rem"></div>`;
 
