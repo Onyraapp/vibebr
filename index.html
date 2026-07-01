@@ -607,9 +607,9 @@ html,body{height:100dvh;overflow:hidden;font-family:'VAG Rounded','DM Sans',syst
         <div class="qslider-labels"><span>USD 500</span><span>USD 4.000+</span></div>
       </div>
       <div class="qopts" id="q2opts">
-        <button class="qopt" onclick="setBudget(750,this,'q2opts')"><span class="qopt-icon">💸</span><span class="qopt-text"><span class="qopt-main">Económico — hasta USD 900</span><span class="qopt-sub">Hostel, low cost, comida local</span></span></button>
-        <button class="qopt" onclick="setBudget(1500,this,'q2opts')"><span class="qopt-icon">💵</span><span class="qopt-text"><span class="qopt-main">Mid — USD 900 a 2.000</span><span class="qopt-sub">Pousada, mid hotel, buen restaurante</span></span></button>
-        <button class="qopt" onclick="setBudget(2500,this,'q2opts')"><span class="qopt-icon">💳</span><span class="qopt-text"><span class="qopt-main">Premium — USD 2.000 a 3.500</span><span class="qopt-sub">Hotel boutique, gastronomía, confort</span></span></button>
+        <button class="qopt" onclick="setBudget(900,this,'q2opts')"><span class="qopt-icon">💸</span><span class="qopt-text"><span class="qopt-main">Económico — hasta USD 900</span><span class="qopt-sub">Hostel, low cost, comida local</span></span></button>
+        <button class="qopt" onclick="setBudget(2000,this,'q2opts')"><span class="qopt-icon">💵</span><span class="qopt-text"><span class="qopt-main">Mid — USD 900 a 2.000</span><span class="qopt-sub">Pousada, mid hotel, buen restaurante</span></span></button>
+        <button class="qopt" onclick="setBudget(3500,this,'q2opts')"><span class="qopt-icon">💳</span><span class="qopt-text"><span class="qopt-main">Premium — USD 2.000 a 3.500</span><span class="qopt-sub">Hotel boutique, gastronomía, confort</span></span></button>
         <button class="qopt" onclick="setBudget(4000,this,'q2opts')"><span class="qopt-icon">👑</span><span class="qopt-text"><span class="qopt-main">Sin límite claro</span><span class="qopt-sub">Priorizo la experiencia</span></span></button>
       </div>
       <div class="qnav"><button class="qbtn secondary" onclick="nextQ(1)">← Atrás</button><button class="qbtn primary" onclick="nextQ(3)">Siguiente →</button></div>
@@ -788,7 +788,7 @@ const DEST = {
     compat:{COUPLE:10,FRIENDS:8,FAMILY:6,SOLO:5,BACKPACK:3,LUXE:9},
     vibes:['romance','gastronomía','relax','playa chic','sunsets'],
     buceo:"bueno", buceoNota:"Snorkel en el passeio de barco por las 27 playas. Aguas cristalinas en João Fernandes.",
-    exclusion:[{cond:'presupuesto',max:900,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
+    exclusion:[{cond:'presupuesto',max:800,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
     highlights:['Praia de João Fernandes','Rua das Pedras','Orla Bardot al atardecer','Passeio de barco','Gastronomía en Ossos'],
     logs:[{i:'✈️',t:'Vuelo',d:'A GIG o CBF. Transfer 3h o bus 1.5h.'},{i:'🚗',t:'Transporte',d:'Buggy o bici dentro de Búzios.'},{i:'☀️',t:'Clima',d:'27°C. Mejor mar–may y ago–oct.'},{i:'📅',t:'Días ideales',d:'Mínimo 4, ideal 7.'}],
     budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG ida/vuelta',r:'USD 240–500'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 700–1.400'},{c:'#D4A017',l:'Comida · USD 55/día',r:'USD 385'},{c:'#8A5C2A',l:'Actividades y passeios',r:'USD 245'},{c:'#D94040',l:'Transfer GIG-Búzios',r:'USD 80'}],
@@ -902,8 +902,7 @@ const DEST = {
 
   foz: {
     id:'foz', nombre:"Foz do Iguaçu", loc:"Paraná · Brasil",
-    exclusion:[],
-    duffelCode:'IGR',
+    exclusion:[{cond:'relax',min:8,accion:'excluir'}], // Foz es cataratas/aventura, no relax
     tipo:'naturaleza', cluster:'aventura', cssClass:'foz',
     temp:23, logistica:"fácil", aero:"IGU",
     mejor:"Todo el año", evitar:"—",
@@ -930,7 +929,7 @@ const DEST = {
 
   saopaulo: {
     id:'saopaulo', nombre:"São Paulo", loc:"São Paulo · Brasil",
-    exclusion:[],
+    exclusion:[{cond:'relax',min:8,accion:'excluir'},{cond:'buceo',min:8,accion:'excluir'}],
     duffelCode:'GRU',
     hotelbedsCode:'SAO',
     tipo:'ciudad_completa', cluster:'ciudad', cssClass:'saopaulo',
@@ -959,7 +958,7 @@ const DEST = {
 
   salvador: {
     id:'salvador', nombre:"Salvador", loc:"Bahia · Brasil",
-    exclusion:[],
+    exclusion:[{cond:'dias',max:3,accion:'excluir'}],
     duffelCode:'SSA',
     tipo:'ciudad_completa', cluster:'cultura', cssClass:'salvador',
     temp:26, logistica:"fácil", aero:"SSA",
@@ -987,7 +986,7 @@ const DEST = {
 
   paraty: {
     id:'paraty', nombre:"Paraty", loc:"Rio de Janeiro · Brasil",
-    exclusion:[],
+    exclusion:[{cond:'presupuesto',max:650,accion:'excluir'}],
     duffelCode:'GIG',
     tipo:'playa+ciudad', cluster:'cultura', cssClass:'paraty',
     temp:24, logistica:"media", aero:"Sin aeropuerto propio (vía GIG)",
@@ -1015,7 +1014,7 @@ const DEST = {
 
   angra: {
     id:'angra', nombre:"Angra dos Reis", loc:"Rio de Janeiro · Brasil",
-    exclusion:[],
+    exclusion:[{cond:'presupuesto',max:700,accion:'excluir'}],
     duffelCode:'GIG',
     tipo:'playa', cluster:'lujo', cssClass:'angra',
     temp:25, logistica:"fácil-media", aero:"Sin aeropuerto propio (vía GIG)",
