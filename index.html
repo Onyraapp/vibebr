@@ -813,7 +813,7 @@ const DEST = {
     escenario:'Pipa Bohemia',
     desc:'El nordeste auténtico. Falésias, mar azul, surf y una energía bohemia que no se encuentra en ningún otro lado de Brasil.',
     tip:'Marzo a junio llueve fuerte por las tardes pero el mar sigue hermoso y los precios bajan bastante. Agosto a diciembre es el pico de sol.',
-    scores:{relax:8,romance:8,social:8,aventura:9,naturaleza:9,gastronomia:7,exclusividad:6,autenticidad:8},
+    scores:{relax:8,romance:6,social:5,aventura:9,naturaleza:9,gastronomia:6,exclusividad:4,autenticidad:9},
     compat:{COUPLE:8,FRIENDS:8,FAMILY:5,SOLO:9,BACKPACK:9,LUXE:4},
     vibes:['surf','bohemio','naturaleza','relax','auténtico'],
     buceo:"bueno", buceoNota:"Snorkel en los arrecifes cerca de Praia do Amor con marea baja.",
@@ -911,7 +911,7 @@ const DEST = {
     escenario:"Iguazú Salvaje",
     desc:"Foz do Iguaçu no es solo las cataratas — es un combo de 3 países. Lado brasileño para la vista panorámica completa, lado argentino para la experiencia inmersiva con pasarelas, y Ciudad del Este en Paraguay para shopping de electrónica y perfumería. En 3 o 4 noches lo conocés todo.",
     tip:"Si tenés los días, cruzá también al lado argentino — la experiencia es distinta y se complementa con la vista panorámica brasileña. Y un día de shopping en Ciudad del Este (Paraguay) es clásico — solo necesitás el pasaporte, sin visa.",
-    scores:{relax:4,romance:5,social:3,aventura:9,naturaleza:10,gastronomia:5,exclusividad:4,autenticidad:6},
+    scores:{relax:4,romance:5,social:3,aventura:9,naturaleza:8,gastronomia:5,exclusividad:4,autenticidad:6},
     compat:{COUPLE:7,FRIENDS:7,FAMILY:9,SOLO:8,BACKPACK:8,LUXE:5},
     vibes:["naturaleza","aventura","bucket list","cataratas","familiar","triple frontera"],
     buceo:"ninguno", buceoNota:"Sin actividad de buceo — destino de cataratas y selva, no de mar.",
@@ -1287,12 +1287,19 @@ function calcMatch() {
     let score = 0, total = 0;
 
     // Vibe match (40% weight)
+    // Usamos promedio ponderado con penalizacion por el minimo:
+    // si alguien pide romance+fiesta+gastronomia y un destino tiene
+    // romance=9 pero fiesta=4, el minimo bajo penaliza el score final,
+    // evitando que un destino "especialista" gane sobre uno "equilibrado".
     if(state.vibes.length > 0) {
       const buceoMap = { ninguno:1, limitado:4, bueno:7, excelente:10 };
-      const vibeScore = state.vibes.reduce((acc, v) => {
-        if (v === 'buceo') return acc + (buceoMap[d.buceo] || 3);
-        return acc + (d.scores[v] || 5);
-      }, 0) / state.vibes.length;
+      const vibeValues = state.vibes.map(v =>
+        v === 'buceo' ? (buceoMap[d.buceo] || 3) : (d.scores[v] || 5)
+      );
+      const avg = vibeValues.reduce((a,b) => a+b, 0) / vibeValues.length;
+      const min = Math.min(...vibeValues);
+      // 80% promedio + 20% minimo — penalizacion moderada al que es muy malo en alguna vibe pedida
+      const vibeScore = avg * 0.80 + min * 0.20;
       score += vibeScore * 4;
       total += 40;
     }
