@@ -1162,10 +1162,13 @@ function setCustomLandingBudget(val) {
 // Lleva de la landing al quiz SIN repetir lo que ya eligió (ni vibe ni presupuesto)
 function goToQuiz() {
   go(2);
-  // Si escribio texto libre sin tocar chips, buscamos palabras clave de vibe ahi tambien
-  const texto = document.getElementById('s1-input').value;
-  if (texto) {
-    parseVibesFromText(texto).forEach(v => { if (!state.vibes.includes(v)) state.vibes.push(v); });
+  // Solo parseamos el texto libre si NO hay chips seleccionados —
+  // si hay chips, ya cargaron state.vibes correctamente y no queremos pisar nada.
+  if (state.vibes.length === 0) {
+    const texto = document.getElementById('s1-input').value;
+    if (texto) {
+      parseVibesFromText(texto).forEach(v => { if (!state.vibes.includes(v)) state.vibes.push(v); });
+    }
   }
   syncQuizBudgetFromLanding();
 }
