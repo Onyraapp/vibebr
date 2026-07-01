@@ -766,7 +766,7 @@ const DEST = {
     presupuesto_excedido_msg: null,
     highlights:['Ipanema y Leblon','Pan de Azúcar al atardecer','Santa Teresa + Lapa','Corcovado','Gastronomía de Botafogo'],
     logs:[{i:'✈️',t:'Vuelo',d:'Directo desde BUE/MVD/SCL. GIG o GRU.'},{i:'🚇',t:'Transporte',d:'Metro + Uber. Fácil de moverse.'},{i:'☀️',t:'Clima',d:'28°C promedio. Evitar carnaval.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo desde BUE ida/vuelta',r:'USD 250–520'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 560–1.120'},{c:'#D4A017',l:'Comida · USD 14–28/día',op:true,r:'USD 98–196 · 7 días'},{c:'#8A5C2A',l:'Actividades y transporte',op:true,r:'USD 280'},{c:'#D94040',l:'Extras varios',op:true,r:'USD 100'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo desde BUE ida/vuelta',r:'USD 460–680'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 560–1.120'},{c:'#D4A017',l:'Comida · USD 14–28/día',op:true,r:'USD 98–196 · 7 días'},{c:'#8A5C2A',l:'Actividades y transporte',op:true,r:'USD 280'},{c:'#D94040',l:'Extras varios',op:true,r:'USD 100'}],
     itinerary:[
       {n:'1',t:'Llegada · Ipanema',d:'Check-in y primera caminata por Ipanema. Atardecer en Leblon.'},
       {n:'2',t:'Corcovado y Santa Teresa',d:'Subís al Cristo y después bajás al barrio más bohemio de Río.'},
@@ -795,7 +795,7 @@ const DEST = {
     exclusion:[{cond:'presupuesto',max:800,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
     highlights:['Praia de João Fernandes','Rua das Pedras','Orla Bardot al atardecer','Passeio de barco','Gastronomía en Ossos'],
     logs:[{i:'✈️',t:'Vuelo',d:'A GIG o CBF. Transfer 3h o bus 1.5h.'},{i:'🚗',t:'Transporte',d:'Buggy o bici dentro de Búzios.'},{i:'☀️',t:'Clima',d:'27°C. Mejor mar–may y ago–oct.'},{i:'📅',t:'Días ideales',d:'Mínimo 4, ideal 7.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG ida/vuelta',r:'USD 240–500'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 700–1.400'},{c:'#D4A017',l:'Comida · USD 14–26/día',op:true,r:'USD 98–182 · 7 días'},{c:'#8A5C2A',l:'Actividades y passeios',op:true,r:'USD 245'},{c:'#D94040',l:'Transfer GIG-Búzios',r:'USD 80'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG ida/vuelta',r:'USD 460–680'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 700–1.400'},{c:'#D4A017',l:'Comida · USD 14–26/día',op:true,r:'USD 98–182 · 7 días'},{c:'#8A5C2A',l:'Actividades y passeios',op:true,r:'USD 245'},{c:'#D94040',l:'Transfer GIG-Búzios',r:'USD 80'}],
     itinerary:[
       {n:'1',t:'Llegada · Primer sunset',d:'Transfer desde GIG. Bajá en la Orla Bardot para el primer sunset de Búzios.'},
       {n:'2',t:'João Fernandes',d:'La playa más linda de Búzios. Aguas cristalinas, bares en la arena.'},
@@ -824,7 +824,7 @@ const DEST = {
     exclusion:[{cond:'exclusividad',min:8,accion:'excluir'},{cond:'perfil',val:'LUXE',accion:'excluir'}],
     highlights:['Praia do Amor','Falésias de Pipa','Mirante das Golfinhos','Lagoa de Guaraíras','Surf al amanecer'],
     logs:[{i:'✈️',t:'Vuelo',d:'A NAT con 1 escala. Transfer 1.5h.'},{i:'🚶',t:'Transporte',d:'A pie mayormente. Buggy o moto.'},{i:'☀️',t:'Clima',d:'28°C. Mejor ago–dic.'},{i:'📅',t:'Días ideales',d:'Mínimo 4, ideal 7.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → NAT ida/vuelta',r:'USD 290–600'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 420–910'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 63–119 · 7 días'},{c:'#8A5C2A',l:'Surf, trilhas, actividades',op:true,r:'USD 175'},{c:'#D94040',l:'Transfer NAT-Pipa',r:'USD 40'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → NAT ida/vuelta',r:'USD 670–950'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 420–910'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 63–119 · 7 días'},{c:'#8A5C2A',l:'Surf, trilhas, actividades',op:true,r:'USD 175'},{c:'#D94040',l:'Transfer NAT-Pipa',r:'USD 40'}],
     itinerary:[
       {n:'1',t:'Llegada · Primeras falésias',d:'Transfer desde NAT. Llegás a la tarde y ves el sunset desde las falésias.'},
       {n:'2',t:'Praia do Amor',d:'La playa icónica de Pipa. Mar azul intenso y olas para surf.'},
@@ -854,7 +854,7 @@ const DEST = {
     exclusion:[{cond:'presupuesto',max:1500,accion:'excluir'},{cond:'dias',max:4,accion:'excluir'},{cond:'perfil',val:'BACKPACK',accion:'excluir'}],
     highlights:['Baía do Sancho','Mirante dos Golfinhos','Mergulho en Cabeço','Praia do Leão','Pôr do sol en Boldró'],
     logs:[{i:'✈️',t:'Vuelo',d:'2 escalas desde BUE. ~18–20hs.'},{i:'🚗',t:'Transporte',d:'Buggy USD 80/día. Sin autos privados.'},{i:'📋',t:'Taxa ambiental',d:'USD 70/persona/semana. Online.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → FEN ida/vuelta',r:'USD 520–840'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 1.120–2.240'},{c:'#D4A017',l:'Comida · USD 21–34/día',op:true,r:'USD 147–238 · 7 días'},{c:'#8A5C2A',l:'Buggy + actividades + buceo',op:true,r:'USD 630'},{c:'#D94040',l:'Taxa ambiental · 2 personas',r:'USD 140'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → REC ida/vuelta',r:'USD 570–800'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 1.120–2.240'},{c:'#D4A017',l:'Comida · USD 21–34/día',op:true,r:'USD 147–238 · 7 días'},{c:'#8A5C2A',l:'Buggy + actividades + buceo',op:true,r:'USD 630'},{c:'#D94040',l:'Taxa ambiental · 2 personas',r:'USD 140'}],
     itinerary:[
       {n:'1',t:'Llegada · Primer sunset',d:'BUE → REC → Noronha. Caminá hasta Boldró para el sunset. Ya justifica el viaje.'},
       {n:'2',t:'Baía do Sancho',d:'La playa más linda del mundo. Bajás por escalera entre rocas. Snorkel con tortugas.'},
@@ -892,7 +892,7 @@ const DEST = {
     ],
     highlights:['Jurerê Internacional','Lagoa da Conceição','Surf en Joaquina','Ostras en Ribeirão','Pôr do sol en Campeche'],
     logs:[{i:'✈️',t:'Vuelo',d:'Directo desde BUE/MVD. FLN.'},{i:'🚗',t:'Transporte',d:'Auto recomendado. Playas muy separadas.'},{i:'☀️',t:'Clima',d:'24°C promedio. 28°C en verano.'},{i:'📅',t:'Días ideales',d:'Mínimo 5, ideal 7.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → FLN ida/vuelta',r:'USD 140–400'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 490–1.050'},{c:'#D4A017',l:'Comida · USD 12–22/día',op:true,r:'USD 84–154 · 7 días'},{c:'#8A5C2A',l:'Auto alquilado · 7 días',op:true,r:'USD 245'},{c:'#D94040',l:'Actividades y salidas',op:true,r:'USD 210'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → FLN ida/vuelta',r:'USD 390–580'},{c:'#0E8C5A',l:'Hospedaje mid · 7 noches',r:'USD 490–1.050'},{c:'#D4A017',l:'Comida · USD 12–22/día',op:true,r:'USD 84–154 · 7 días'},{c:'#8A5C2A',l:'Auto alquilado · 7 días',op:true,r:'USD 245'},{c:'#D94040',l:'Actividades y salidas',op:true,r:'USD 210'}],
     itinerary:[
       {n:'1',t:'Llegada · Lagoa da Conceição',d:'Check-in. Primera noche en los bares de la Lagoa.'},
       {n:'2',t:'Jurerê Internacional',d:'Beach clubs y la playa más famosa de Floripa.'},
@@ -922,7 +922,7 @@ const DEST = {
     combinable:true, combos:[{n:"Cruce a Puerto Iguazú, Argentina",d:"Vista inmersiva con pasarelas sobre el agua. Solo pasaporte, sin visa."},{n:"Ciudad del Este, Paraguay",d:"Shopping de electrónica, perfumería y artículos duty-free."},{n:"Itaipú + Parque das Aves",d:"La represa más grande del mundo y un parque de aves tropicales."}],
     highlights:["Cataratas lado brasileño","Cataratas lado argentino","Parque das Aves","Represa de Itaipú","Shopping en Ciudad del Este"],
     logs:[{i:'✈️',t:'Vuelo',d:'Directo a IGU desde varias capitales.'},{i:'🌎',t:'Triple frontera',d:'Cruce a Argentina y Paraguay solo con pasaporte.'},{i:'☀️',t:'Clima',d:'23°C. Bueno todo el año.'},{i:'📅',t:'Días ideales',d:'3 a 4 noches con los combos.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → IGU ida/vuelta',r:'USD 180–320'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 220–440'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 36–68 · 4 días'},{c:'#8A5C2A',l:'Entradas + shopping Paraguay',op:true,r:'USD 180'},{c:'#D94040',l:'Traslados entre fronteras',r:'USD 60'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → IGR ida/vuelta',r:'USD 350–520'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 220–440'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 36–68 · 4 días'},{c:'#8A5C2A',l:'Entradas + shopping Paraguay',op:true,r:'USD 180'},{c:'#D94040',l:'Traslados entre fronteras',r:'USD 60'}],
     itinerary:[
       {n:'1',t:'Llegada · Lado brasileño',d:'Visitás las Cataratas desde el lado brasileño — la vista panorámica completa.'},
       {n:'2',t:'Lado argentino',d:'Cruzás a Puerto Iguazú para la experiencia inmersiva con pasarelas sobre el agua.'},
@@ -951,7 +951,7 @@ const DEST = {
     combinable:true, combos:[{n:"Ilhabela",d:"La joya del litoral paulista — isla con playas, cascadas y selva."},{n:"Ubatuba",d:"Surf, naturaleza y un ambiente más bohemio."},{n:"Santos / Guarujá",d:"La opción más accesible y cercana."}],
     highlights:["Mercado Municipal","Vila Madalena de noche","Avenida Paulista","MASP","Restaurantes de Jardins"],
     logs:[{i:'✈️',t:'Vuelo',d:'Hub principal de Brasil. GRU o CGH.'},{i:'🚇',t:'Transporte',d:'Metro extenso y eficiente.'},{i:'🍽️',t:'Gastronomía',d:'Capital mundial de la gastronomía.'},{i:'📅',t:'Días ideales',d:'4 días ciudad, +2-3 con litoral.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GRU ida/vuelta',r:'USD 130–250'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 240–520'},{c:'#D4A017',l:'Comida · USD 16–31/día',op:true,r:'USD 64–124 · 4 días'},{c:'#8A5C2A',l:'Museos, tours, nightlife',op:true,r:'USD 140'},{c:'#D94040',l:'Transporte local',op:true,r:'USD 60'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GRU ida/vuelta',r:'USD 480–680'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 240–520'},{c:'#D4A017',l:'Comida · USD 16–31/día',op:true,r:'USD 64–124 · 4 días'},{c:'#8A5C2A',l:'Museos, tours, nightlife',op:true,r:'USD 140'},{c:'#D94040',l:'Transporte local',op:true,r:'USD 60'}],
     itinerary:[
       {n:'1',t:'Llegada · Jardins',d:'Check-in y primera noche de gastronomía en Jardins.'},
       {n:'2',t:'Centro y MASP',d:'Avenida Paulista, museo MASP y Mercado Municipal.'},
@@ -979,7 +979,7 @@ const DEST = {
     combinable:true, combos:[{n:"Morro de São Paulo",d:"Isla sin autos, playas espectaculares, ambiente bohemio."},{n:"Praia do Forte",d:"Más accesible, proyecto de conservación de tortugas."},{n:"Itacaré",d:"Surf, naturaleza, más al sur."}],
     highlights:["Pelourinho","Elevador Lacerda","Mercado Modelo","Rio Vermelho de noche","Praia do Porto da Barra"],
     logs:[{i:'✈️',t:'Vuelo',d:'Directo a SSA desde varias capitales.'},{i:'🎭',t:'Cultura',d:'Pelourinho, patrimonio UNESCO.'},{i:'☀️',t:'Clima',d:'26°C. Mejor sep-mar.'},{i:'📅',t:'Días ideales',d:'5 días ciudad, 10-12 con playas.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → SSA ida/vuelta',r:'USD 260–470'},{c:'#0E8C5A',l:'Hospedaje mid · 5 noches',r:'USD 250–500'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 45–85 · 5 días'},{c:'#8A5C2A',l:'Tours culturales y shows',op:true,r:'USD 150'},{c:'#D94040',l:'Transporte local',op:true,r:'USD 75'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → SSA ida/vuelta',r:'USD 500–720'},{c:'#0E8C5A',l:'Hospedaje mid · 5 noches',r:'USD 250–500'},{c:'#D4A017',l:'Comida · USD 9–17/día',op:true,r:'USD 45–85 · 5 días'},{c:'#8A5C2A',l:'Tours culturales y shows',op:true,r:'USD 150'},{c:'#D94040',l:'Transporte local',op:true,r:'USD 75'}],
     itinerary:[
       {n:'1',t:'Llegada · Pelourinho',d:'Centro histórico colonial, patrimonio de la UNESCO.'},
       {n:'2',t:'Cultura afrobrasileña',d:'Capoeira, candomblé y la música que está en cada esquina.'},
@@ -1007,7 +1007,7 @@ const DEST = {
     combinable:true, combos:[{n:"Río de Janeiro",d:"Parada en la Costa Verde antes o después de Río."},{n:"Ilha Grande",d:"Isla sin autos con playas paradisíacas, muy cerca de Paraty."}],
     highlights:["Centro histórico al atardecer","Calles inundadas con marea alta","Passeio de barco","Cachoeira do Tobogã","Ilha Grande cerca"],
     logs:[{i:'🚗',t:'Traslado',d:'Sin aeropuerto propio — desde Río ~3.5h.'},{i:'🏛️',t:'Centro histórico',d:'Colonial portugués, patrimonio UNESCO.'},{i:'🌊',t:'Particularidad',d:'Las calles se inundan con marea alta.'},{i:'📅',t:'Días ideales',d:'4 días, ideal combinado con Río.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 320–560'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 280–560'},{c:'#D4A017',l:'Comida · USD 12–22/día',op:true,r:'USD 48–88 · 4 días'},{c:'#8A5C2A',l:'Passeio de barco + cachoeiras',op:true,r:'USD 140'},{c:'#D94040',l:'Traslados locales',op:true,r:'USD 50'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 460–700'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 280–560'},{c:'#D4A017',l:'Comida · USD 12–22/día',op:true,r:'USD 48–88 · 4 días'},{c:'#8A5C2A',l:'Passeio de barco + cachoeiras',op:true,r:'USD 140'},{c:'#D94040',l:'Traslados locales',op:true,r:'USD 50'}],
     itinerary:[
       {n:'1',t:'Llegada · Centro histórico',d:'Calles coloniales empedradas, primera caminata al atardecer.'},
       {n:'2',t:'Passeio de barco',d:'Recorrida por las islas y playas cercanas en barco.'},
@@ -1035,7 +1035,7 @@ const DEST = {
     combinable:true, combos:[{n:"Río de Janeiro",d:"El combo más obvio — ciudad + bahía de lujo a 2-2.5h."},{n:"Paraty",d:"Mismo camino de la Costa Verde."},{n:"Ilha Grande",d:"Prácticamente al lado — más auténtica y económica."}],
     highlights:["Ilha de Gipóia","Lagoa Azul","Passeio de barco por las 365 islas","Marina de Frade"],
     logs:[{i:'🚗',t:'Traslado',d:'Sin aeropuerto propio — desde Río ~2-2.5h.'},{i:'⛵',t:'Actividad central',d:'Passeio de barco por las 365 islas.'},{i:'💎',t:'Perfil',d:'Destino de lujo náutico — yates y resorts.'},{i:'📅',t:'Días ideales',d:'3-4 días, clásico finde largo.'}],
-    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 320–560'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 480–1.000'},{c:'#D4A017',l:'Comida · USD 14–26/día',op:true,r:'USD 56–104 · 4 días'},{c:'#8A5C2A',l:'Passeio de barco',op:true,r:'USD 320'},{c:'#D94040',l:'Traslados locales',op:true,r:'USD 60'}],
+    budget_lines:[{c:'#1A4FA8',l:'Vuelo BUE → GIG + traslado',r:'USD 460–700'},{c:'#0E8C5A',l:'Hospedaje mid · 4 noches',r:'USD 480–1.000'},{c:'#D4A017',l:'Comida · USD 14–26/día',op:true,r:'USD 56–104 · 4 días'},{c:'#8A5C2A',l:'Passeio de barco',op:true,r:'USD 320'},{c:'#D94040',l:'Traslados locales',op:true,r:'USD 60'}],
     itinerary:[
       {n:'1',t:'Llegada · Marina',d:'Check-in en resort con marina propia.'},
       {n:'2',t:'365 islas',d:'Passeio de barco por la bahía — Ilha de Gipóia, Lagoa Azul.'},
