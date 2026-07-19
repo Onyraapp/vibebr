@@ -2254,6 +2254,13 @@ function renderBookingStep() {
     loadMonthAveragePrice(d); // dispara el promedio del mes elegido (no bloquea el render)
     const realFlightState = realFlightCache[realFlightCacheKey(d)];
     const estaCargando = realFlightState === undefined || realFlightState === null;
+    const debugInfo = `<div style="background:red;color:white;font-weight:900;padding:8px;font-size:11px;word-break:break-all">
+      🚨 DEBUG SIEMPRE VISIBLE 🚨<br>
+      key=${realFlightCacheKey(d)}<br>
+      tipo=${typeof realFlightState}<br>
+      esArray=${Array.isArray(realFlightState)}<br>
+      estaCargando=${estaCargando}
+    </div>`;
     const monthAvg = monthAvgCache[monthAvgCacheKey(d)];
     const monthAvgHtml = monthAvg
       ? `<div class="bk-sec-sub" style="margin-top:2px">📊 Promedio ida y vuelta en ${state.mesViaje}: <strong>USD ${monthAvg.avg}</strong> (entre USD ${monthAvg.min} y USD ${monthAvg.max} según el día)</div>`
@@ -2301,8 +2308,9 @@ function renderBookingStep() {
     content = `
       <div class="bk-section">
         <div class="bk-sec-title">Elegí tu vuelo</div>
+        ${debugInfo}
         <div class="bk-sec-sub">${state.origen || 'BUE'} → ${d.duffelCode || d.aero.split('/')[0].split('+')[0].trim()}</div>
-        ${estaCargando ? '<div class="bk-sec-sub" style="margin-top:2px">🔎 Buscando tarifas reales…</div>' : monthAvgHtml}
+        ${estaCargando ? '<div class="bk-sec-sub" style="margin-top:2px;background:red;color:white;font-weight:900;padding:8px">🚨 DEBUG-CARGANDO-XYZ123 🚨</div>' : monthAvgHtml}
         ${estaCargando ? '' : disclaimerHtml}
         ${cardsHtml}
       </div>`;
